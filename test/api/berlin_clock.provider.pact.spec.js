@@ -6,14 +6,14 @@ const server = require('../../app');
 const providerOptions = {
   logLevel: 'INFO',
   providerBaseUrl: `http://localhost:${process.env.SERVER_PORT || 9080}`,
-  provider: 'dummy_app',
+  provider: 'berlin_clock_app',
   providerVersion: versionFromGitTag(),
   matchingRules: {
     body: {},
   },
   stateHandlers: {
-    'Initial state': () => {
-      return true;
+    Midnight: () => {
+      return '00:00:00';
     },
   },
 };
@@ -26,21 +26,24 @@ if (process.env.CI || process.env.PACT_PUBLISH_RESULTS) {
 } else {
   Object.assign(providerOptions, {
     pactUrls: [
-      path.resolve(__dirname, '../../pact/pacts/dummy_client-dummy_app.json'),
+      path.resolve(
+        __dirname,
+        '../../pact/pacts/berlin_clock_client-berlin_clock_app.json',
+      ),
     ],
   });
 }
 
-describe('Test Dummy Provider', () => {
+describe('Berlin Clock Provider', () => {
   afterAll(async () => {
     await server.close();
   });
 
-  test('tests dummmy api routes', async () => {
+  test('tests berlin clock api routes', async () => {
     try {
       const output = await new Verifier(providerOptions).verifyProvider();
       console.log(output);
-      expect(output).toContain('finished: 0');
+      expect(output).toContain('0 failures');
     } catch (error) {
       console.log(error.message);
       // eslint-disable-next-line jest/no-conditional-expect
