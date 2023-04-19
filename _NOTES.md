@@ -25,3 +25,10 @@
   - 🚧 Setup the BDD test
   - ⚠ Setup the unit tests
   - ⚠ Implement the functionality
+
+## Pomdoro 4
+
+- 🚧 Handle the second light is on
+  - ✅ Setup the BDD test
+  - 🚧 Setup the unit tests
+  - ⚠ Implement the functionality
