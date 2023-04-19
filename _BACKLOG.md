@@ -13,7 +13,7 @@ When I request the time for 00:00:00 >> EVEN
 Then the seconds lightbulb is ON
 And the seconds is Y
 
-### UAT 1.2 ⚠
+### UAT 1.2 🚧
 
 Given the API endpoint /time
 When I request the time for 00:00:01 >> ODD

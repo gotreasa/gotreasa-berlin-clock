@@ -31,7 +31,7 @@
     "jest/no-standalone-expect": [
       "error",
       {
-        "additionalTestBlockFunctions": ["Given", "When", "Then", "And"]
+        "additionalTestBlockFunctions": ["Then", "And"]
       }
     ],
     "no-underscore-dangle": 0,

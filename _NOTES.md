@@ -38,3 +38,12 @@
 - 🚧 Handle the second light is on
   - 🚧 Implement the functionality
   - 🚧 Sort out the problem with supertest port
+
+## Pomdoro 6
+
+- ✅ Handle the second light is on
+  - ✅ Implement the functionality
+  - ✅ Sort out the problem with supertest port
+- 🚧 Handle the second light is off
+  - 🚧 Setup the API test
+  - ⚠ Setup the BDD test

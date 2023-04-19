@@ -15,6 +15,9 @@ const providerOptions = {
     Midnight: () => {
       return '00:00:00';
     },
+    '12:17:57': () => {
+      return '12:17:57';
+    },
   },
 };
 
