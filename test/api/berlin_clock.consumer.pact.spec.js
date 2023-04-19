@@ -29,6 +29,9 @@ pactWith(
             headers: {
               'Content-Type': 'application/json; charset=utf-8',
             },
+            body: {
+              seconds: 'Y',
+            },
           },
         });
       });
@@ -40,7 +43,7 @@ pactWith(
 
       test('should light the second light yellow at midnight', async () => {
         const response = await instance.get(TIME_ENDPOINT);
-        expect(response.body.seconds).toBe('Y');
+        expect(response.data.seconds).toBe('Y');
       });
     });
   },

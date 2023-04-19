@@ -32,3 +32,9 @@
   - ✅ Setup the BDD test
   - 🚧 Setup the unit tests
   - ⚠ Implement the functionality
+
+## Pomdoro 5
+
+- 🚧 Handle the second light is on
+  - 🚧 Implement the functionality
+  - 🚧 Sort out the problem with supertest port

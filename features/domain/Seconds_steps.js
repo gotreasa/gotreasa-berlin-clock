@@ -3,7 +3,7 @@ const { Given, When, Then, And, Fusion } = require('jest-cucumber-fusion');
 
 const request = require('supertest');
 
-const app = require('../../src/api/app');
+const app = require('../../app');
 
 let endpoint;
 
@@ -11,7 +11,7 @@ let response;
 const LIGHT_OFF = 'O';
 
 Given('the API endpoint /time', () => {
-  endpoint = '/time';
+  endpoint = '/api/v1/time';
 });
 
 When(/^I request the time for (.*)$/, async (time) => {
@@ -30,7 +30,7 @@ Then('the seconds lightbulb is ON', () => {
 });
 
 And('the seconds is Y', () => {
-  expect(response.seconds).toBe('Y');
+  expect(response.body.seconds).toBe('Y');
 });
 
 Fusion('Seconds.feature');
