@@ -15,6 +15,13 @@
 ## Pomodoro 2
 
 - 🚧 Handle the second light is on
-  - 🚧 Setup the API test
+  - ✅ Setup the API test
   - 🚧 Setup the BDD test
   - ⚠ Setup the unit tests
+
+## Pomdoro 3
+
+- 🚧 Handle the second light is on
+  - 🚧 Setup the BDD test
+  - ⚠ Setup the unit tests
+  - ⚠ Implement the functionality

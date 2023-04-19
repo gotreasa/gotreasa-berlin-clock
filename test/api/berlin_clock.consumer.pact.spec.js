@@ -7,7 +7,7 @@ const TIME_ENDPOINT = '/api/v1/time';
 pactWith(
   { consumer: 'berlin_clock_client', provider: 'berlin_clock_app' },
   (provider) => {
-    describe('dummmy API', () => {
+    describe('Berlin Clock API', () => {
       let instance;
 
       beforeAll(() => {

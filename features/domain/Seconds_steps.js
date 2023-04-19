@@ -7,13 +7,6 @@ const {
   // eslint-disable-next-line import/no-extraneous-dependencies
 } = require('jest-cucumber-fusion');
 
-/**
- *         Given the API endpoint /time
-        When I request the time for <time>
-        Then the seconds lightbulb is ON/OFF
-        And the seconds is Y
- */
-
 Given('the API endpoint /time', () => {});
 
 When(/^I request the time for (.*)$/, () => {});
