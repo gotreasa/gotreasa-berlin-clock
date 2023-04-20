@@ -11,7 +11,7 @@ const {
 const MockDate = require('mockdate');
 const request = require('supertest');
 
-const app = require('../../app');
+const app = require('../../src/api/app');
 
 let endpoint;
 
@@ -33,7 +33,8 @@ When(/^I request the time for (.*)$/, async (time) => {
     .set({
       Accept: 'application/json',
     })
-    .send();
+    .send()
+    .expect(200);
 });
 
 Then('the seconds lightbulb is ON', () => {
