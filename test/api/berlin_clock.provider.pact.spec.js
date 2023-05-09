@@ -43,14 +43,8 @@ describe('Berlin Clock Provider', () => {
   });
 
   test('tests berlin clock api routes', async () => {
-    try {
-      const output = await new Verifier(providerOptions).verifyProvider();
-      console.log(output);
-      expect(output).toContain('0 failures');
-    } catch (error) {
-      console.log(error.message);
-      // eslint-disable-next-line jest/no-conditional-expect
-      expect(error).toBeNull();
-    }
+    const output = await new Verifier(providerOptions).verifyProvider();
+    console.log(output);
+    expect(output).toContain('0 failures');
   });
 });

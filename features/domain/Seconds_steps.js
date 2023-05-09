@@ -20,8 +20,7 @@ When(/^I request the time for (.*)$/, async (time) => {
     .set({
       Accept: 'application/json',
     })
-    .send()
-    .expect(200);
+    .send();
 });
 
 Then('the seconds lightbulb is ON', () => {
@@ -38,6 +37,20 @@ Then('the seconds lightbulb is OFF', () => {
 
 And('the seconds is O', () => {
   expect(response.body.seconds).toBe(LIGHT_OFF);
+});
+
+And('the status is OK', () => {
+  expect(response.status).toBe(200);
+});
+
+Then('the status is BAD_REQUEST', () => {
+  expect(response.status).toBe(400);
+});
+
+And('the message is Your input should be in the format of HH:MM:ss', () => {
+  expect(response.body.message).toBe(
+    'Your input should be in the format of HH:MM:ss',
+  );
 });
 
 Fusion('Seconds.feature');

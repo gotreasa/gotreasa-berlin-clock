@@ -2,6 +2,8 @@ const { pactWith } = require('jest-pact');
 const axios = require('axios');
 
 const OK = 200;
+const BAD_REQUEST = 400;
+const JSON_BODY = 'application/json; charset=utf-8';
 const TIME_ENDPOINT = '/api/v1/time';
 
 pactWith(
@@ -30,7 +32,7 @@ pactWith(
             willRespondWith: {
               status: OK,
               headers: {
-                'Content-Type': 'application/json; charset=utf-8',
+                'Content-Type': JSON_BODY,
               },
               body: {
                 seconds: 'Y',
@@ -64,7 +66,7 @@ pactWith(
             willRespondWith: {
               status: OK,
               headers: {
-                'Content-Type': 'application/json; charset=utf-8',
+                'Content-Type': JSON_BODY,
               },
               body: {
                 seconds: 'O',
@@ -81,6 +83,51 @@ pactWith(
         test('should light the second light yellow at 12:17:57', async () => {
           const response = await instance.get(timeWithOddSeconds);
           expect(response.data.seconds).toBe('O');
+        });
+      });
+
+      describe('Invalid Time', () => {
+        const invalidTime = `${TIME_ENDPOINT}/1a:17:57`;
+
+        beforeEach(() => {
+          return provider.addInteraction({
+            uponReceiving: 'a request for invalid time',
+            withRequest: {
+              method: 'GET',
+              path: invalidTime,
+            },
+            willRespondWith: {
+              status: BAD_REQUEST,
+              headers: {
+                'Content-Type': JSON_BODY,
+              },
+              body: {
+                message: 'Your input should be in the format of HH:MM:ss',
+              },
+            },
+          });
+        });
+
+        test('should return a response of Bad Request', async () => {
+          try {
+            await instance.get(invalidTime);
+            expect(true).toBe(false);
+          } catch (error) {
+            // eslint-disable-next-line jest/no-conditional-expect
+            expect(error.response.status).toBe(BAD_REQUEST);
+          }
+        });
+
+        test('should light the second light yellow at 1a:17:57', async () => {
+          try {
+            await instance.get(invalidTime);
+            expect(true).toBe(false);
+          } catch (error) {
+            // eslint-disable-next-line jest/no-conditional-expect
+            expect(error.response.data.message).toBe(
+              'Your input should be in the format of HH:MM:ss',
+            );
+          }
         });
       });
     });
