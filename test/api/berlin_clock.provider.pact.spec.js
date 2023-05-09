@@ -4,7 +4,7 @@ const { Verifier } = require('@pact-foundation/pact');
 const server = require('../../app');
 
 let baseUrl;
-if (process.env.APP_HOST) {
+if (process.env.SMOKE_TEST) {
   baseUrl = process.env.APP_HOST;
 } else {
   baseUrl = `http://localhost:${process.env.SERVER_PORT || 9080}`;
