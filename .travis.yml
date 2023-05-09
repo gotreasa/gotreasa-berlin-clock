@@ -65,7 +65,7 @@ jobs:
       name: Smoke test using pact tests
       script:
         - touch .env
-        - export SMOKE_TEST=true && npm run test:api:provider
+        - export SMOKE_TEST=true && npm run test:api:provider -- --collectCoverage=false
     - env: step=Run Snyk Monitor
       name: Run Snyk Monitor
       script: snyk monitor
