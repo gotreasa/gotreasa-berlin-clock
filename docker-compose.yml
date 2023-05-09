@@ -1,10 +1,12 @@
-version: '3.4'
+version: '3.5'
 
 services:
-  { { cookiecutter.project_slug } }:
-    image: { { cookiecutter.project_slug } }
-    container_name: { { cookiecutter.project_slug } }
+  gotreasa-berlin-clock:
+    image: gotreasa-berlin-clock
+    container_name: gotreasa-berlin-clock
     build:
+      platforms:
+        - linux/amd64
       context: .
       dockerfile: ./Dockerfile
     environment:
