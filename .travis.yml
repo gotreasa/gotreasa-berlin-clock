@@ -6,8 +6,7 @@ stages:
   - name: Test
   - name: Build
   - name: Deploy
-  - name: Smoke Test
-  - name: Monitor
+  - name: Smoke Test & Monitoring
 jobs:
   include:
     - stage: Quality
@@ -61,13 +60,12 @@ jobs:
       name: Deploy the images
       script:
         - ./scripts/deploy.sh
-    - stage: Smoke Test
-      env: step=Run contract tests
-      name: Run contract tests
+    - stage: Smoke Test & Monitoring
+      env: step=Smoke test using pact tests
+      name: Smoke test using pact tests
       script:
         - touch .env
         - export SMOKE_TEST=true && npm run test:api:provider
-    - stage: Monitor
-      env: step=Run Snyk Monitor
+    - env: step=Run Snyk Monitor
       name: Run Snyk Monitor
       script: snyk monitor

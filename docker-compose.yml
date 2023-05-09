@@ -5,8 +5,6 @@ services:
     image: gotreasa-berlin-clock
     container_name: gotreasa-berlin-clock
     build:
-      platforms:
-        - linux/amd64
       context: .
       dockerfile: ./Dockerfile
     environment:
