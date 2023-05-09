@@ -11,11 +11,6 @@ const providerOptions = {
   matchingRules: {
     body: {},
   },
-  stateHandlers: {
-    Midnight: () => {
-      return '00:00:00';
-    },
-  },
 };
 
 if (process.env.CI || process.env.PACT_PUBLISH_RESULTS) {

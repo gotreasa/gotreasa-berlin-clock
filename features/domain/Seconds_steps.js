@@ -1,25 +1,42 @@
-const {
-  Given,
-  When,
-  Then,
-  And,
-  Fusion,
-  // eslint-disable-next-line import/no-extraneous-dependencies
-} = require('jest-cucumber-fusion');
+/* eslint-disable import/no-extraneous-dependencies */
+const { Given, When, Then, And, Fusion } = require('jest-cucumber-fusion');
 
-/**
- *         Given the API endpoint /time
-        When I request the time for <time>
-        Then the seconds lightbulb is ON/OFF
-        And the seconds is Y
- */
+const request = require('supertest');
 
-Given('the API endpoint /time', () => {});
+const app = require('../../app');
 
-When(/^I request the time for (.*)$/, () => {});
+let endpoint;
 
-Then('the seconds lightbulb is ON', () => {});
+let response;
+const LIGHT_OFF = 'O';
 
-And('the seconds is Y', () => {});
+Given('the API endpoint /time', () => {
+  endpoint = '/api/v1/time';
+});
+
+When(/^I request the time for (.*)$/, async (time) => {
+  response = await request(app)
+    .get(`${endpoint}/${time}`)
+    .set({
+      Accept: 'application/json',
+    })
+    .send();
+});
+
+Then('the seconds lightbulb is ON', () => {
+  expect(response.body.seconds).not.toBe(LIGHT_OFF);
+});
+
+And('the seconds is Y', () => {
+  expect(response.body.seconds).toBe('Y');
+});
+
+Then('the seconds lightbulb is OFF', () => {
+  expect(response.body.seconds).toBe(LIGHT_OFF);
+});
+
+And('the seconds is O', () => {
+  expect(response.body.seconds).toBe(LIGHT_OFF);
+});
 
 Fusion('Seconds.feature');
