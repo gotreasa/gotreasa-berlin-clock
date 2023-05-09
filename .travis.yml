@@ -65,6 +65,7 @@ jobs:
       env: step=Run contract tests
       name: Run contract tests
       script:
+        - touch .env
         - export SMOKE_TEST=true && npm run test:api:provider
     - stage: Monitor
       env: step=Run Snyk Monitor
