@@ -22,7 +22,7 @@ pactWith(
         beforeEach(() => {
           return provider.addInteraction({
             state: 'Midnight',
-            uponReceiving: 'a request for the time',
+            uponReceiving: 'a request for midnight',
             withRequest: {
               method: 'GET',
               path: midnightTime,
@@ -56,7 +56,7 @@ pactWith(
         beforeEach(() => {
           return provider.addInteraction({
             state: '12:17:57',
-            uponReceiving: 'a request for the time',
+            uponReceiving: 'a request for the time 12:17:57',
             withRequest: {
               method: 'GET',
               path: timeWithOddSeconds,

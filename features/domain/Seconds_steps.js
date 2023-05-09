@@ -20,7 +20,8 @@ When(/^I request the time for (.*)$/, async (time) => {
     .set({
       Accept: 'application/json',
     })
-    .send();
+    .send()
+    .expect(200);
 });
 
 Then('the seconds lightbulb is ON', () => {
