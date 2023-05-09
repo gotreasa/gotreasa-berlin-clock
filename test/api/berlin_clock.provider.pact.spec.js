@@ -3,9 +3,16 @@ const { versionFromGitTag } = require('@pact-foundation/absolute-version');
 const { Verifier } = require('@pact-foundation/pact');
 const server = require('../../app');
 
+let baseUrl;
+if (process.env.APP_HOST) {
+  baseUrl = process.env.APP_HOST;
+} else {
+  baseUrl = `http://localhost:${process.env.SERVER_PORT || 9080}`;
+}
+
 const providerOptions = {
   logLevel: 'INFO',
-  providerBaseUrl: `http://localhost:${process.env.SERVER_PORT || 9080}`,
+  providerBaseUrl: baseUrl,
   provider: 'berlin_clock_app',
   providerVersion: versionFromGitTag(),
   matchingRules: {
