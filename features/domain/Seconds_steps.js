@@ -3,7 +3,7 @@ const { Given, When, Then, And, Fusion } = require('jest-cucumber-fusion');
 
 const request = require('supertest');
 
-const app = require('../../app');
+const app = require('../../src/api/app');
 
 let endpoint;
 
