@@ -52,7 +52,7 @@ time | secondRow
 19:00:00 | RRRR
 21:00:00 | ROOO
 
-### UAT 1.5 🚧
+### UAT 1.5 ✅
 
 Given the API endpoint /time
 When I request the time for {time}
@@ -68,7 +68,7 @@ time | fourthRow
 00:19:00 | YYYY
 00:21:00 | YOOO
 
-### UAT 1.6 ⚠
+### UAT 1.6 🚧
 
 Given the API endpoint /time
 When I request the time for {time}

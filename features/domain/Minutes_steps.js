@@ -19,6 +19,10 @@ When(/^I request the time for (.*)$/, async (time) => {
     .send();
 });
 
+Then(/^the third row is (.*)$/, (thirdRow) => {
+  expect(response.body.thirdRow).toBe(thirdRow);
+});
+
 Then(/^the fourth row is (.*)$/, (fourthRow) => {
   expect(response.body.fourthRow).toBe(fourthRow);
 });
