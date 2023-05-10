@@ -47,3 +47,11 @@
 - ✅ Handle the second light is off
   - ✅ Setup the API test
   - ✅ Setup the BDD test
+
+## Pomodoro 7
+
+- ✅ Handle errors for seconds
+
+## Pomodoro 8
+
+- ✅ Define the OpenAPI specification for the API

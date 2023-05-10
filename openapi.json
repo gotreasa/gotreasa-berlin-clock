@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Template NodeJS & Express API",
-    "description": "Template NodeJS & Express API for testing.",
+    "title": "Berlin Clock API",
+    "description": "API for getting the time in Berlin Clock format",
     "version": "1.0.0"
   },
   "servers": [
@@ -10,21 +10,65 @@
       "url": "http://localhost:9080"
     },
     {
-      "url": "https://gotreasa-berlin-clock-app.lczugnccqc5.eu-de.codeengine.appdomain.cloud"
+      "url": "https://gotreasa-berlin-clock-app.12973fgb6pzq.eu-de.codeengine.appdomain.cloud"
     }
   ],
   "paths": {
-    "/api/v1/dummy": {
+    "/api/v1/time/{time}": {
       "get": {
-        "summary": "Dummy endpoint.",
-        "description": "Dummy endpoint.",
+        "summary": "Get the time in Berlin Clock format",
+        "parameters": [
+          {
+            "name": "time",
+            "required": true,
+            "in": "path",
+            "description": "Time to be requested in Berlin Clock format",
+            "schema": {
+              "type": "string",
+              "pattern": "[0-23]:[0-5][0-9]:[0-5][0-9]"
+            }
+          }
+        ],
+        "description": "Time Endpoint",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "type": "object",
+                  "properties": {
+                    "seconds": {
+                      "type": "string",
+                      "description": "Seconds light which is Yellow for even seconds and off for odd seconds",
+                      "pattern": "Y|O",
+                      "example": "Y"
+                    },
+                    "firstLine": {
+                      "type": "string",
+                      "description": "Five hour lights which are red to indicate 5 hours or off, with up to four lights lit",
+                      "pattern": "[R|O]{4}",
+                      "example": "RROO"
+                    },
+                    "secondLine": {
+                      "type": "string",
+                      "description": "Single hour lights which are red to indicate 1 hour or off, with up to four lights lit",
+                      "pattern": "[R|O]{4}",
+                      "example": "RROO"
+                    },
+                    "thirdLine": {
+                      "type": "string",
+                      "description": "Five minute lights which are yellow or red to indicate 5 minutes or off, with up to eleven lights lit",
+                      "pattern": "[Y|O]{2}[R|O][Y|O]{2}[R|O][Y|O]{2}[R|O][Y|O]{2}",
+                      "example": "YYRYYRYYRYY"
+                    },
+                    "fourthLine": {
+                      "type": "string",
+                      "description": "Single minute lights which are yellow to indicate 1 minute or off, with up to four lights lit",
+                      "pattern": "[Y|O]{4}",
+                      "example": "YOOO"
+                    }
+                  }
                 }
               }
             }
