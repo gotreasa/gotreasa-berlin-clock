@@ -59,6 +59,12 @@
 ## Pomodoro 9
 
 - ✅ Define the backlog for the first and second line of the API
-- 🚧 Write the API test for UAT 1.3
-- ⚠ Write the BDD test for UAT 1.3
-- ⚠ Implement the unit test and functionality for 1.3
+- ✅ Write the API test for UAT 1.3
+- ✅ Write the BDD test for UAT 1.3
+- ✅ Implement the unit test and functionality for 1.3
+
+## Pomodoro 10
+
+- ✅ Write the API test for UAT 1.4
+- ✅ Write the BDD test for UAT 1.4
+- ✅ Implement the unit test and functionality for 1.4

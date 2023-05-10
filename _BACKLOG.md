@@ -20,7 +20,7 @@ When I request the time for 00:00:01 >> ODD
 Then the seconds lightbulb is OFF
 And the seconds is O
 
-### UAT 1.3 🚧
+### UAT 1.3 ✅
 
 Given the API endpoint /time
 When I request the time for {time} >> EVEN
@@ -36,7 +36,7 @@ time | firstRow
 04:00:00 | OOOO
 06:00:00 | ROOO
 
-### UAT 1.4 ⚠
+### UAT 1.4 ✅
 
 Given the API endpoint /time
 When I request the time for {time} >> EVEN

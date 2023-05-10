@@ -23,4 +23,8 @@ Then(/^the firstRow is (.*)$/, (firstRow) => {
   expect(response.body.firstRow).toBe(firstRow);
 });
 
+Then(/^the secondRow is (.*)$/, (secondRow) => {
+  expect(response.body.secondRow).toBe(secondRow);
+});
+
 Fusion('Hours.feature');

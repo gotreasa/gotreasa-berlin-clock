@@ -1,4 +1,4 @@
-const getFirstRow = require('../domain/Hours');
+const { getFirstRow, getSecondRow } = require('../domain/Hours');
 const getSeconds = require('../domain/Seconds');
 
 const getTime = (time) => {
@@ -6,7 +6,11 @@ const getTime = (time) => {
     throw Error('Your input should be in the format of HH:MM:ss');
   }
 
-  return { seconds: getSeconds(time), firstRow: getFirstRow(time) };
+  return {
+    seconds: getSeconds(time),
+    firstRow: getFirstRow(time),
+    secondRow: getSecondRow(time),
+  };
 };
 
 module.exports = getTime;
