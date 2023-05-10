@@ -96,7 +96,7 @@ pactWith(
                 seconds: 'O',
                 firstRow: 'RROO',
                 secondRow: 'RROO',
-                thirdRow: 'YYRYYRYYRYY',
+                thirdRow: 'YYROOOOOOOO',
                 fourthRow: 'YYOO',
               },
             },
@@ -125,7 +125,7 @@ pactWith(
 
         test('should light all the lights on the third row at 12:17:57', async () => {
           const response = await instance.get(timeWithOddSeconds);
-          expect(response.data.thirdRow).toBe('YYRYYRYYRYY');
+          expect(response.data.thirdRow).toBe('YYROOOOOOOO');
         });
 
         test('should light the first two lights yellow the fourth row at 12:17:57', async () => {

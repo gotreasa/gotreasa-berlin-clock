@@ -7,7 +7,7 @@ Feature: Count the minutes on the berlin clock
         Then the third row is <thirdRow>
 
         Examples:
-            time | thirdRow
+            | time     | thirdRow    |
             | 00:00:00 | OOOOOOOOOOO |
             | 00:05:00 | YOOOOOOOOOO |
             | 00:10:00 | YYOOOOOOOOO |

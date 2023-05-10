@@ -1,5 +1,5 @@
 const { getFirstRow, getSecondRow } = require('../domain/Hours');
-const { getFourthRow } = require('../domain/Minutes');
+const { getFourthRow, getThirdRow } = require('../domain/Minutes');
 const getSeconds = require('../domain/Seconds');
 
 const getTime = (time) => {
@@ -11,6 +11,7 @@ const getTime = (time) => {
     seconds: getSeconds(time),
     firstRow: getFirstRow(time),
     secondRow: getSecondRow(time),
+    thirdRow: getThirdRow(time),
     fourthRow: getFourthRow(time),
   };
 };
