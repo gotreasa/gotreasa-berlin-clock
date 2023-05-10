@@ -13,8 +13,6 @@ app.get('/api/v1/time/:time', async (req, response) => {
   try {
     return response.status(200).json(getTime(req.params.time));
   } catch (error) {
-    console.log('The error is ', error.message);
-
     return response.status(400).json({ message: error.message });
   }
 });

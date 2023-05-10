@@ -25,7 +25,7 @@
             "description": "Time to be requested in Berlin Clock format",
             "schema": {
               "type": "string",
-              "pattern": "[0-23]:[0-5][0-9]:[0-5][0-9]"
+              "pattern": "[0-23]:[0-59]:[0-59]"
             }
           }
         ],
@@ -44,25 +44,25 @@
                       "pattern": "Y|O",
                       "example": "Y"
                     },
-                    "firstLine": {
+                    "firstRow": {
                       "type": "string",
                       "description": "Five hour lights which are red to indicate 5 hours or off, with up to four lights lit",
                       "pattern": "[R|O]{4}",
                       "example": "RROO"
                     },
-                    "secondLine": {
+                    "secondRow": {
                       "type": "string",
                       "description": "Single hour lights which are red to indicate 1 hour or off, with up to four lights lit",
                       "pattern": "[R|O]{4}",
                       "example": "RROO"
                     },
-                    "thirdLine": {
+                    "thirdRow": {
                       "type": "string",
                       "description": "Five minute lights which are yellow or red to indicate 5 minutes or off, with up to eleven lights lit",
                       "pattern": "[Y|O]{2}[R|O][Y|O]{2}[R|O][Y|O]{2}[R|O][Y|O]{2}",
                       "example": "YYRYYRYYRYY"
                     },
-                    "fourthLine": {
+                    "fourthRow": {
                       "type": "string",
                       "description": "Single minute lights which are yellow to indicate 1 minute or off, with up to four lights lit",
                       "pattern": "[Y|O]{4}",
