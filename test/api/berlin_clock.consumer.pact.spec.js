@@ -62,6 +62,11 @@ pactWith(
           const response = await instance.get(midnightTime);
           expect(response.data.secondRow).toBe('OOOO');
         });
+
+        test('should have all the lights on the fourth row off', async () => {
+          const response = await instance.get(midnightTime);
+          expect(response.data.fourthRow).toBe('OOOOOOOOOOO');
+        });
       });
 
       describe('Odd Seconds', () => {
@@ -107,6 +112,11 @@ pactWith(
         test('should light the first two lights red in the second row at 12:17:57', async () => {
           const response = await instance.get(timeWithOddSeconds);
           expect(response.data.secondRow).toBe('RROO');
+        });
+
+        test('should light all the lights the fourth row at 12:17:57', async () => {
+          const response = await instance.get(timeWithOddSeconds);
+          expect(response.data.fourthRow).toBe('YYRYYRYYRYY');
         });
       });
 
