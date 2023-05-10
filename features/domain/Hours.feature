@@ -10,7 +10,7 @@ Feature: Count the hours on the berlin clock
             | 00:00:00 | OOOO     |
             | 05:00:00 | ROOO     |
             | 10:00:00 | RROO     |
-            | 15:00:00 | RROO     |
+            | 15:00:00 | RRRO     |
             | 20:00:00 | RRRR     |
             | 04:00:00 | OOOO     |
             | 06:00:00 | ROOO     |
