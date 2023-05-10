@@ -38,6 +38,7 @@ pactWith(
                 seconds: 'Y',
                 firstRow: 'OOOO',
                 secondRow: 'OOOO',
+                thirdRow: 'OOOOOOOOOOO',
                 fourthRow: 'OOOO',
               },
             },
@@ -62,6 +63,11 @@ pactWith(
         test('should have all the lights on the second row off', async () => {
           const response = await instance.get(midnightTime);
           expect(response.data.secondRow).toBe('OOOO');
+        });
+
+        test('should have all the lights on the third row off', async () => {
+          const response = await instance.get(midnightTime);
+          expect(response.data.thirdRow).toBe('OOOOOOOOOOO');
         });
 
         test('should have all the lights on the fourth row off', async () => {
@@ -90,6 +96,7 @@ pactWith(
                 seconds: 'O',
                 firstRow: 'RROO',
                 secondRow: 'RROO',
+                thirdRow: 'YYRYYRYYRYY',
                 fourthRow: 'YYOO',
               },
             },
@@ -114,6 +121,11 @@ pactWith(
         test('should light the first two lights red in the second row at 12:17:57', async () => {
           const response = await instance.get(timeWithOddSeconds);
           expect(response.data.secondRow).toBe('RROO');
+        });
+
+        test('should light all the lights on the third row at 12:17:57', async () => {
+          const response = await instance.get(timeWithOddSeconds);
+          expect(response.data.thirdRow).toBe('YYRYYRYYRYY');
         });
 
         test('should light the first two lights yellow the fourth row at 12:17:57', async () => {
