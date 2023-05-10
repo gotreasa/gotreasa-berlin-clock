@@ -1,8 +1,14 @@
 const getFirstRow = (time) => {
-  const hours = parseInt(time.split(':')[0], 10);
-  const multipleOfFive = Math.floor(hours / 5);
+  const RED_LIGHT = 'R';
+  const LIGHT_OFF = 'O';
 
-  return 'R'.repeat(multipleOfFive) + 'O'.repeat(4 - multipleOfFive);
+  const hours = parseInt(time.split(':')[0], 10);
+  const numberOfRedLights = Math.floor(hours / 5);
+
+  return (
+    RED_LIGHT.repeat(numberOfRedLights) +
+    LIGHT_OFF.repeat(4 - numberOfRedLights)
+  );
 };
 
 module.exports = getFirstRow;
