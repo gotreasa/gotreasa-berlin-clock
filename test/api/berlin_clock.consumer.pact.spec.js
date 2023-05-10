@@ -38,6 +38,7 @@ pactWith(
                 seconds: 'Y',
                 firstRow: 'OOOO',
                 secondRow: 'OOOO',
+                fourthRow: 'OOOO',
               },
             },
           });
@@ -65,7 +66,7 @@ pactWith(
 
         test('should have all the lights on the fourth row off', async () => {
           const response = await instance.get(midnightTime);
-          expect(response.data.fourthRow).toBe('OOOOOOOOOOO');
+          expect(response.data.fourthRow).toBe('OOOO');
         });
       });
 
@@ -89,6 +90,7 @@ pactWith(
                 seconds: 'O',
                 firstRow: 'RROO',
                 secondRow: 'RROO',
+                fourthRow: 'YYOO',
               },
             },
           });
@@ -114,9 +116,9 @@ pactWith(
           expect(response.data.secondRow).toBe('RROO');
         });
 
-        test('should light all the lights the fourth row at 12:17:57', async () => {
+        test('should light the first two lights yellow the fourth row at 12:17:57', async () => {
           const response = await instance.get(timeWithOddSeconds);
-          expect(response.data.fourthRow).toBe('YYRYYRYYRYY');
+          expect(response.data.fourthRow).toBe('YYOO');
         });
       });
 
