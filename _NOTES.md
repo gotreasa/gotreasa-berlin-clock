@@ -68,4 +68,13 @@
 - ✅ Write the API test for UAT 1.4
 - ✅ Write the BDD test for UAT 1.4
 - ✅ Implement the unit test and functionality for 1.4
-- 🚧 Write backlog for third and fourth line of API
+- ✅ Write backlog for third and fourth line of API
+
+## Pomodoro 11
+
+- 🚧 Write the API test for UAT 1.5
+- ⚠ Write the BDD test for UAT 1.5
+- ⚠ Implement the unit test and functionality for 1.5
+- ⚠ Write the API test for UAT 1.6
+- ⚠ Write the BDD test for UAT 1.6
+- ⚠ Implement the unit test and functionality for 1.6
