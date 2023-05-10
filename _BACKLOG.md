@@ -24,10 +24,10 @@ And the seconds is O
 
 Given the API endpoint /time
 When I request the time for {time} >> EVEN
-Then the firstLine is {firstLine}
+Then the firstRow is {firstRow}
 
 Examples
-time | firstLine
+time | firstRow
 00:00:00 | OOOO
 05:00:00 | ROOO
 10:00:00 | RROO
@@ -40,10 +40,10 @@ time | firstLine
 
 Given the API endpoint /time
 When I request the time for {time} >> EVEN
-Then the secondLine is {secondLine}
+Then the secondRow is {secondRow}
 
 Examples
-time | secondLine
+time | secondRow
 00:00:00 | OOOO
 01:00:00 | ROOO
 02:00:00 | RROO
