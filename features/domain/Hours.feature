@@ -3,7 +3,7 @@ Feature: Count the hours on the berlin clock
     Scenario Outline: Showing the multiple of 5 hours on the first row of the clock (<time>)
         Given the API endpoint /time
         When I request the time for <time>
-        Then the firstRow is <firstRow>
+        Then the first row is <firstRow>
 
         Examples:
             | time     | firstRow |
@@ -19,7 +19,7 @@ Feature: Count the hours on the berlin clock
 
         Given the API endpoint /time
         When I request the time for <time>
-        Then the secondRow is <secondRow>
+        Then the second row is <secondRow>
 
         Examples:
             | time     | secondRow |

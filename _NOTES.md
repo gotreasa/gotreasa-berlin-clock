@@ -72,8 +72,8 @@
 
 ## Pomodoro 11
 
-- 🚧 Write the API test for UAT 1.5
-- ⚠ Write the BDD test for UAT 1.5
+- ✅ Write the API test for UAT 1.5
+- 🚧 Write the BDD test for UAT 1.5
 - ⚠ Implement the unit test and functionality for 1.5
 - ⚠ Write the API test for UAT 1.6
 - ⚠ Write the BDD test for UAT 1.6

@@ -19,12 +19,8 @@ When(/^I request the time for (.*)$/, async (time) => {
     .send();
 });
 
-Then(/^the first row is (.*)$/, (firstRow) => {
-  expect(response.body.firstRow).toBe(firstRow);
+Then(/^the fourth row is (.*)$/, (fourthRow) => {
+  expect(response.body.fourthRow).toBe(fourthRow);
 });
 
-Then(/^the second row is (.*)$/, (secondRow) => {
-  expect(response.body.secondRow).toBe(secondRow);
-});
-
-Fusion('Hours.feature');
+Fusion('Minutes.feature');

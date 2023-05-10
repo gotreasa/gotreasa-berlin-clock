@@ -24,7 +24,7 @@ And the seconds is O
 
 Given the API endpoint /time
 When I request the time for {time}
-Then the firstRow is {firstRow}
+Then the first row is {firstRow}
 
 Examples
 time | firstRow
@@ -40,7 +40,7 @@ time | firstRow
 
 Given the API endpoint /time
 When I request the time for {time}
-Then the secondRow is {secondRow}
+Then the second row is {secondRow}
 
 Examples
 time | secondRow
@@ -52,11 +52,11 @@ time | secondRow
 19:00:00 | RRRR
 21:00:00 | ROOO
 
-### UAT 1.5 ⚠
+### UAT 1.5 🚧
 
 Given the API endpoint /time
 When I request the time for {time}
-Then the fourthRow is {fourthRow}
+Then the fourth row is {fourthRow}
 
 Examples
 time | fourthRow
@@ -72,7 +72,7 @@ time | fourthRow
 
 Given the API endpoint /time
 When I request the time for {time}
-Then the thirdRow is {thirdRow}
+Then the third row is {thirdRow}
 
 Examples
 time | thirdRow
