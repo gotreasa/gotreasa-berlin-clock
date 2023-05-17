@@ -7,7 +7,7 @@ describe('Retrieve the time', () => {
     expect(getTime('00:00:00')).toMatchObject({ seconds: YELLOW_LIGHT });
   });
 
-  test.each([['0a:00:00'], ['blah'], ['99:99:99']])(
+  test.each([['0a:00:00'], ['blah'], ['99:99:99'], ['24:59:59']])(
     'should return an error when the input is not a valid time (%s)',
     (input) => {
       expect(() => {
