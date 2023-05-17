@@ -79,8 +79,14 @@
 - ⚠ Write the BDD test for UAT 1.6
 - ⚠ Implement the unit test and functionality for 1.6
 
-## Pomodor 12
+## Pomodoro 12
 
 - ✅ Write the API test for UAT 1.6
 - ✅ Write the BDD test for UAT 1.6
-- 🚧 Implement the unit test and functionality for 1.6
+- ✅ Implement the unit test and functionality for 1.6
+
+## Pomodoro 13
+
+- 🚧 Refactor the naming of items
+  - 🚧 TD2 extract the names of the lights to a constants file
+- ⚠ Add a test for 24:59:59 TD1

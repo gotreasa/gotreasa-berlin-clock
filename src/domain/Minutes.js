@@ -1,6 +1,4 @@
-const LIGHT_OFF = 'O';
-const RED_LIGHT = 'R';
-const YELLOW_LIGHT = 'Y';
+const { YELLOW_LIGHT, RED_LIGHT, LIGHT_OFF } = require('./constants');
 
 const getMinutes = (time) => parseInt(time.split(':')[1], 10);
 const getRedLights = (numberOfLitLights, lights) => {
@@ -20,7 +18,8 @@ const getThirdRow = (time) => {
   const numberOfLitLights = Math.floor(getMinutes(time) / 5);
 
   let lights =
-    'Y'.repeat(numberOfLitLights) + 'O'.repeat(11 - numberOfLitLights);
+    YELLOW_LIGHT.repeat(numberOfLitLights) +
+    LIGHT_OFF.repeat(11 - numberOfLitLights);
 
   lights = getRedLights(numberOfLitLights, lights);
 

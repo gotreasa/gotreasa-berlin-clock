@@ -1,5 +1,5 @@
-const RED_LIGHT = 'R';
-const LIGHT_OFF = 'O';
+const { RED_LIGHT, LIGHT_OFF } = require('./constants');
+
 const getHours = (time) => parseInt(time.split(':')[0], 10);
 
 const getFirstRow = (time) => {

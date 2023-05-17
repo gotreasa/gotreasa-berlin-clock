@@ -32,8 +32,4 @@ describe('Retrieving the hours', () => {
       expect(getSecondRow(input)).toBe(expected);
     },
   );
-
-  //   test('should return OOOO on the second row when the input is 00:00:00', () => {
-  //     expect(getSecondRow('00:00:00')).toBe('OOOO');
-  //   });
 });

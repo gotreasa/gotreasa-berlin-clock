@@ -6,8 +6,8 @@ const request = require('supertest');
 const app = require('../../src/api/app');
 
 let endpoint;
-
 let response;
+const YELLOW_LIGHT = 'Y';
 const LIGHT_OFF = 'O';
 
 Given('the API endpoint /time', () => {
@@ -28,7 +28,7 @@ Then('the seconds lightbulb is ON', () => {
 });
 
 And('the seconds is Y', () => {
-  expect(response.body.seconds).toBe('Y');
+  expect(response.body.seconds).toBe(YELLOW_LIGHT);
 });
 
 Then('the seconds lightbulb is OFF', () => {

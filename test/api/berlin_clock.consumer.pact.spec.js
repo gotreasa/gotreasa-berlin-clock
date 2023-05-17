@@ -6,6 +6,8 @@ const BAD_REQUEST = 400;
 const JSON_BODY = 'application/json; charset=utf-8';
 const TIME_ENDPOINT = '/api/v1/time';
 
+const YELLOW_LIGHT = 'Y';
+const LIGHT_OFF = 'O';
 pactWith(
   { consumer: 'berlin_clock_client', provider: 'berlin_clock_app' },
   (provider) => {
@@ -52,7 +54,7 @@ pactWith(
 
         test('should light the second light yellow at midnight', async () => {
           const response = await instance.get(midnightTime);
-          expect(response.data.seconds).toBe('Y');
+          expect(response.data.seconds).toBe(YELLOW_LIGHT);
         });
 
         test('should have all the lights on the first row off', async () => {
@@ -110,7 +112,7 @@ pactWith(
 
         test('should light the second light yellow at 12:17:57', async () => {
           const response = await instance.get(timeWithOddSeconds);
-          expect(response.data.seconds).toBe('O');
+          expect(response.data.seconds).toBe(LIGHT_OFF);
         });
 
         test('should light the first two lights red in the first row at 12:17:57', async () => {

@@ -4,7 +4,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/xpfarm/gotreasa-berlin-clock/badge.svg)](https://snyk.io/test/github/xpfarm/gotreasa-berlin-clock)
 [![Build Status](https://travis.ibm.com/xpfarm/gotreasa-berlin-clock.svg?token=qUvyKZdxoFqWxS8YbzZZ&branch=main)](https://travis.ibm.com/xpfarm/gotreasa-berlin-clock)
 
-API: [https://gotreasa-berlin-clock-app.wdc1a.ciocloud.nonprod.intranet.ibm.com/api/v1/dummy]
+API: [https://gotreasa-berlin-clock-app.12973fgb6pzq.eu-de.codeengine.appdomain.cloud/api/v1/time/00:00:00]
 
 ## Description
 
