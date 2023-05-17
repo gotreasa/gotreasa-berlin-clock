@@ -90,3 +90,7 @@
 - ✅ Refactor the naming of items
   - ✅ TD2 extract the names of the lights to a constants file
 - ✅ Add a test for 24:59:59 TD1
+
+## Pomodoro 14
+
+- 🚧 Review the criteria for the brown belt
