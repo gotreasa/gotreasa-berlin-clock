@@ -93,11 +93,19 @@
 
 ## Pomodoro 14
 
-- ok Review the criteria for the brown belt
+- ✅ Review the criteria for the brown belt
   - Missing:
     - CLI
     - Deal with Sonar issues
     - IaC
     - Low fidelity sketches for CLI
-- 🚧 Address the Sonar issues
+- ✅ Address the Sonar issues
+- ✅ Fix Smoke test failure on IBM Cloud
 - ⚠ Create low fidelity sketch of the CLI
+
+## Pomodoro 15
+
+- 🚧 Spike how to put an emoji on a CLI
+- ⚠ Create mockup of the CLI
+- ⚠ Create backlog for the CLI
+- ⚠ Start the first test for the CLI
