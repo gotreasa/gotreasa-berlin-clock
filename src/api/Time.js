@@ -3,7 +3,7 @@ const { getFourthRow, getThirdRow } = require('../domain/Minutes');
 const getSeconds = require('../domain/Seconds');
 
 const getTime = (time) => {
-  if (!/^[0-1]\d|2[0-3]:[0-5]\d:[0-5]\d$/.test(time)) {
+  if (!/^([0-1]\d|2[0-3]):[0-5]\d:[0-5]\d$/.test(time)) {
     throw Error('Your input should be in the format of HH:MM:ss');
   }
 
