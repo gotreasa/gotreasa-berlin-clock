@@ -93,4 +93,11 @@
 
 ## Pomodoro 14
 
-- 🚧 Review the criteria for the brown belt
+- ok Review the criteria for the brown belt
+  - Missing:
+    - CLI
+    - Deal with Sonar issues
+    - IaC
+    - Low fidelity sketches for CLI
+- 🚧 Address the Sonar issues
+- ⚠ Create low fidelity sketch of the CLI
