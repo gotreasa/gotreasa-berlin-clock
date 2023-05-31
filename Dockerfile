@@ -8,7 +8,7 @@ RUN curl -sfL https://gobinaries.com/tj/node-prune | bash -s -- -b /usr/local/bi
 COPY package*.json ./
 
 # Locally we will run it using
-RUN npm ci
+RUN npm ci --omit=dev --ignore-scripts
 
 # Prune the source code.
 RUN npm prune
@@ -32,7 +32,8 @@ RUN chmod -R 775 /usr/src/app/
 # Switch to node user.
 USER node
 
+ENV SERVER_PORT=80
 # Image start commands.
-EXPOSE 9080
+EXPOSE $SERVER_PORT
 ENTRYPOINT [ "npm" ]
 CMD [ "run", "start:app" ]
