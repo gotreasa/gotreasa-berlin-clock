@@ -105,7 +105,7 @@
 
 ## Pomodoro 15
 
-- 🚧 Spike how to put an emoji on a CLI
-- ⚠ Create mockup of the CLI
-- ⚠ Create backlog for the CLI
+- ✅ Spike how to put an emoji on a CLI
+- ❌ Create mockup of the CLI
+- 🚧 Create backlog for the CLI
 - ⚠ Start the first test for the CLI
