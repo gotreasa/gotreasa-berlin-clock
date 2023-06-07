@@ -17,6 +17,7 @@ on:
 
 jobs:
   commitlint:
+    name: Verify that the commit all follow the linting rules
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -143,9 +144,10 @@ jobs:
           command: monitor
 
   prune_image:
+    name: Prune the old image
     runs-on: ubuntu-latest
     needs: [smoke_test]
     steps:
-      - name: Prune the old image
+      - name: Run script to prune the old image
         uses: actions/checkout@master
       - run: ./scripts/prune_image.sh
