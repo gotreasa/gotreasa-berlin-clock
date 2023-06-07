@@ -150,4 +150,4 @@ jobs:
     steps:
       - name: Run script to prune the old image
         uses: actions/checkout@master
-      - run: ./scripts/prune_image.sh
+      - run: ./scripts/prune_images.sh
