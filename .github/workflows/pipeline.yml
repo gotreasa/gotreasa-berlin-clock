@@ -85,6 +85,7 @@ jobs:
       - name: Run Pact tests
         uses: actions/checkout@master
       - run: touch .env
+      - run: npm ci
       - run: npm run test:api:consumer
       - run: npm run publish:pact
       - run: export CI=true && npm run test:api:provider
