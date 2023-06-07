@@ -7,7 +7,7 @@ env:
   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
   IBMCLOUD_APIKEY: ${{ secrets.IBMCLOUD_APIKEY }}
   REGISTRY_SECRET: ${{ secrets.REGISTRY_SECRET }}
-  APP_HOST: ${{ env.APP_HOST }}
+  APP_HOST: ${{ vars.APP_HOST }}
 
 on:
   push:
