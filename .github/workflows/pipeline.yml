@@ -10,6 +10,30 @@ on:
     branches: [main]
 
 jobs:
+  commitlint-travis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use Node.js 18.16.0
+        uses: actions/checkout@v2
+      - run: npm ci
+      - run: npx commitlint-travis
+
+  eslint-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use Node.js 18.16.0
+        uses: actions/checkout@v2
+      - run: npm ci
+      - run: npm run lint:verify
+
+  prettier-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use Node.js 18.16.0
+        uses: actions/checkout@v2
+      - run: npm ci
+      - run: npm run prettier:verify
+
   detect-secrets:
     runs-on: ubuntu-latest
     steps:
