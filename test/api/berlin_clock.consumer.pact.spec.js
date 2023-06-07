@@ -20,6 +20,48 @@ pactWith(
         });
       });
 
+      describe('Health Endpoint', () => {
+        beforeEach(() => {
+          return provider.addInteraction({
+            state: 'health check',
+            uponReceiving: 'a request the health endpoint',
+            withRequest: {
+              method: 'GET',
+              path: '/health',
+            },
+            willRespondWith: {
+              status: OK,
+            },
+          });
+        });
+
+        test('should return a response of OK for the health endpoint', async () => {
+          const response = await instance.get('/health');
+          expect(response.status).toBe(OK);
+        });
+      });
+
+      describe('OpenAPI Endpoint', () => {
+        beforeEach(() => {
+          return provider.addInteraction({
+            state: 'openapi endpoint',
+            uponReceiving: 'a request the openapi endpoint',
+            withRequest: {
+              method: 'GET',
+              path: '/api-docs/',
+            },
+            willRespondWith: {
+              status: OK,
+            },
+          });
+        });
+
+        test('should return a response of OK for the OpenAPI endpoint', async () => {
+          const response = await instance.get('/api-docs/');
+          expect(response.status).toBe(OK);
+        });
+      });
+
       describe('Even Seconds', () => {
         const midnightTime = `${TIME_ENDPOINT}/00:00:00`;
 
