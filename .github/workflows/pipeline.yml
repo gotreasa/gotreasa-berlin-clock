@@ -13,7 +13,7 @@ jobs:
   commitlint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@master
         with:
           fetch-depth: 0
       - uses: wagoid/commitlint-github-action@v5
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Use Node.js 18.16.0
-        uses: actions/checkout@v3
+        uses: actions/checkout@master
       - run: npm ci
       - run: npm run lint:verify
 
@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Use Node.js 18.16.0
-        uses: actions/checkout@v3
+        uses: actions/checkout@master
       - run: npm ci
       - run: npm run prettier:verify
 
@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Use Node.js 18.16.0
-        uses: actions/checkout@v3
+        uses: actions/checkout@master
       - run: npm ci
       - run: npm run detect-secrets $(git ls-files)
 
@@ -47,7 +47,7 @@ jobs:
     needs: [commitlint, eslint-verify, prettier-verify, detect-secrets]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@master
       - name: Use Node.js 18.16.0
         uses: snyk/actions/node@master
         env:
@@ -63,9 +63,9 @@ jobs:
     needs: [commitlint, eslint-verify, prettier-verify, detect-secrets]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@master
       - name: Use Node.js 18.16.0
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@master
         with:
           node-version: 18.16.0
       - run: touch .env
