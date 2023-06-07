@@ -23,10 +23,7 @@ ibmcloud ce registry create --name $IMAGE_NAMESPACE --server $IMAGE_REPOSITORY_U
 $SCRIPT_DIR/buildAndPublish.sh
 
 ibmcloud ce app create --name $APP_NAME --image $IMAGE_REPOSITORY_URL/$IMAGE_NAMESPACE/$APP_IMAGE --min-scale 1 --max-scale 1 --port 9080 --registry-secret $IMAGE_NAMESPACE
-travis env set IBMCLOUD_APIKEY $IBMCLOUD_APIKEY --private -e https://v3.travis.ibm.com/api
-travis env set REGISTRY_SECRET $IMAGE_NAMESPACE --private -e https://v3.travis.ibm.com/api
-travis env set APP_HOST $(ibmcloud ce app get --name $APP_NAME --output url) --public -e https://v3.travis.ibm.com/api
 
-gh secret set IBMCLOUD_APIKEY $IBMCLOUD_APIKEY
-gh secret set REGISTRY_SECRET $IMAGE_NAMESPACE
-gh variable set APP_HOST $(ibmcloud ce app get --name $APP_NAME --output url)
+gh secret set IBMCLOUD_APIKEY --body "$IBMCLOUD_APIKEY"
+gh secret set REGISTRY_SECRET --body "$IMAGE_NAMESPACE"
+gh variable set APP_HOST --body "$(ibmcloud ce app get --name $APP_NAME --output url)"
