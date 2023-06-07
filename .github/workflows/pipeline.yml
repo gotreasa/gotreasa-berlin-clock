@@ -15,7 +15,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 18.16.0
-        uses: snyk/actions/node@master
       - run: npm ci
       - run: npm run detect-secrets $(git ls-files)
 
