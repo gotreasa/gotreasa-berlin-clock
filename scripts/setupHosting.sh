@@ -1,6 +1,7 @@
 #!/bin/bash
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-. $SCRIPT_DIR/hosting.conf
+source $SCRIPT_DIR/hosting.conf
+source .env
 
 checkIbmcloudCli
 
@@ -25,3 +26,7 @@ ibmcloud ce app create --name $APP_NAME --image $IMAGE_REPOSITORY_URL/$IMAGE_NAM
 travis env set IBMCLOUD_APIKEY $IBMCLOUD_APIKEY --private -e https://v3.travis.ibm.com/api
 travis env set REGISTRY_SECRET $IMAGE_NAMESPACE --private -e https://v3.travis.ibm.com/api
 travis env set APP_HOST $(ibmcloud ce app get --name $APP_NAME --output url) --public -e https://v3.travis.ibm.com/api
+
+gh secret set IBMCLOUD_APIKEY $IBMCLOUD_APIKEY
+gh secret set REGISTRY_SECRET $IMAGE_NAMESPACE
+gh variable set APP_HOST $(ibmcloud ce app get --name $APP_NAME --output url)
