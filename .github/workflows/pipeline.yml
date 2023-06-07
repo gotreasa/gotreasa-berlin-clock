@@ -3,6 +3,9 @@
 
 name: Node.js CI
 
+env:
+  PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+
 on:
   push:
     branches: [main]
