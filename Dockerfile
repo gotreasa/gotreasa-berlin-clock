@@ -32,7 +32,6 @@ RUN chmod -R 775 /usr/src/app/
 # Switch to node user.
 USER node
 
-ENV SERVER_PORT=80
 # Image start commands.
 EXPOSE $SERVER_PORT
 ENTRYPOINT [ "npm" ]
