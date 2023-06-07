@@ -115,17 +115,29 @@ jobs:
         uses: actions/checkout@master
       - run: ./scripts/deploy.sh
 
-  #   - stage: Deploy
-  #     env: step=Deploy the images
-  #     name: Deploy the images
-  #     script:
-  #       - ./scripts/deploy.sh
-  #   - stage: Smoke Test & Monitoring
-  #     env: step=Smoke test using pact tests
-  #     name: Smoke test using pact tests
-  #     script:
-  #       - touch .env
-  #       - export SMOKE_TEST=true && npm run test:api:provider -- --collectCoverage=false
-  #   - env: step=Run Snyk Monitor
-  #     name: Run Snyk Monitor
-  #     script: snyk monitor
+  smoke_test:
+    runs-on: ubuntu-latest
+    needs: [deploy_image]
+    steps:
+      - uses: actions/setup-node@master
+      - name: Smoke test using pact tests
+        uses: actions/checkout@master
+      - run: touch .env
+      - run: npm ci
+      - run: export SMOKE_TEST=true && npm run test:api:provider -- --collectCoverage=false
+
+  snyk_monitor:
+    runs-on: ubuntu-latest
+    needs: [deploy_image]
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js 18.16.0
+        uses: snyk/actions/node@master
+        env:
+          # In order to use the Snyk Action you will need to have a Snyk API token.
+          # More details in https://{{cookiecutter.github_url}}/snyk/actions#getting-your-snyk-token
+          # or you can signup for free at https://snyk.io/login
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: monitor
