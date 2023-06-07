@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode,certificates,node,sonar,sonarqube,terraform,snyk
-# Edit at https://www.toptal.com/developers/gitignore?templates=macos,visualstudiocode,certificates,node,sonar,sonarqube,terraform,snyk
+# Created by https://www.toptal.com/developers/gitignore/api/node,snyk,macos,sonar,sonarqube,terraform,certificates,visualstudiocode,terragrunt
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,snyk,macos,sonar,sonarqube,terraform,certificates,visualstudiocode,terragrunt
 
 ### certificates ###
 *.pem
@@ -239,6 +239,14 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+### Terragrunt ###
+# terragrunt cache directories
+**/.terragrunt-cache/*
+
+# Terragrunt debug output file (when using `--terragrunt-debug` option)
+# See: https://terragrunt.gruntwork.io/docs/reference/cli-options/#terragrunt-debug
+terragrunt-debug.tfvars.json
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -258,7 +266,7 @@ terraform.rc
 .history
 .ionide
 
-# End of https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode,certificates,node,sonar,sonarqube,terraform,snyk
+# End of https://www.toptal.com/developers/gitignore/api/node,snyk,macos,sonar,sonarqube,terraform,certificates,visualstudiocode,terragrunt
 
 # Temporary files used for Portman
 tmp/
