@@ -1,9 +1,10 @@
 #!/bin/bash
 SCRIPT_DIR=$( cd -- "$( dirname -- "$0" )" &> /dev/null && pwd )
 . $SCRIPT_DIR/hosting.conf
+. $SCRIPT_DIR/utils.sh
 
 echo "🛠 Building docker image"
-docker-compose build --parallel
+docker build .
 echo "✅ Completed building the image"
 
 
