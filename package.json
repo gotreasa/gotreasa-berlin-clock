@@ -59,6 +59,9 @@
     "*.{js,css,md,yml,json}": [
       "npm run prettier:fix"
     ],
+    "Dockerfile": [
+      "hadolint Dockerfile"
+    ],
     "package.json": [
       "sort-package-json",
       "typesync ./package.json --silent"
