@@ -1,0 +1,20 @@
+schemaVersion: '2.0.0'
+
+metadataTest:
+  exposedPorts: ["9080"]
+  entrypoint: ["npm"]
+  cmd: ["run start:app"]
+  workdir: "/usr/src/app"
+  user: "node"
+
+commandTests:
+  - name:  "🔎  node is installed"
+    command: "which"
+    args: ["node"]
+    exitCode: 0
+    expectedOutput: ["/usr/local/bin/node"]
+  - name:  "🔎  node is version 18"
+    command: "node"
+    args: ["--version"]
+    exitCode: 0
+    expectedOutput: ["18"]

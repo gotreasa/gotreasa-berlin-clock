@@ -118,5 +118,5 @@
 ## Pomodoro 26
 
 - ✅ Setup hadolint locally for linting the docker file
-- 🚧 Integrate hadolint into the pipeline
-- ⚠ Setup container structure tests
+- ✅ Integrate hadolint into the pipeline
+- 🚧 Setup container structure tests
