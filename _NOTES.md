@@ -109,3 +109,14 @@
 - ❌ Create mockup of the CLI
 - 🚧 Create backlog for the CLI
 - ⚠ Start the first test for the CLI
+
+## Pomdoro 16 - 25
+
+- ✅ Migrate the pipeline from Travis to GitHub actions
+- ✅ Update the deploy scripts to be more resilient
+
+## Pomodoro 26
+
+- ✅ Setup hadolint locally for linting the docker file
+- 🚧 Integrate hadolint into the pipeline
+- ⚠ Setup container structure tests
