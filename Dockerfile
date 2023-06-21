@@ -32,6 +32,6 @@ RUN chown -R node:root /usr/src/app/ && chmod -R 775 /usr/src/app/
 USER node
 
 # Image start commands.
-EXPOSE $SERVER_PORT
+EXPOSE 9080
 ENTRYPOINT [ "npm" ]
 CMD [ "run", "start:app" ]
