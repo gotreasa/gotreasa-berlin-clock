@@ -119,4 +119,10 @@
 
 - ✅ Setup hadolint locally for linting the docker file
 - ✅ Integrate hadolint into the pipeline
-- 🚧 Setup container structure tests
+- ✅ Setup container structure tests executable locally
+
+## Pomodoro 27
+
+- 🚧 Continue fleshing out the container structure tests
+- ⚠ Integrate container structure tests into the pipeline
+- ⚠ Setup the local environment for inspec tests
