@@ -3,6 +3,7 @@ FROM node:18 AS BUILD
 WORKDIR /usr/src/app
 
 # Add pruning packages for use later.
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -sfL https://gobinaries.com/tj/node-prune | bash -s -- -b /usr/local/bin
 
 COPY package*.json ./
@@ -11,8 +12,7 @@ COPY package*.json ./
 RUN npm ci --omit=dev --ignore-scripts
 
 # Prune the source code.
-RUN npm prune
-RUN /usr/local/bin/node-prune
+RUN npm prune && /usr/local/bin/node-prune
 
 COPY app.js ./
 COPY openapi.json ./
@@ -26,8 +26,7 @@ WORKDIR /usr/src/app
 COPY --from=BUILD /usr/src/app /usr/src/app
 
 # Set permissions for node app folder after copy.
-RUN chown -R node:root /usr/src/app/
-RUN chmod -R 775 /usr/src/app/
+RUN chown -R node:root /usr/src/app/ && chmod -R 775 /usr/src/app/
 
 # Switch to node user.
 USER node
