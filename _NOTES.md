@@ -132,3 +132,8 @@
 - ✅ Check if SonarLint can be run from the command line
 - ❌ Integrate container structure tests into the pipeline
 - 🚧 Setup the local environment for inspec tests
+
+## Pomodoro 29
+
+- ✅ Setup the local environment for inspec tests
+- ✅ Write the tests for the Dockerfile
