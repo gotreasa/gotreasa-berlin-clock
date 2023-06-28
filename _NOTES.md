@@ -137,3 +137,8 @@
 
 - ✅ Setup the local environment for inspec tests
 - ✅ Write the tests for the Dockerfile
+
+## Pomodoro 30
+
+- ✅ Write the tests for the Docker compose
+- 🚧 Setup GitHub action for inspec
