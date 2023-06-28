@@ -123,6 +123,12 @@
 
 ## Pomodoro 27
 
-- 🚧 Continue fleshing out the container structure tests
+- ✅ Continue fleshing out the container structure tests
 - ⚠ Integrate container structure tests into the pipeline
+- ⚠ Setup the local environment for inspec tests
+
+## Pomodoro 28
+
+- ✅ Check if SonarLint can be run from the command line
+- 🚧 Integrate container structure tests into the pipeline
 - ⚠ Setup the local environment for inspec tests
