@@ -42,6 +42,19 @@ jobs:
       - run: npm ci
       - run: npm run lint:verify
 
+  inspec:
+    needs: [hadolint]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@master
+
+      - name: Install Inspec
+        run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
+
+      - name: Run Inspec tests
+        run: inspec exec test/container/unit/*.rb  --chef-license accept
+
   prettier-verify:
     runs-on: ubuntu-latest
     steps:

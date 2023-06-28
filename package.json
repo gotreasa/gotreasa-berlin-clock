@@ -47,7 +47,7 @@
     "test:security": "env-cmd snyk test",
     "test:security:dev": "npm run test:security -- --dev",
     "test:unit": "jest ./test --testPathIgnorePatterns test/**/*.pact.spec.js",
-    "test:unit:docker": "inspec exec test/container/unit/*.rb",
+    "test:unit:docker": "inspec exec test/container/unit/*.rb --chef-license accept",
     "test:unit:docker:watch": "chokidar '**.rb' 'Dockerfile' --initial -c 'npm run test:unit:docker'",
     "test:unit:watch": "npm run test:unit -- --watch"
   },
