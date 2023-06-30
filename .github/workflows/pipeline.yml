@@ -149,7 +149,30 @@ jobs:
   #     - run: touch .env
   #     - run: ./scripts/buildAndPublish.sh
 
-  # deploy_image:
+  deploy_image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: okteto/context@latest
+        with:
+          token: ${{ secrets.OKTETO_TOKEN }}
+
+      - name: 'Activate Namespace'
+        uses: okteto/namespace@latest
+        with:
+          name: gotreasa
+
+      - name: 'Deploy application'
+        uses: okteto/apply@latest
+        with:
+          namespace: gotreasa
+          manifest: k8s.yaml
+
+      - name: 'Push changes'
+        uses: okteto/push@latest
+        with:
+          namespace: gotreasa
+          name: gotreasa-berlin-clock
   #   runs-on: ubuntu-latest
   #   needs: [build_image]
   #   steps:
