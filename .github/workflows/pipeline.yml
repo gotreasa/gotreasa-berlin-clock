@@ -160,7 +160,7 @@ jobs:
       - name: 'Activate Namespace'
         uses: okteto/namespace@latest
         with:
-          name: gotreasa
+          namespace: gotreasa
 
       - name: 'Deploy application'
         uses: okteto/apply@latest
