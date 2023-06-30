@@ -127,6 +127,7 @@ jobs:
       - uses: okteto/context@latest
         with:
           token: ${{ secrets.OKTETO_TOKEN }}
+      - run: pwd && ls
 
       - name: 'Build'
         uses: okteto/build@latest
