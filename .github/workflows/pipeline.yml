@@ -8,6 +8,7 @@ env:
   IBMCLOUD_APIKEY: ${{ secrets.IBMCLOUD_APIKEY }}
   REGISTRY_SECRET: ${{ secrets.REGISTRY_SECRET }}
   APP_HOST: ${{ vars.APP_HOST }}
+  OKTETO_TOKEN: ${{ secrets.OKTETO_TOKEN }}
 
 on:
   push:
@@ -120,7 +121,14 @@ jobs:
       - run: npm run publish:pact
       - run: export CI=true && npm run test:api:provider
 
-  # build_image:
+  build_image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: okteto/context@latest
+
+      - name: 'Build'
+        uses: okteto/build@latest
+
   #   runs-on: ubuntu-latest
   #   needs:
   #     [
