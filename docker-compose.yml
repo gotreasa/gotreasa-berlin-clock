@@ -7,7 +7,11 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    volumes:
+      - .:/src
     environment:
       NODE_ENV: production
     ports:
       - 9080:9080
+    command: npm run start:app
+    restart: always

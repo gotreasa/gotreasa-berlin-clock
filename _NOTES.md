@@ -141,4 +141,12 @@
 ## Pomodoro 30
 
 - ✅ Write the tests for the Docker compose
-- 🚧 Setup GitHub action for inspec
+- ✅ Setup GitHub action for inspec
+
+## Pomodoro 31 - 33
+
+- ✅ Spike different free kubernetes offerings - Okteto was chosen
+- 🚧 Set up local okteto configuration
+- ⚠ Set up build pipeline configuration
+- ⚠ Set up deployment of the image
+- ⚠ Set up the smoke tests
