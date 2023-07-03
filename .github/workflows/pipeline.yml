@@ -179,7 +179,7 @@ jobs:
       - name: Run tests on the docker container structure
         uses: plexsystems/container-structure-test-action@main
         with:
-          image: ${{ env.REGISTRY }}/gotreasa/gotreasa-berlin-clock
+          image: ${{ env.REGISTRY }}/gotreasa/gotreasa-berlin-clock:main
           config: test/container/structure/config.yaml
 
   deploy_image:
