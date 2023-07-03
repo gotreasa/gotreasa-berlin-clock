@@ -161,6 +161,9 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
+      - name: List out the Docker images
+        run: docker images
+
       # - uses: actions/checkout@master
       # - uses: okteto/context@latest
       #   with:
