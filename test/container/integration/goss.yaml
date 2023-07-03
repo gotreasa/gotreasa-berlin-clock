@@ -1,0 +1,43 @@
+dns:
+  localhost:
+    addrs:
+      - ::1
+    resolvable: true
+
+port:
+  tcp6:9080:
+    listening: true
+    ip:
+      - '::'
+    skip: false
+
+process:
+  node:
+    skip: false
+    running: true
+
+group:
+  node:
+    exists: true
+    gid: 1000
+    skip: false
+
+user:
+  node:
+    exists: true
+    gid: 1000
+    uid: 1000
+    home: /home/node
+    shell: /bin/sh
+    skip: false
+
+interface:
+  eth0:
+    exists: true
+    addrs:
+      - '172.17.0.3/16'
+    mtu: 65535
+
+kernel-param:
+  kernel.ostype:
+    value: Linux
