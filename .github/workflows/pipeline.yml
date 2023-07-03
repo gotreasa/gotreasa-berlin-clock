@@ -143,7 +143,7 @@ jobs:
       - name: 'Build'
         uses: okteto/build@latest
         with:
-          tag: gotreasa-berlin-clock
+          tag: gotreasa-berlin-clock:latest
       - run: docker images
 
       - name: Run tests on the docker container structure
