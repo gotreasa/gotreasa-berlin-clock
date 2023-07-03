@@ -144,7 +144,7 @@ jobs:
         uses: okteto/build@latest
 
       - name: Run tests on the docker container structure
-        uses: plexsystems/container-structure-test-action@vmaster
+        uses: plexsystems/container-structure-test-action@main
         with:
           image: gotreasa-berlin-clock
           config: test/container/structure/config.yaml
