@@ -144,6 +144,7 @@ jobs:
         uses: okteto/build@latest
         with:
           tag: gotreasa-berlin-clock:latest
+          global: true
       - run: docker images
 
       - name: Run tests on the docker container structure
