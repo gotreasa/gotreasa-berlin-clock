@@ -139,6 +139,7 @@ jobs:
       - uses: okteto/context@latest
         with:
           token: ${{ secrets.OKTETO_TOKEN }}
+          tag: gotreasa-berlin-clock
 
       - name: 'Build'
         uses: okteto/build@latest
