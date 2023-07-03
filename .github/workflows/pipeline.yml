@@ -174,16 +174,16 @@ jobs:
   #       uses: actions/checkout@master
   #     - run: ./scripts/deploy.sh
 
-  # smoke_test:
-  #   runs-on: ubuntu-latest
-  #   needs: [deploy_image]
-  #   steps:
-  #     - uses: actions/setup-node@master
-  #     - name: Smoke test using pact tests
-  #       uses: actions/checkout@master
-  #     - run: touch .env
-  #     - run: npm ci
-  #     - run: export SMOKE_TEST=true && npm run test:api:provider -- --collectCoverage=false
+  smoke_test:
+    runs-on: ubuntu-latest
+    needs: [deploy_image]
+    steps:
+      - uses: actions/setup-node@master
+      - name: Smoke test using pact tests
+        uses: actions/checkout@master
+      - run: touch .env
+      - run: npm ci
+      - run: export SMOKE_TEST=true && npm run test:api:provider -- --collectCoverage=false
 
   # snyk_monitor:
   #   runs-on: ubuntu-latest
