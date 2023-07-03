@@ -9,6 +9,7 @@ env:
   REGISTRY_SECRET: ${{ secrets.REGISTRY_SECRET }}
   APP_HOST: ${{ vars.APP_HOST }}
   OKTETO_TOKEN: ${{ secrets.OKTETO_TOKEN }}
+  REGISTRY: registry.cloud.okteto.net
 
 on:
   push:
@@ -141,6 +142,7 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@master
         with:
+          registry: ${{ env.REGISTRY }}
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
@@ -148,7 +150,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@master
         with:
-          images: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock
+          images: ${{ env.REGISTRY }}/gotreasa/gotreasa-berlin-clock
 
       - name: Build and push Docker image
         uses: docker/build-push-action@master
