@@ -126,15 +126,15 @@ jobs:
 
   build_image:
     runs-on: ubuntu-latest
-    # needs:
-    #   [
-    #     pact_test,
-    #     test_and_coverage,
-    #     detect-secrets,
-    #     commitlint,
-    #     snyk_test,
-    #     inspec,
-    #   ]
+    needs:
+      [
+        pact_test,
+        test_and_coverage,
+        detect-secrets,
+        commitlint,
+        snyk_test,
+        inspec,
+      ]
     steps:
       - name: Check out the repo
         uses: actions/checkout@master
@@ -163,18 +163,6 @@ jobs:
 
       - name: Output the details of outputs
         run: echo "The tags ${{ steps.meta.outputs.tags }}" && echo "The labels ${{ steps.meta.outputs.labels }}"
-
-      # - uses: actions/checkout@master
-      # - uses: okteto/context@latest
-      #   with:
-      #     token: ${{ secrets.OKTETO_TOKEN }}
-
-      # - name: 'Build'
-      #   uses: okteto/build@latest
-      #   with:
-      #     tag: gotreasa-berlin-clock:latest
-      #     global: true
-      # - run: docker images
 
       - name: Run tests on the docker container structure
         uses: plexsystems/container-structure-test-action@main
