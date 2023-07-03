@@ -207,7 +207,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/setup-go@v2
       - name: Install Goss action
-        uses: e1himself/goss-installation-action@master
+        uses: e1himself/goss-installation-action@v1
         with:
           version: 'v0.3.20'
       - name: Validate the server is running correctly
