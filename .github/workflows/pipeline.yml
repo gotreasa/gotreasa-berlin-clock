@@ -135,23 +135,47 @@ jobs:
     #     inspec,
     #   ]
     steps:
-      - uses: actions/checkout@master
-      - uses: okteto/context@latest
-        with:
-          token: ${{ secrets.OKTETO_TOKEN }}
+      - name: Check out the repo
+        uses: actions/checkout@master
 
-      - name: 'Build'
-        uses: okteto/build@latest
+      - name: Log in to Docker Hub
+        uses: docker/login-action@master
         with:
-          tag: gotreasa-berlin-clock:latest
-          global: true
-      - run: docker images
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Run tests on the docker container structure
-        uses: plexsystems/container-structure-test-action@main
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@master
         with:
-          image: gotreasa-berlin-clock
-          config: test/container/structure/config.yaml
+          images: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@master
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      # - uses: actions/checkout@master
+      # - uses: okteto/context@latest
+      #   with:
+      #     token: ${{ secrets.OKTETO_TOKEN }}
+
+      # - name: 'Build'
+      #   uses: okteto/build@latest
+      #   with:
+      #     tag: gotreasa-berlin-clock:latest
+      #     global: true
+      # - run: docker images
+
+      # - name: Run tests on the docker container structure
+      #   uses: plexsystems/container-structure-test-action@main
+      #   with:
+      #     image: gotreasa-berlin-clock
+      #     config: test/container/structure/config.yaml
 
   deploy_image:
     runs-on: ubuntu-latest
