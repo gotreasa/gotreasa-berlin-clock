@@ -139,10 +139,11 @@ jobs:
       - uses: okteto/context@latest
         with:
           token: ${{ secrets.OKTETO_TOKEN }}
-          tag: gotreasa-berlin-clock
 
       - name: 'Build'
         uses: okteto/build@latest
+        with:
+          tag: gotreasa-berlin-clock
       - run: docker images
 
       - name: Run tests on the docker container structure
