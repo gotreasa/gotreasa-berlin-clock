@@ -150,3 +150,7 @@
 - ✅ Set up build pipeline configuration
 - ✅ Set up deployment of the image
 - ✅ Set up the smoke tests
+
+## Pomodor 34
+
+- 🚧 TD 3 Set up the Github action for testing the container structure
