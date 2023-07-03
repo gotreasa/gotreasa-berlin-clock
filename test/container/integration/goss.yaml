@@ -41,3 +41,13 @@ interface:
 kernel-param:
   kernel.ostype:
     value: Linux
+
+file:     
+  /usr/src/app/app.js:
+    exists: true
+    mode: "0775"
+    size: 267
+    owner: node  
+    group: root
+    filetype: file
+    contains: ['server.address().port']
