@@ -18,7 +18,7 @@ on:
 
 jobs:
   commitlint:
-    name: Verify that the commit all follow the linting rules
+    name: Verify commits are linted
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -27,6 +27,7 @@ jobs:
       - uses: wagoid/commitlint-github-action@master
 
   hadolint:
+    name: Verify dockerfile is linted
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -44,6 +45,7 @@ jobs:
       - run: npm run lint:verify
 
   inspec:
+    name: Unit test docker image
     needs: [hadolint]
     runs-on: ubuntu-latest
     steps:
