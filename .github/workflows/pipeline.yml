@@ -204,11 +204,12 @@ jobs:
   goss:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-go@v2
       - name: Install Goss action
         uses: e1himself/goss-installation-action@master
         with:
           version: 'v0.3.20'
-      - uses: actions/checkout@master
       - name: Validate the server is running correctly
         run: goss validate --gossfile test/container/integration/goss.yaml
 
