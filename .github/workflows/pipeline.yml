@@ -189,7 +189,7 @@ jobs:
         uses: okteto/deploy-stack@latest
         with:
           build: 'false'
-          file: okteto.yaml
+          file: okteto.yml
 
   smoke_test:
     runs-on: ubuntu-latest
