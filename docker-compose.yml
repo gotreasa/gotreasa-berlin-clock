@@ -20,13 +20,13 @@ services:
       interval: 10s
       timeout: 10m
       retries: 5
-      start_period: 30s
+      start_period: 10s
   goss:
     image: aelsabbahy/goss
     container_name: goss
     volumes:
       - goss:/goss
-    command: ['/usr/bin/top']
+    command: ['tail', '-f', '/dev/null']
 
 volumes:
   goss:

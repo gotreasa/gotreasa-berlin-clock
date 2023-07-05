@@ -2,9 +2,9 @@
 
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=xpfarm_gotreasa-berlin-clock&metric=alert_status)](https://sonarcloud.io/dashboard?id=xpfarm_gotreasa-berlin-clock)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=xpfarm_gotreasa-berlin-clock&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=xpfarm_gotreasa-berlin-clock)
-[![Build Status](https://travis.ibm.com/xpfarm/gotreasa-berlin-clock.svg?token=qUvyKZdxoFqWxS8YbzZZ&branch=main)](https://travis.ibm.com/xpfarm/gotreasa-berlin-clock)
+[![Build Status](https://github.com/gotreasa/gotreasa-berlin-clock/actions/workflows/pipeline.yml/badge.svg)](https://github.com/gotreasa/gotreasa-berlin-clock/actions/workflows/pipeline.yml)
 
-API: [https://gotreasa-berlin-clock-app.12973fgb6pzq.eu-de.codeengine.appdomain.cloud/api/v1/time/00:00:00]
+API: [https://gotreasa-berlin-clock-gotreasa.cloud.okteto.net/api/v1/time/00:00:00]
 
 ## Description
 

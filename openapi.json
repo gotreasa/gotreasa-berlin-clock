@@ -10,7 +10,7 @@
       "url": "http://localhost:9080"
     },
     {
-      "url": "https://gotreasa-berlin-clock-app.12973fgb6pzq.eu-de.codeengine.appdomain.cloud"
+      "url": "https://gotreasa-berlin-clock-gotreasa.cloud.okteto.net"
     }
   ],
   "paths": {
