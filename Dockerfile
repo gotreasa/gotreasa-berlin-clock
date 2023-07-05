@@ -12,11 +12,12 @@ COPY package*.json ./
 RUN npm ci --omit=dev --ignore-scripts
 
 # Prune the source code.
-RUN npm prune && /usr/local/bin/node-prune
+RUN npm prune --omit=dev && /usr/local/bin/node-prune 
 
 COPY app.js ./
 COPY openapi.json ./
 COPY src src
+COPY test/container/integration/goss.yaml goss.yaml
 
 # Build final image using small base image.
 FROM node:18-alpine

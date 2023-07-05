@@ -9,14 +9,24 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - .:/src
+      - goss:/goss:ro
     environment:
       NODE_ENV: production
     ports:
       - 9080:9080
     restart: always
+    # command: ["npm", "ci", "--omit=dev", "--ignore-scripts", "&&", "npm", "run", "start:app", "&", "&&", "/goss/goss", "serve", "--format", "json"]
     healthcheck:
-      test: ['CMD', 'wget', 'http://localhost:9080/health', '-O', '/dev/null']
+      test: ['CMD', '/goss/goss', 'validate']
       interval: 10s
       timeout: 10m
       retries: 5
       start_period: 30s
+  goss:
+    image: aelsabbahy/goss
+    container_name: goss
+    volumes:
+      - goss:/goss:ro
+
+volumes:
+  goss:

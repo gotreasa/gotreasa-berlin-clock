@@ -51,3 +51,23 @@ file:
     group: root
     filetype: file
     contains: ['server.address().port']
+
+http:
+  internal_midnight:
+    url: http://localhost:9080/api/v1/time/00:00:00
+    status: 200
+    body:
+      -   '{"seconds":"Y","firstRow":"OOOO","secondRow":"OOOO","thirdRow":"OOOOOOOOOOO","fourthRow":"OOOO"}'
+
+  internal_bad_time:
+    url: http://localhost:9080/api/v1/time/bad_time
+    status: 400
+    body:
+      -  'Your input should be in the format of HH:MM:ss'
+
+  internal_one_second_to_midnight:
+    url: http://localhost:9080/api/v1/time/23:59:59
+    status: 200
+    body:
+    body:
+      - '{"seconds":"O","firstRow":"RRRR","secondRow":"RRRO","thirdRow":"YYRYYRYYRYY","fourthRow":"YYYY"}'
