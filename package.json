@@ -29,7 +29,7 @@
     "prettier:verify": "prettier --check \"*.{js,css,md,yml,json}\"",
     "publish:pact": "env-cmd node test/scripts/publish.pacts.js",
     "save": "./scripts/save.sh",
-    "start": "export SERVER_PORT=9080 && npm run start:app",
+    "start": "npm run start:app",
     "start:app": "export SERVER_PORT=9080 && node app.js",
     "start:app:watch": "export SERVER_PORT=9080 && nodemon app.js",
     "start:cli": "node src/cli/time.js",
