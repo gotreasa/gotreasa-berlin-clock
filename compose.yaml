@@ -15,7 +15,6 @@ services:
     ports:
       - 9080:9080
     restart: always
-    # command: ["npm", "ci", "--omit=dev", "--ignore-scripts", "&&", "npm", "run", "start:app", "&", "&&", "/goss/goss", "serve", "--format", "json"]
     healthcheck:
       test: ['CMD', '/goss/goss', 'validate']
       interval: 10s
