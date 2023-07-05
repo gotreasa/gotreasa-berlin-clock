@@ -99,11 +99,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-      - uses: actions/setup-node@master
+      - uses: warchant/setup-sonar-scanner@master
       - name: Install Inspec
         run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
       - name: Use Node.js 18.16.0
-        uses: warchant/setup-sonar-scanner@master
+        uses: actions/setup-node@master
         with:
           node-version: 18.16.0
       - run: touch .env
@@ -191,6 +191,7 @@ jobs:
         uses: okteto/deploy-stack@latest
         with:
           build: 'false'
+          file: compose.yaml
 
   smoke_test:
     runs-on: ubuntu-latest
