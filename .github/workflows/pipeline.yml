@@ -141,7 +141,7 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@master
 
-      - name: Log in to Docker Hub
+      - name: Log in to Okteto Container Registry
         uses: docker/login-action@master
         with:
           registry: ${{ env.REGISTRY }}
@@ -163,9 +163,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Output the details of outputs
-        run: echo "The tags ${{ steps.meta.outputs.tags }}" && echo "The labels ${{ steps.meta.outputs.labels }}"
-
       - name: Run tests on the docker container structure
         uses: plexsystems/container-structure-test-action@main
         with:
@@ -175,7 +172,7 @@ jobs:
       - name: Run the goss tests on the image
         run: |
           docker run --name goss aelsabbahy/goss goss
-          docker run --rm --volumes-from goss --name app ${{ steps.meta.outputs.tags }}
+          docker run --rm -d --volumes-from goss --name app ${{ steps.meta.outputs.tags }}
           docker exec app /goss/goss validate
 
   deploy_image:
