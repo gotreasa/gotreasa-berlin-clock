@@ -87,7 +87,7 @@ jobs:
         uses: snyk/actions/node@master
         env:
           # In order to use the Snyk Action you will need to have a Snyk API token.
-          # More details in https://{{cookiecutter.github_url}}/snyk/actions#getting-your-snyk-token
+          # More details in https://github.com/snyk/actions#getting-your-snyk-token
           # or you can signup for free at https://snyk.io/login
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
@@ -185,6 +185,11 @@ jobs:
             --highestWastedBytes=30MB
 
       - name: Run Security test on container image
+        env:
+          # In order to use the Snyk Action you will need to have a Snyk API token.
+          # More details in https://github.com/snyk/actions#getting-your-snyk-token
+          # or you can signup for free at https://snyk.io/login
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
           npm ci
           npx snyk container test ${{ steps.meta.outputs.tags }}
@@ -230,7 +235,7 @@ jobs:
         uses: snyk/actions/node@master
         env:
           # In order to use the Snyk Action you will need to have a Snyk API token.
-          # More details in https://{{cookiecutter.github_url}}/snyk/actions#getting-your-snyk-token
+          # More details in https://github.com/snyk/actions#getting-your-snyk-token
           # or you can signup for free at https://snyk.io/login
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
