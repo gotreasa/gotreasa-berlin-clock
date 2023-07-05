@@ -40,6 +40,9 @@ fileExistenceTests:
   - name: '💿 App entrypoint'
     path: '/usr/src/app/app.js'
     shouldExist: true
+  - name: '📝 Goss file'
+    path: '/usr/src/app/goss.yaml'
+    shouldExist: true
   - name: '🗂️ App directory'
     path: '/usr/src/app'
     shouldExist: true

@@ -26,6 +26,7 @@ services:
     container_name: goss
     volumes:
       - goss:/goss
+    command: ['/usr/bin/top']
 
 volumes:
   goss:

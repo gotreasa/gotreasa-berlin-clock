@@ -11,6 +11,9 @@ control 'Dockerfile' do
     its('content') { should match (%r{COPY app.js ./}) }
     its('content') { should match (%r{COPY openapi.json ./}) }
     its('content') { should match (/COPY src src/) }
+    its('content') do
+      should match (%r{COPY test/container/integration/goss.yaml goss.yaml})
+    end
     its('content') { should match (/node:18-alpine/) }
     its('content') { should match (%r{WORKDIR /usr/src/app}) }
     its('content') do
