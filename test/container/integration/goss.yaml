@@ -34,9 +34,6 @@ user:
 interface:
   eth0:
     exists: true
-    addrs:
-      - '172.17.0.3/16'
-    mtu: 65535
 
 kernel-param:
   kernel.ostype:

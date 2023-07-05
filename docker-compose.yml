@@ -9,7 +9,7 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - .:/src
-      - goss:/goss:ro
+      - goss:/goss
     environment:
       NODE_ENV: production
     ports:
@@ -25,7 +25,7 @@ services:
     image: aelsabbahy/goss
     container_name: goss
     volumes:
-      - goss:/goss:ro
+      - goss:/goss
 
 volumes:
   goss:
