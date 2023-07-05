@@ -191,7 +191,6 @@ jobs:
         uses: okteto/deploy-stack@latest
         with:
           build: 'false'
-          file: compose.yaml
 
   smoke_test:
     runs-on: ubuntu-latest
