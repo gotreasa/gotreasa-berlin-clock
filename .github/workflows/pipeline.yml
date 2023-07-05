@@ -178,7 +178,7 @@ jobs:
 
       - name: Analyse the container for waste
         run: |
-          docker run --rm -it \
+          docker run --rm \
             -v /var/run/docker.sock:/var/run/docker.sock \
             wagoodman/dive:latest --ci ${{ steps.meta.outputs.tags }} \
             --lowestEfficiency=0.8 --highestUserWastedPercent=0.45 \
