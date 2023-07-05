@@ -33,7 +33,7 @@
     "start:app": "export SERVER_PORT=9080 && node app.js",
     "start:app:watch": "export SERVER_PORT=9080 && nodemon app.js",
     "start:cli": "node src/cli/time.js",
-    "test": "rm -f pact/pacts/* && export SERVER_PORT=9998 && npm run test:api:consumer && npm run publish:pact && env-cmd jest --testTimeout 30000",
+    "test": "rm -f pact/pacts/* && export SERVER_PORT=9998 && npm run test:api:consumer && npm run publish:pact && env-cmd jest --testTimeout 30000 && npm run test:unit:container",
     "test:api": "npm run build:postman && newman run test/mock/postman_collection.json -r cli,json",
     "test:api:all": "rm -f pact/pacts/* && export SERVER_PORT=9999 && env-cmd jest test/**/*.pact.spec.js --testTimeout 30000",
     "test:api:all:watch": "export SERVER_PORT=9999 && env-cmd jest test/**/*.pact.spec.js --testTimeout 30000 --watch",
