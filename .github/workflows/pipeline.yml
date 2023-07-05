@@ -175,7 +175,7 @@ jobs:
       - name: Run the goss tests on the image
         run: |
           docker run --name goss aelsabbahy/goss goss
-          docker run --rm -it --volumes-from goss --name app ${{ steps.meta.outputs.tags }}
+          docker run --rm --volumes-from goss --name app ${{ steps.meta.outputs.tags }}
           docker exec app /goss/goss validate
 
   deploy_image:
@@ -208,18 +208,6 @@ jobs:
       - run: touch .env
       - run: npm ci
       - run: export SMOKE_TEST=true && npm run test:api:provider -- --collectCoverage=false
-
-  goss:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-go@v2
-      - name: Install Goss action
-        uses: e1himself/goss-installation-action@v1
-        with:
-          version: 'v0.3.20'
-      - name: Validate the server is running correctly
-        run: goss validate --gossfile test/container/integration/goss.yaml
 
   snyk_monitor:
     runs-on: ubuntu-latest
