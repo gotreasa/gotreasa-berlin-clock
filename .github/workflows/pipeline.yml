@@ -176,12 +176,13 @@ jobs:
           sleep 5
           docker exec app /goss/goss validate --format tap
 
-      - name: Analyse the conatiner for waste
-        uses: yuichielectric/dive-action@0.0.4
-        with:
-          image: ${{ steps.meta.outputs.tags }}
-          config-file: ${{ github.workspace }}/.dive-ci.yml
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Analyse the container for waste
+        run: |
+          docker run --rm -it \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            wagoodman/dive:latest --ci ${{ steps.meta.outputs.tags }} \
+            --lowestEfficiency=0.8 --highestUserWastedPercent=0.45 \
+            --highestWastedBytes=30MB
 
       - name: Run Security test on container image
         uses: snyk/actions/node@master
