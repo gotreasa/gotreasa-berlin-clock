@@ -11,6 +11,7 @@ control 'Dockerfile' do
     its('content') { should match (%r{COPY app.js ./}) }
     its('content') { should match (%r{COPY openapi.json ./}) }
     its('content') { should match (/COPY src src/) }
+    its('content') { should match (/RUN date -u > timestamp/) }
     its('content') do
       should match (%r{COPY test/container/integration/goss.yaml goss.yaml})
     end
