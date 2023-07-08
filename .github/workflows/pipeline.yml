@@ -214,10 +214,8 @@ jobs:
         with:
           namespace: gotreasa
 
-      - name: 'Create stack'
-        uses: okteto/deploy-stack@latest
-        with:
-          build: true
+      - name: 'Deploy image'
+        run: okteto deploy --wait
 
   smoke_test:
     runs-on: ubuntu-latest
