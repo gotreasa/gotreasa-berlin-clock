@@ -217,7 +217,7 @@ jobs:
       - name: 'Create stack'
         uses: okteto/deploy-stack@latest
         with:
-          build: false
+          build: true
 
   smoke_test:
     runs-on: ubuntu-latest
