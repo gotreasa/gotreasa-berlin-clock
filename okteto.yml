@@ -11,7 +11,6 @@ build:
   gotreasa-berlin-clock:
     context: .
     dockerfile: Dockerfile
-    # image: gotreasa-berlin-clock
 
 # The deploy section defines how to deploy your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#deploy
@@ -27,15 +26,12 @@ deploy:
 # More info: https://www.okteto.com/docs/reference/manifest/#dev
 dev:
   gotreasa-berlin-clock:
-    # image: gotreasa-berlin-clock
     command: npm ci --omit=dev --ignore-scripts && npm run start:app
     workdir: /usr/src/app
-    # sync:
-    #   - goss:/goss
     forward:
       - 9229:9229
       - 9080:9080
   goss:
     image: aelsabbahy/goss
-    # sync:
-    #   - goss:/goss
+    environment:
+      - NODE_ENV=production
