@@ -10,8 +10,6 @@ app.use(helmet());
 
 app.use('/health', (_, response) => response.sendStatus(200));
 
-app.use('/test', (_, response) => response.sendStatus(200));
-
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiSpecification));
 
 app.get('/api/v1/time/:time', (req, response) => {
