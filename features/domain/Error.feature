@@ -8,5 +8,9 @@ Feature: The API errors
         And the response contains an error message
 
         Examples:
-            | time     |
-            | 00:00:60 |
+            | time      |
+            | 00:00:60  |
+            | 05:00:aa  |
+            | 110:00:00 |
+            | 15:70:00  |
+            | blah      |
