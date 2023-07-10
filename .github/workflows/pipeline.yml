@@ -204,22 +204,15 @@ jobs:
     needs: [build_image]
     steps:
       - uses: actions/checkout@master
-      - run: |
-          curl https://get.okteto.com -sSfL | sh
-          okteto context use --token ${{ secrets.OKTETO_TOKEN }}
-          okteto deploy --wait
 
-      # - uses: okteto/context@latest
-      #   with:
-      #     token: ${{ secrets.OKTETO_TOKEN }}
+      - name: Install okteto CLI
+        run: curl https://get.okteto.com -sSfL | sh
 
-      # - name: 'Activate Namespace'
-      #   uses: okteto/namespace@latest
-      #   with:
-      #     namespace: gotreasa
+      - name: Setup the Okteto context
+        run: okteto context use --token ${{ secrets.OKTETO_TOKEN }}
 
-      # - name: 'Deploy image'
-      #   run: okteto deploy --wait
+      - name: Deploy the containers using Okteto
+        run: okteto deploy --wait
 
   smoke_test:
     runs-on: ubuntu-latest
