@@ -1,10 +1,9 @@
 const getTime = require('../../src/api/Time');
-
-const YELLOW_LIGHT = 'Y';
+const { LIGHT_OFF } = require('../../src/domain/constants');
 
 describe('Retrieve the time', () => {
-  test('should return Y for the seconds when the seconds are even', () => {
-    expect(getTime('00:00:00')).toMatchObject({ seconds: YELLOW_LIGHT });
+  test('should return O for the seconds when the seconds are even', () => {
+    expect(getTime('00:00:00')).toMatchObject({ seconds: LIGHT_OFF });
   });
 
   test.each([['0a:00:00'], ['blah'], ['99:99:99'], ['24:59:59']])(

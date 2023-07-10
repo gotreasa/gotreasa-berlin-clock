@@ -58,7 +58,7 @@
     "*.js": [
       "npm run lint:fix"
     ],
-    "*.{css,js,json,rb,md,yml}": [
+    "*.{css,js,json,rb,md,yml,feature}": [
       "npm run prettier:fix"
     ],
     "Dockerfile": [
@@ -118,6 +118,7 @@
     "nodemon": "^2.0.15",
     "npm-check-updates": "^16.7.13",
     "prettier": "^2.8.8",
+    "prettier-plugin-gherkin": "^1.1.1",
     "rimraf": "^3.0.2",
     "snyk": "^1.865.0",
     "sonarqube-scanner": "^2.8.1",

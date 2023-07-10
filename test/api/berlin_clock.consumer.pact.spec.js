@@ -79,7 +79,7 @@ pactWith(
                 'Content-Type': JSON_BODY,
               },
               body: {
-                seconds: 'Y',
+                seconds: 'O',
                 firstRow: 'OOOO',
                 secondRow: 'OOOO',
                 thirdRow: 'OOOOOOOOOOO',
@@ -94,9 +94,9 @@ pactWith(
           expect(response.status).toBe(OK);
         });
 
-        test('should light the second light yellow at midnight', async () => {
+        test('should switch off the second light yellow at midnight', async () => {
           const response = await instance.get(midnightTime);
-          expect(response.data.seconds).toBe(YELLOW_LIGHT);
+          expect(response.data.seconds).toBe(LIGHT_OFF);
         });
 
         test('should have all the lights on the first row off', async () => {
@@ -137,7 +137,7 @@ pactWith(
                 'Content-Type': JSON_BODY,
               },
               body: {
-                seconds: 'O',
+                seconds: 'Y',
                 firstRow: 'RROO',
                 secondRow: 'RROO',
                 thirdRow: 'YYROOOOOOOO',
@@ -154,7 +154,7 @@ pactWith(
 
         test('should light the second light yellow at 12:17:57', async () => {
           const response = await instance.get(timeWithOddSeconds);
-          expect(response.data.seconds).toBe(LIGHT_OFF);
+          expect(response.data.seconds).toBe(YELLOW_LIGHT);
         });
 
         test('should light the first two lights red in the first row at 12:17:57', async () => {

@@ -1,10 +1,11 @@
 Feature: Count the seconds on the berlin clock
 
-    Scenario Outline: Turn on the Yellow light for even seconds <time>
+    Scenario Outline: Turn off the Yellow light for even seconds <time>
         Given the API endpoint /time
+
         When I request the time for <time>
-        Then the seconds lightbulb is ON
-        And the seconds is Y
+        Then the seconds lightbulb is OFF
+        And the seconds is O
         And the status is OK
 
         Examples:
@@ -14,11 +15,12 @@ Feature: Count the seconds on the berlin clock
             | 00:00:10 |
             | 00:00:58 |
 
-    Scenario Outline: Turn off the Yellow light for even seconds <time>
+    Scenario Outline: Turn on the Yellow light for odd seconds <time>
         Given the API endpoint /time
+
         When I request the time for <time>
-        Then the seconds lightbulb is OFF
-        And the seconds is O
+        Then the seconds lightbulb is ON
+        And the seconds is Y
         And the status is OK
 
         Examples:
@@ -30,6 +32,7 @@ Feature: Count the seconds on the berlin clock
 
     Scenario: Invalid time input
         Given the API endpoint /time
+
         When I request the time for 1a:23:23
         Then the status is BAD_REQUEST
         And the message is Your input should be in the format of HH:MM:ss

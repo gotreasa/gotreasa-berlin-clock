@@ -54,7 +54,7 @@ http:
     url: http://localhost:9080/api/v1/time/00:00:00
     status: 200
     body:
-      -   '{"seconds":"Y","firstRow":"OOOO","secondRow":"OOOO","thirdRow":"OOOOOOOOOOO","fourthRow":"OOOO"}'
+      -   '{"seconds":"O","firstRow":"OOOO","secondRow":"OOOO","thirdRow":"OOOOOOOOOOO","fourthRow":"OOOO"}'
 
   internal_bad_time:
     url: http://localhost:9080/api/v1/time/bad_time
@@ -67,4 +67,4 @@ http:
     status: 200
     body:
     body:
-      - '{"seconds":"O","firstRow":"RRRR","secondRow":"RRRO","thirdRow":"YYRYYRYYRYY","fourthRow":"YYYY"}'
+      - '{"seconds":"Y","firstRow":"RRRR","secondRow":"RRRO","thirdRow":"YYRYYRYYRYY","fourthRow":"YYYY"}'
