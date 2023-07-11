@@ -161,8 +161,8 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Output details of meta
-        run: echo "The tag details are ${{ steps.meta }}"
+      - name: Output details of steps
+        run: echo "The tag details are ${{ steps }}"
 
       - name: Run tests on the docker container structure
         uses: plexsystems/container-structure-test-action@main
