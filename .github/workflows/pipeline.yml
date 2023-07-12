@@ -8,6 +8,7 @@ env:
   APP_HOST: ${{ vars.APP_HOST }}
   OKTETO_TOKEN: ${{ secrets.OKTETO_TOKEN }}
   OKTETO_REGISTRY: registry.cloud.okteto.net
+  OKTETO_IMAGE_TAG: okteto.dev/gotreasa/gotreasa-berlin-clock-gotreasa-berlin-clock:${{github.sha}}
 
 on:
   push:
@@ -139,49 +140,36 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@master
 
-      - name: Log in to Okteto Container Registry
-        uses: docker/login-action@master
-        with:
-          registry: ${{ env.OKTETO_REGISTRY }}
-          username: ${{ vars.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Install okteto CLI
+        run: curl https://get.okteto.com -sSfL | sh
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@master
-        with:
-          images: ${{ env.OKTETO_REGISTRY }}/gotreasa/gotreasa-berlin-clock
+      - name: Setup the Okteto context
+        run: okteto context use --token ${{ secrets.OKTETO_TOKEN }}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@master
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      - name: Build the image using Okteto
+        run: okteto build
 
-      - name: Output details of steps
-        run: echo "The tag details are ${{ steps }}"
+      - name: Output details of container tag
+        run: echo "The tag details are ${{ env.OKTETO_IMAGE_TAG }}"
 
       - name: Run tests on the docker container structure
         uses: plexsystems/container-structure-test-action@main
         with:
-          image: ${{ steps.meta.outputs.tags }}
+          image: ${{ env.OKTETO_IMAGE_TAG }}
           config: test/container/structure/config.yaml
 
       - name: Run the goss tests on the image
         run: |
           docker run --name goss aelsabbahy/goss goss
-          docker run --rm -d --volumes-from goss --name app ${{ steps.meta.outputs.tags }}
+          docker run --rm -d --volumes-from goss --name app ${{ env.OKTETO_IMAGE_TAG }}
           sleep 5
           docker exec app /goss/goss validate --format tap
 
-      - name: Analyse the container for waste
+      - name: Analyse the container for waste using dive
         run: |
           docker run --rm \
             -v /var/run/docker.sock:/var/run/docker.sock \
-            wagoodman/dive:latest --ci ${{ steps.meta.outputs.tags }} \
+            wagoodman/dive:latest --ci ${{ env.OKTETO_IMAGE_TAG }} \
             --lowestEfficiency=0.8 --highestUserWastedPercent=0.45 \
             --highestWastedBytes=30MB
 
@@ -193,12 +181,12 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
           npm ci
-          npx snyk container test ${{ steps.meta.outputs.tags }}
+          npx snyk container test ${{ env.OKTETO_IMAGE_TAG }}
 
       - name: Generate software bill of materials
         uses: anchore/sbom-action@v0
         with:
-          image: ${{ steps.meta.outputs.tags }}
+          image: ${{ env.OKTETO_IMAGE_TAG }}
 
   deploy_image:
     runs-on: ubuntu-latest
