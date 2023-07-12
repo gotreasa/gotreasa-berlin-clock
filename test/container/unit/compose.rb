@@ -6,7 +6,7 @@ control 'docker-compose.yml' do
     its('content') { should match (/gotreasa-berlin-clock:/) }
     its('content') do
       should match (
-                     %r{image: okteto.dev/gotreasa/gotreasa-berlin-clock:main\$\{OKTETO_GIT_COMMIT\}}
+                     %r{image: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock:main\$\{OKTETO_GIT_COMMIT\}}
                    )
     end
     its('content') { should match (/container_name: gotreasa-berlin-clock/) }

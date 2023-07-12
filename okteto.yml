@@ -26,7 +26,7 @@ deploy:
 # More info: https://www.okteto.com/docs/reference/manifest/#dev
 dev:
   gotreasa-berlin-clock:
-    image: okteto.dev/gotreasa/gotreasa-berlin-clock-gotreasa-berlin-clock:${OKTETO_GIT_COMMIT}
+    image: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock-gotreasa-berlin-clock:${OKTETO_GIT_COMMIT}
     command: npm ci --omit=dev --ignore-scripts && npm run start:app
     workdir: /usr/src/app
     forward:
