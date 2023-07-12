@@ -153,4 +153,19 @@
 
 ## Pomodor 34
 
-- 🚧 TD 3 Set up the Github action for testing the container structure
+- ✅ TD 3 Set up the Github action for testing the container structure
+
+## Pomodoro 35 - 44
+
+- ✅ Setup dive in the pipeline
+- ✅ Integrate Goss into the pipeline
+- ✅ Security test the container
+- ✅ Generate software bill of materials
+
+## Pomodoro 45
+
+- ✅ Refactor the code so that the seconds light is off when the it is even seconds
+
+## Pomodor 46
+
+- 🚧 Investigate building the image and deploying the same image
