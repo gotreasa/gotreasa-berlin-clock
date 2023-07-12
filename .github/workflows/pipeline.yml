@@ -146,13 +146,16 @@ jobs:
       - name: Setup the Okteto context
         run: okteto context use --token ${{ secrets.OKTETO_TOKEN }}
 
-      - name: Build the image using Okteto
+      - name: Build the container image using Okteto
         run: okteto build
 
       - name: Output details of container tag
         run: echo "The tag details are ${{ env.OKTETO_IMAGE_TAG }}"
 
-      - name: Run tests on the docker container structure
+      - name: Pull the container image for testing
+        run: docker pull ${{ env.OKTETO_IMAGE_TAG }}
+
+      - name: Run tests on the container structure
         uses: plexsystems/container-structure-test-action@main
         with:
           image: ${{ env.OKTETO_IMAGE_TAG }}
