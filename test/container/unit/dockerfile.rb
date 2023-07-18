@@ -26,6 +26,7 @@ control 'Dockerfile' do
                    )
     end
     its('content') { should match (/USER node/) }
+    its('content') { should match (/RUN apk update && apk upgrade/) }
     its('content') { should match (/EXPOSE 9080/) }
     its('content') { should match (/ENTRYPOINT \[ \"npm\" \]/) }
     its('content') { should match (/CMD \[ \"run\", \"start:app\" \]/) }

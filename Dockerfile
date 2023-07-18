@@ -30,6 +30,9 @@ COPY --from=BUILD /usr/src/app /usr/src/app
 # Set permissions for node app folder after copy.
 RUN chown -R node:root /usr/src/app/ && chmod -R 775 /usr/src/app/
 
+# Update any out of date packages
+RUN apk update && apk upgrade
+
 # Switch to node user.
 USER node
 
