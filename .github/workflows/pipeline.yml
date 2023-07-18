@@ -210,6 +210,16 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
+      - name: Log in to Okteto Container Registry
+        uses: docker/login-action@master
+        with:
+          registry: ${{ env.OKTETO_REGISTRY }}
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Pull latest image
+        run: docker pull ${{ env.OKTETO_IMAGE_TAG }}
+
       - name: Install okteto CLI
         run: curl https://get.okteto.com -sSfL | sh
 
