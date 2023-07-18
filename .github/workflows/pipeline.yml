@@ -125,6 +125,20 @@ jobs:
       - run: npm run publish:pact
       - run: export CI=true && npm run test:api:provider
 
+  test_docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@master
+
+      - name: Log in to Okteto Container Registry
+        uses: docker/login-action@master
+        with:
+          registry: ${{ env.OKTETO_REGISTRY }}
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - run: docker --version
+
   build_image:
     runs-on: ubuntu-latest
     needs:
