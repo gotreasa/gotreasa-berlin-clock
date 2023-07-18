@@ -153,8 +153,8 @@ jobs:
       - name: Setup the Okteto context
         run: okteto context use --token ${{ secrets.OKTETO_TOKEN }}
 
-      - name: Build the container image using Okteto
-        run: okteto build
+      - name: Build the container image using Docker built
+        run: docker build -t ${{ env.OKTETO_IMAGE_TAG }} --push .
 
       - name: Output details of container tag
         run: echo "The tag details are ${{ env.OKTETO_IMAGE_TAG }}"
