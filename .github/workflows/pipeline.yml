@@ -8,7 +8,7 @@ env:
   APP_HOST: ${{ vars.APP_HOST }}
   OKTETO_TOKEN: ${{ secrets.OKTETO_TOKEN }}
   OKTETO_REGISTRY: registry.cloud.okteto.net
-  OKTETO_IMAGE_TAG: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock-gotreasa-berlin-clock:latest
+  OKTETO_IMAGE_TAG: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock:latest
 
 on:
   push:
