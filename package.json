@@ -76,8 +76,8 @@
   },
   "devDependencies": {
     "@apideck/portman": "^1.14.2",
-    "@commitlint/cli": "^16.2.1",
-    "@commitlint/config-conventional": "^16.2.1",
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
     "@pact-foundation/absolute-version": "^0.0.4",
     "@pact-foundation/pact": "^9.17.3",
     "@pact-foundation/pact-node": "^10.17.2",
