@@ -166,6 +166,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build_image]
     steps:
+      - name: Log in to Okteto Container Registry
+        uses: docker/login-action@master
+        with:
+          registry: ${{ env.OKTETO_REGISTRY }}
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Pull the container image for testing
         run: docker pull ${{ env.OKTETO_IMAGE_TAG }}
 
@@ -179,6 +186,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build_image]
     steps:
+      - name: Log in to Okteto Container Registry
+        uses: docker/login-action@master
+        with:
+          registry: ${{ env.OKTETO_REGISTRY }}
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Pull the container image for testing
         run: docker pull ${{ env.OKTETO_IMAGE_TAG }}
 
@@ -193,6 +207,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build_image]
     steps:
+      - name: Log in to Okteto Container Registry
+        uses: docker/login-action@master
+        with:
+          registry: ${{ env.OKTETO_REGISTRY }}
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Pull the container image for testing
         run: docker pull ${{ env.OKTETO_IMAGE_TAG }}
 
@@ -208,6 +229,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build_image]
     steps:
+      - name: Log in to Okteto Container Registry
+        uses: docker/login-action@master
+        with:
+          registry: ${{ env.OKTETO_REGISTRY }}
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Pull the container image for testing
         run: docker pull ${{ env.OKTETO_IMAGE_TAG }}
 
@@ -225,6 +253,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build_image]
     steps:
+      - name: Log in to Okteto Container Registry
+        uses: docker/login-action@master
+        with:
+          registry: ${{ env.OKTETO_REGISTRY }}
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Pull the container image for testing
         run: docker pull ${{ env.OKTETO_IMAGE_TAG }}
 
