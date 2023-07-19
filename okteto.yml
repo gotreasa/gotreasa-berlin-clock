@@ -9,6 +9,7 @@ build:
   #  - OKTETO_BUILD_GOTREASA_BERLIN_CLOCK_IMAGE: image name
   #  - OKTETO_BUILD_GOTREASA_BERLIN_CLOCK_SHA: image tag sha256
   gotreasa-berlin-clock:
+    image: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock:latest
     context: .
     dockerfile: Dockerfile
 
