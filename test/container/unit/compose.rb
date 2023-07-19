@@ -1,7 +1,7 @@
-control 'docker-compose.yml' do
+control 'compose.yml' do
   title 'Inspect docker compose file'
 
-  describe file('docker-compose.yml') do
+  describe file('compose.yml') do
     its('content') { should match (/version: '3.8'/) }
     its('content') { should match (/gotreasa-berlin-clock:/) }
     its('content') do
