@@ -2,7 +2,6 @@ version: '3.8'
 
 services:
   gotreasa-berlin-clock:
-    image: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock:latest
     container_name: gotreasa-berlin-clock
     build:
       context: .

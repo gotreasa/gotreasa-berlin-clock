@@ -4,11 +4,6 @@ control 'compose.yml' do
   describe file('compose.yml') do
     its('content') { should match (/version: '3.8'/) }
     its('content') { should match (/gotreasa-berlin-clock:/) }
-    its('content') do
-      should match (
-                     %r{image: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock:latest}
-                   )
-    end
     its('content') { should match (/container_name: gotreasa-berlin-clock/) }
     its('content') { should match (/context: \./) }
     its('content') { should match (%r{dockerfile: \./Dockerfile}) }
