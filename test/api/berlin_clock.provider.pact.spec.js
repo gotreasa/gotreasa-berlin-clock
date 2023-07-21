@@ -52,6 +52,6 @@ describe('Berlin Clock Provider', () => {
   test('tests berlin clock api routes', async () => {
     const output = await new Verifier(providerOptions).verifyProvider();
     console.log(output);
-    expect(output).toContain('0 failures');
+    expect(output).toContain('finished: 0');
   });
 });
