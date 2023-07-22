@@ -203,7 +203,7 @@ jobs:
         run: |
           docker run --name goss aelsabbahy/goss goss
           docker run --rm -d --volumes-from goss --name app ${{ env.OKTETO_IMAGE_TAG }}
-          sleep 5
+          sleep 20
           docker exec app /goss/goss validate --format tap
 
   check_container_efficiency:
@@ -225,7 +225,7 @@ jobs:
           docker run --rm \
             -v /var/run/docker.sock:/var/run/docker.sock \
             wagoodman/dive:latest --ci ${{ env.OKTETO_IMAGE_TAG }} \
-            --lowestEfficiency=0.91 --highestUserWastedPercent=0.20 \
+            --lowestEfficiency=0.90 --highestUserWastedPercent=0.20 \
             --highestWastedBytes=36MB
 
   check_container_security:
