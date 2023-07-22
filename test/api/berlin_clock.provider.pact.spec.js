@@ -31,6 +31,16 @@ const providerOptions = {
 if (process.env.CI || process.env.PACT_PUBLISH_RESULTS) {
   Object.assign(providerOptions, {
     pactBrokerUrl: 'https://gotreasa.pactflow.io/',
+    /**
+     * @TODO: update the code based on the error:
+     * pactBrokerUrl requires one of the following properties: pactUrls,consumerVersionSelectors,consumerVersionTags
+     */
+    pactUrls: [
+      path.resolve(
+        __dirname,
+        '../../pact/pacts/berlin_clock_client-berlin_clock_app.json',
+      ),
+    ],
     publishVerificationResult: true,
   });
 } else {
