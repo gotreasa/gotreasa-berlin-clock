@@ -1,9 +1,10 @@
 # Berlin Clock by Gearoid
 
 [![GitHub release](https://img.shields.io/github/release/gotreasa/gotreasa-berlin-clock.svg)](https://github.com/gotreasa/gotreasa-berlin-clock/releases/latest)
-[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/anchore/sbom-action/blob/main/LICENSE)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/gotreasa/gotreasa-berlin-clock/blob/main/LICENSE)
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=xpfarm_gotreasa-berlin-clock&metric=alert_status)](https://sonarcloud.io/dashboard?id=xpfarm_gotreasa-berlin-clock)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=xpfarm_gotreasa-berlin-clock&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=xpfarm_gotreasa-berlin-clock)
+[![Known Vulnerabilities](https://snyk.io/test/github/gotreasa/gotreasa-berlin-clock/badge.svg)](https://snyk.io/test/github/gotreasa/gotreasa-berlin-clock)
 [![Build Status](https://github.com/gotreasa/gotreasa-berlin-clock/actions/workflows/pipeline.yml/badge.svg)](https://github.com/gotreasa/gotreasa-berlin-clock/actions/workflows/pipeline.yml)
 
 API: [https://gotreasa-berlin-clock-gotreasa.cloud.okteto.net/api/v1/time/00:00:00]
