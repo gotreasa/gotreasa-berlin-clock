@@ -26,7 +26,7 @@
     "precommit": "lint-staged --relative --verbose",
     "prepare": "husky install",
     "prettier:fix": "prettier --write",
-    "prettier:verify": "prettier --check \"*.{js,css,md,yml,json}\"",
+    "prettier:verify": "prettier --check \"*.{css,feature,js,json,rb,md,sh,yaml,yml}\"",
     "publish:pact": "env-cmd node test/scripts/publish.pacts.js",
     "save": "./scripts/save.sh",
     "start": "npm run start:app",
@@ -58,7 +58,7 @@
     "*.js": [
       "npm run lint:fix"
     ],
-    "*.{css,js,json,rb,md,yml,feature,sh}": [
+    "*.{css,feature,js,json,rb,md,sh,yaml,yml}": [
       "npm run prettier:fix"
     ],
     "Dockerfile": [
