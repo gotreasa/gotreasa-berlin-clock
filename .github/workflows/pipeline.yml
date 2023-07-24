@@ -315,7 +315,7 @@ jobs:
         uses: actions/checkout@master
       - run: touch .env
       - run: npm ci
-      - run: export SMOKE_TEST=true && npm run test:api:provider -- --collectCoverage=false
+      - run: npm run test:api:consumer && export SMOKE_TEST=true && npm run test:api:provider -- --collectCoverage=false
 
   snyk_monitor:
     runs-on: ubuntu-latest
