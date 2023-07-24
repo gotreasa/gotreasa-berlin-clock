@@ -73,7 +73,7 @@ case "$ACTION" in
     CUSTOM_MESSAGE="$5"
     MSG=""
     COMMIT_OPTS=""
-    
+
     checkNotEmpty "$US"
     checkNotEmpty "$UAT"
     checkNotEmpty "$PHASE"
@@ -81,7 +81,7 @@ case "$ACTION" in
     case "$PHASE" in
 
       "r" | "red")
-	      MSG=$(uatMessage feat "$US" "$UAT" "🔴 red")
+        MSG=$(uatMessage feat "$US" "$UAT" "🔴 red")
         ;;
 
       "g" | "green")
@@ -89,7 +89,7 @@ case "$ACTION" in
         ;;
 
       "ref")
-	      checkNotEmpty "$CUSTOM_MESSAGE"
+        checkNotEmpty "$CUSTOM_MESSAGE"
         MSG=$(uatMessage refactor "$US" "$UAT" "👩‍💻 $CUSTOM_MESSAGE")
         ;;
 
@@ -103,7 +103,7 @@ case "$ACTION" in
 
       *)
         usage
-	;;
+        ;;
     esac
 
     commit "$MSG" "$COMMIT_OPTS"

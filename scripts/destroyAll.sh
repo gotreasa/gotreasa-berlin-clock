@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 . $SCRIPT_DIR/hosting.conf
 . $SCRIPT_DIR/utils.sh
 
@@ -7,8 +7,8 @@ echo "This will delete the entire project for $APP_NAME."
 echo "If you're certain enter 'delete', otherwise the process will be cancelled."
 read input
 if [ "$input" != "delete" ]; then
-    echo -e "✋ Aborting the process!\n"
-    exit 0
+  echo -e "✋ Aborting the process!\n"
+  exit 0
 fi
 
 checkIbmcloudCli

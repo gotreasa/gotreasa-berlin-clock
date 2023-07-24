@@ -1,8 +1,8 @@
 Feature: Count the minutes on the berlin clock
 
     Scenario Outline: Showing the five miutes on the third row of the clock (<time>)
-
         Given the API endpoint /time
+
         When I request the time for <time>
         Then the third row is <thirdRow>
 
@@ -22,8 +22,8 @@ Feature: Count the minutes on the berlin clock
             | 00:55:00 | YYRYYRYYRYY |
 
     Scenario Outline: Showing the single minutes on the fourth row of the clock (<time>)
-
         Given the API endpoint /time
+
         When I request the time for <time>
         Then the fourth row is <fourthRow>
 

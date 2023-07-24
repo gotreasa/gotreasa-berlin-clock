@@ -1,31 +1,32 @@
 schemaVersion: '2.0.0'
 
 metadataTest:
-  exposedPorts: ["9080"]
-  entrypoint: ["npm"]
-  cmd: ["run", "start:app"]
-  workdir: "/usr/src/app"
-  user: "node"
+  exposedPorts: ['9080']
+  entrypoint: ['npm']
+  cmd: ['run', 'start:app']
+  workdir: '/usr/src/app'
+  user: 'node'
 
 commandTests:
-  - name:  "🔎  node is installed"
-    command: "which"
-    args: ["node"]
+  - name: '🔎  node is installed'
+    command: 'which'
+    args: ['node']
     exitCode: 0
-    expectedOutput: ["/usr/local/bin/node"]
-  - name:  "🔎  node is version 18"
-    command: "node"
-    args: ["--version"]
+    expectedOutput: ['/usr/local/bin/node']
+  - name: '🔎  node is version 18'
+    command: 'node'
+    args: ['--version']
     exitCode: 0
-    expectedOutput: ["v18."]
+    expectedOutput: ['v18.']
 
 fileContentTests:
   - name: '📦 Package JSON'
     path: '/usr/src/app/package.json'
-    expectedContents: [
-     '.*"start:app": "export SERVER_PORT=9080 && node app\.js".*',
-     '.*"name": "gotreasa-berlin-clock",.*'
-     ]
+    expectedContents:
+      [
+        '.*"start:app": "export SERVER_PORT=9080 && node app\.js".*',
+        '.*"name": "gotreasa-berlin-clock",.*',
+      ]
 
 fileExistenceTests:
   - name: '📦 Package JSON'

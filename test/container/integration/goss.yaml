@@ -39,12 +39,12 @@ kernel-param:
   kernel.ostype:
     value: Linux
 
-file:     
+file:
   /usr/src/app/app.js:
     exists: true
-    mode: "0775"
+    mode: '0775'
     size: 267
-    owner: node  
+    owner: node
     group: root
     filetype: file
     contains: ['server.address().port']
@@ -54,17 +54,16 @@ http:
     url: http://localhost:9080/api/v1/time/00:00:00
     status: 200
     body:
-      -   '{"seconds":"O","firstRow":"OOOO","secondRow":"OOOO","thirdRow":"OOOOOOOOOOO","fourthRow":"OOOO"}'
+      - '{"seconds":"O","firstRow":"OOOO","secondRow":"OOOO","thirdRow":"OOOOOOOOOOO","fourthRow":"OOOO"}'
 
   internal_bad_time:
     url: http://localhost:9080/api/v1/time/bad_time
     status: 400
     body:
-      -  'Your input should be in the format of HH:MM:ss'
+      - 'Your input should be in the format of HH:MM:ss'
 
   internal_one_second_to_midnight:
     url: http://localhost:9080/api/v1/time/23:59:59
     status: 200
-    body:
     body:
       - '{"seconds":"Y","firstRow":"RRRR","secondRow":"RRRO","thirdRow":"YYRYYRYYRYY","fourthRow":"YYYY"}'

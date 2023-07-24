@@ -12,7 +12,7 @@ COPY package*.json ./
 RUN npm ci --omit=dev --ignore-scripts
 
 # Prune the source code.
-RUN npm prune --omit=dev && /usr/local/bin/node-prune 
+RUN npm prune --omit=dev && /usr/local/bin/node-prune
 
 COPY app.js ./
 COPY openapi.json ./

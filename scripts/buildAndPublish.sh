@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPT_DIR=$( cd -- "$( dirname -- "$0" )" &> /dev/null && pwd )
+SCRIPT_DIR=$(cd -- "$(dirname -- "$0")" &> /dev/null && pwd)
 . $SCRIPT_DIR/hosting.conf
 . $SCRIPT_DIR/utils.sh
 
@@ -7,9 +7,7 @@ echo "🛠 Building docker image"
 docker build -t $APP_IMAGE . --platform linux/amd64
 echo "✅ Completed building the image"
 
-
 checkIbmcloudCli
-
 
 echo "🔐 Logging into IBMCloud"
 ibmcloud login -a $IBMCLOUD_URL --apikey $IBMCLOUD_APIKEY --no-region
