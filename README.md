@@ -6,6 +6,7 @@
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=xpfarm_gotreasa-berlin-clock&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=xpfarm_gotreasa-berlin-clock)
 [![Known Vulnerabilities](https://snyk.io/test/github/gotreasa/gotreasa-berlin-clock/badge.svg)](https://snyk.io/test/github/gotreasa/gotreasa-berlin-clock)
 [![Build Status](https://github.com/gotreasa/gotreasa-berlin-clock/actions/workflows/pipeline.yml/badge.svg)](https://github.com/gotreasa/gotreasa-berlin-clock/actions/workflows/pipeline.yml)
+[![OpenAPI Validation](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/gotreasa/gotreasa-berlin-clock/main/openapi.json)](https://editor.swagger.io/?url=https://raw.githubusercontent.com/gotreasa/gotreasa-berlin-clock/main/openapi.json)
 
 API: [https://gotreasa-berlin-clock-gotreasa.cloud.okteto.net/api/v1/time/00:00:00]
 
