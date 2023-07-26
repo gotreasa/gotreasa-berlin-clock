@@ -17,6 +17,17 @@ on:
     branches: [main]
 
 jobs:
+  test_swagger_editor_validator_remote:
+    runs-on: ubuntu-latest
+    name: Swagger Editor Validator Remote
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Validate OpenAPI definition
+        uses: char0n/swagger-editor-validate@master
+        with:
+          definition-file: openapi.json
+
   commitlint:
     name: Verify commits are linted
     runs-on: ubuntu-latest
