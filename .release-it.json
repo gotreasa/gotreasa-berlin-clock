@@ -1,0 +1,21 @@
+{
+  "git": {
+    "requireBranch": "main",
+    "commitMessage": "chore: release v${version}"
+  },
+  "hooks": {
+    "before:init": [
+      "git pull",
+      "npm run lint:verify",
+      "npm run prettier:verify",
+      "npm test"
+    ],
+    "after:bump": "npx auto-changelog -p"
+  },
+  "github": {
+    "release": true
+  },
+  "npm": {
+    "publish": false
+  }
+}
