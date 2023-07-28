@@ -1,5 +1,16 @@
 name: Release
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      type:
+        type: choice
+        description: Choose release type
+        options:
+          - auto
+          - patch
+          - minor
+          - major
+        default: auto
 
 env:
   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
@@ -42,9 +53,10 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - name: Run release
-        run: npm run release --ci
         env:
+          TYPE_ARG: ${{ fromJSON('{"auto":"", "patch":"--patch", "minor":"--minor", "major":"--major"}')[github.event.inputs.type] }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run release -- --ci --verbose $TYPE_ARG
       - name: Generate software bill of materials
         uses: anchore/sbom-action@main
         with:
