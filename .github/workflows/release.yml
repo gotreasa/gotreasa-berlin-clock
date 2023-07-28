@@ -57,6 +57,21 @@ jobs:
         with:
           image: ${{ env.OKTETO_IMAGE_TAG }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: anchore/sbom-action@main
+        with:
+          format: spdx
+          image: ${{ env.OKTETO_IMAGE_TAG }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: anchore/sbom-action@main
+        with:
+          format: cyclonedx
+          image: ${{ env.OKTETO_IMAGE_TAG }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: anchore/sbom-action@main
+        with:
+          format: cyclonedx-json
+          image: ${{ env.OKTETO_IMAGE_TAG }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run release
         env:
           TYPE_ARG: ${{ fromJSON('{"auto":"", "patch":"--patch", "minor":"--minor", "major":"--major"}')[github.event.inputs.type] }}
