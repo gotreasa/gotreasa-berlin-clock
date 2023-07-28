@@ -5,6 +5,7 @@ env:
   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+  OKTETO_IMAGE_TAG: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock:latest
 
 jobs:
   release:
@@ -23,6 +24,20 @@ jobs:
         run: |
           npm ci
           touch .env
+      - name: Log in to Okteto Container Registry
+        uses: docker/login-action@master
+        with:
+          registry: ${{ env.OKTETO_REGISTRY }}
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.OKTETO_TOKEN }}
+
+      - name: Pull the container image for testing
+        run: docker pull ${{ env.OKTETO_IMAGE_TAG }}
+      - name: Generate software bill of materials
+        uses: anchore/sbom-action@main
+        with:
+          image: ${{ env.OKTETO_IMAGE_TAG }}
+      - uses: anchore/sbom-action/publish-sbom@main
 
       - name: Install Inspec
         run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
