@@ -38,7 +38,6 @@ jobs:
         uses: anchore/sbom-action@main
         with:
           image: ${{ env.OKTETO_IMAGE_TAG }}
-      - uses: anchore/sbom-action/publish-sbom@main
 
       - name: Install Inspec
         run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
@@ -50,3 +49,4 @@ jobs:
         run: npm run release --ci
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: anchore/sbom-action/publish-sbom@main
