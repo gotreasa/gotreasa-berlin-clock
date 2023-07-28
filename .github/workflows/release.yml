@@ -6,12 +6,15 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@main
-      - name: Instlal the dependencies
+      - name: Setup Node version
         uses: actions/setup-node@main
         with:
           node-version: 18.16
           cache: 'npm'
-      - run: npm ci
+      - name: Install the dependencies
+        run: |
+          npm ci
+          touch .env
       - name: Initialise Git user
         run: |
           git config user.name "${GITHUB_ACTOR}"
