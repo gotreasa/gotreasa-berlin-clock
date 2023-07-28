@@ -34,11 +34,6 @@ jobs:
 
       - name: Pull the container image for testing
         run: docker pull ${{ env.OKTETO_IMAGE_TAG }}
-      - name: Generate software bill of materials
-        uses: anchore/sbom-action@main
-        with:
-          image: ${{ env.OKTETO_IMAGE_TAG }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install Inspec
         run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
@@ -50,3 +45,8 @@ jobs:
         run: npm run release --ci
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Generate software bill of materials
+        uses: anchore/sbom-action@main
+        with:
+          image: ${{ env.OKTETO_IMAGE_TAG }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
