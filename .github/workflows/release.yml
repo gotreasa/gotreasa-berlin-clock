@@ -19,6 +19,9 @@ jobs:
         run: |
           npm ci
           touch .env
+
+      - name: Install Inspec
+        run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
       - name: Initialise Git user
         run: |
           git config user.name "${GITHUB_ACTOR}"
