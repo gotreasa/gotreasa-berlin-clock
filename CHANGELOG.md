@@ -1,5 +1,7 @@
 # Changelog
 
+## [2.0.9](https://github.com/xpfarm/gotreasa-berlin-clock/compare/2.0.8...2.0.9) (2023-07-28)
+
 ## [2.0.8](https://github.com/xpfarm/gotreasa-berlin-clock/compare/2.0.7...2.0.8) (2023-07-28)
 
 ### Bug Fixes
