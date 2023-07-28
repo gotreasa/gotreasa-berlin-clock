@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.14](https://github.com/gotreasa/gotreasa-berlin-clock/compare/2.0.13...2.0.14) (2023-07-28)
+
+### Bug Fixes
+
+- correct the image name ([01a98f0](https://github.com/gotreasa/gotreasa-berlin-clock/commit/01a98f04979b06703e6d5466216ff6d895f7936c))
+
 ## [2.0.13](https://github.com/gotreasa/gotreasa-berlin-clock/compare/2.0.12...2.0.13) (2023-07-28)
 
 ## [2.0.12](https://github.com/gotreasa/gotreasa-berlin-clock/compare/2.0.11...2.0.12) (2023-07-28)
