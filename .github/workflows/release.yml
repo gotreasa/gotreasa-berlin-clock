@@ -52,26 +52,12 @@ jobs:
         run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-      - name: Generate software bill of materials
-        uses: anchore/sbom-action@main
-        with:
-          image: ${{ env.OKTETO_IMAGE_TAG }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: anchore/sbom-action@main
-        with:
-          format: spdx
-          image: ${{ env.OKTETO_IMAGE_TAG }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: anchore/sbom-action@main
-        with:
-          format: cyclonedx
-          image: ${{ env.OKTETO_IMAGE_TAG }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: anchore/sbom-action@main
-        with:
-          format: cyclonedx-json
-          image: ${{ env.OKTETO_IMAGE_TAG }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: 🚓 Generate SBOM
+        run: |
+          echo "🔌 Install Anchore/Syft"
+          curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+          echo "📁 catalogue the versions inside the container..."
+          syft ${{ env.IMAGE_NAME }}:build --scope all-layers -o text -o spdx-json -o cyclonedx-json -o json
       - name: Run release
         env:
           TYPE_ARG: ${{ fromJSON('{"auto":"", "patch":"--patch", "minor":"--minor", "major":"--major"}')[github.event.inputs.type] }}
