@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.10](https://github.com/gotreasa/gotreasa-berlin-clock/compare/2.0.9...2.0.10) (2023-07-28)
+
+### Bug Fixes
+
+- correct the organisation from xpfarm to gotreasa for Github ([d1515ff](https://github.com/gotreasa/gotreasa-berlin-clock/commit/d1515ff7ea3579da08de5e09350828a2b1e2b1fe))
+
 ## [2.0.9](https://github.com/xpfarm/gotreasa-berlin-clock/compare/2.0.8...2.0.9) (2023-07-28)
 
 ## [2.0.8](https://github.com/xpfarm/gotreasa-berlin-clock/compare/2.0.7...2.0.8) (2023-07-28)
