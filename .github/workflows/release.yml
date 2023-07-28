@@ -52,13 +52,13 @@ jobs:
         run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-      - name: Run release
-        env:
-          TYPE_ARG: ${{ fromJSON('{"auto":"", "patch":"--patch", "minor":"--minor", "major":"--major"}')[github.event.inputs.type] }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run release -- --ci --verbose $TYPE_ARG
       - name: Generate software bill of materials
         uses: anchore/sbom-action@main
         with:
           image: ${{ env.OKTETO_IMAGE_TAG }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run release
+        env:
+          TYPE_ARG: ${{ fromJSON('{"auto":"", "patch":"--patch", "minor":"--minor", "major":"--major"}')[github.event.inputs.type] }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run release -- --ci --verbose $TYPE_ARG
