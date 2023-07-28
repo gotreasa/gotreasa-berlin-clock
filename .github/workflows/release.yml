@@ -5,6 +5,7 @@ env:
   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+  OKTETO_REGISTRY: registry.cloud.okteto.net
   OKTETO_IMAGE_TAG: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock:latest
 
 jobs:
