@@ -3,6 +3,7 @@ on: workflow_dispatch
 
 env:
   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+  SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
 jobs:
   release:
@@ -28,7 +29,6 @@ jobs:
         run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          echo "The user is ${GITHUB_ACTOR}"
       - name: Run release
         run: npm run release --ci
         env:
