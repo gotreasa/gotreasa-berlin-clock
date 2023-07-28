@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@main
+        with:
+          fetch-depth: 0
       - name: Setup Node version
         uses: actions/setup-node@main
         with:
@@ -26,6 +28,7 @@ jobs:
         run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          echo "The user is ${GITHUB_ACTOR}"
       - name: Run release
         run: npm run release --ci
         env:
