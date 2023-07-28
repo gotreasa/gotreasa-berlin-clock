@@ -1,7 +1,7 @@
 {
   "git": {
     "requireBranch": "main",
-    "commitMessage": "chore: release v${version}"
+    "commitMessage": "chore(release): v${version}"
   },
   "hooks": {
     "before:init": [
@@ -9,13 +9,19 @@
       "npm run lint:verify",
       "npm run prettier:verify",
       "npm test"
-    ],
-    "after:bump": "npx auto-changelog -p"
+    ]
   },
   "github": {
     "release": true
   },
   "npm": {
     "publish": false
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": "angular",
+      "infile": "CHANGELOG.md",
+      "header": "# Changelog"
+    }
   }
 }
