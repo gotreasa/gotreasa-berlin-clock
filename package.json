@@ -2,13 +2,13 @@
   "name": "gotreasa-berlin-clock",
   "version": "2.0.6",
   "description": "Berlin Clock by Gearoid repository",
-  "homepage": "https://github.ibm.com/xpfarm/gotreasa-berlin-clock#readme",
+  "homepage": "https://github.com/xpfarm/gotreasa-berlin-clock#readme",
   "bugs": {
-    "url": "https://github.ibm.com/xpfarm/gotreasa-berlin-clock/issues"
+    "url": "https://github.com/xpfarm/gotreasa-berlin-clock/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.ibm.com/xpfarm/gotreasa-berlin-clock.git"
+    "url": "git+https://github.com/xpfarm/gotreasa-berlin-clock.git"
   },
   "license": "Apache-2.0",
   "author": "Gearoid O'Treasaigh",
