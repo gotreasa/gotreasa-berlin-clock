@@ -1,5 +1,9 @@
 name: Release
 on: workflow_dispatch
+
+env:
+  PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+
 jobs:
   release:
     runs-on: ubuntu-latest
