@@ -7,7 +7,8 @@ const options = {
   pactBroker: 'https://gotreasa.pactflow.io/',
   pactBrokerToken: process.env.PACT_BROKER_TOKEN,
   consumerVersion: versionFromGitTag(),
-  tags: ['dev'],
+  branch: 'main',
+  tags: ['main'],
 };
 
 pact
