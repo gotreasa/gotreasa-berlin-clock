@@ -7,6 +7,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/gotreasa/gotreasa-berlin-clock/badge.svg)](https://snyk.io/test/github/gotreasa/gotreasa-berlin-clock)
 [![Build Status](https://github.com/gotreasa/gotreasa-berlin-clock/actions/workflows/pipeline.yml/badge.svg)](https://github.com/gotreasa/gotreasa-berlin-clock/actions/workflows/pipeline.yml)
 [![OpenAPI Validation](https://validator.swagger.io/validator?url=https://raw.githubusercontent.com/gotreasa/gotreasa-berlin-clock/main/openapi.json)](https://editor.swagger.io/?url=https://raw.githubusercontent.com/gotreasa/gotreasa-berlin-clock/main/openapi.json)
+[![Can I Deploy BRANCH to ENVIRONMENT](https://gotreasa.pactflow.io/pacticipants/berlin_clock_app/branches/dev/latest-version/can-i-deploy/to-environment/prod/badge)](https://gotreasa.pactflow.io/hal-browser/browser.html#https://gotreasa.pactflow.io/pacticipants/berlin_clock_app/branches/main/latest-version/can-i-deploy/to-environment/prod)
 
 API: [https://gotreasa-berlin-clock-gotreasa.cloud.okteto.net/api/v1/time/00:00:00]
 

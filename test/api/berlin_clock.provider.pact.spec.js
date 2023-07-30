@@ -13,6 +13,7 @@ if (process.env.SMOKE_TEST) {
 const providerOptions = {
   logLevel: 'INFO',
   providerBaseUrl: baseUrl,
+  branch: 'main',
   provider: 'berlin_clock_app',
   providerVersion: versionFromGitTag(),
   matchingRules: {
