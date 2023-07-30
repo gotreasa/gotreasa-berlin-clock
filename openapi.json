@@ -72,6 +72,45 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message",
+                      "example": "Your input should be in the format of HH:MM:ss"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Get the health of the endpoint",
+        "description": "Health Endpoint",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api-docs": {
+      "get": {
+        "summary": "OpenAPI documentation viewer",
+        "description": "OpenAPI documentation endpoint",
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
