@@ -11,7 +11,6 @@ const options = {
   pactBrokerToken: process.env.PACT_BROKER_TOKEN,
   consumerVersion: versionFromGitTag(),
   branch: branchName(),
-  tags: ['main'],
 };
 
 pact
