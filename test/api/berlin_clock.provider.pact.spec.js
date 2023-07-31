@@ -2,6 +2,8 @@ const path = require('path');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { versionFromGitTag } = require('absolute-version');
 const { Verifier } = require('@pact-foundation/pact');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const branchName = require('current-git-branch');
 const server = require('../../app');
 
 let baseUrl;
@@ -14,13 +16,10 @@ if (process.env.SMOKE_TEST) {
 const providerOptions = {
   logLevel: 'INFO',
   providerBaseUrl: baseUrl,
-  providerBranch: 'main',
-  providerTags: ['main'],
-  tags: ['mainBranch'],
   provider: 'berlin_clock_app',
+  providerBranch: branchName(),
+  providerVersionTags: ['main'],
   providerVersion: versionFromGitTag(),
-  providerEnvironments: ['dev'],
-  environments: ['local'],
   matchingRules: {
     body: {},
   },

@@ -1,6 +1,8 @@
 const pact = require('@pact-foundation/pact-node');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { versionFromGitTag } = require('absolute-version');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const branchName = require('current-git-branch');
 const path = require('path');
 
 const options = {
@@ -8,9 +10,7 @@ const options = {
   pactBroker: 'https://gotreasa.pactflow.io/',
   pactBrokerToken: process.env.PACT_BROKER_TOKEN,
   consumerVersion: versionFromGitTag(),
-  environments: ['dev'],
-  environment: 'local',
-  branch: 'main',
+  branch: branchName(),
   tags: ['main'],
 };
 
