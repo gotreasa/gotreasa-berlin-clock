@@ -344,7 +344,13 @@ jobs:
         check_container_software_list,
       ]
     steps:
-      - uses: actions/checkout@main
+      - name: Checkout the code
+        uses: actions/checkout@main
+      - uses: actions/setup-node@main
+        with:
+          node-version: 18.16
+          cache: 'npm'
+      - run: npm ci
 
       - name: Log in to Okteto Container Registry
         uses: docker/login-action@master
