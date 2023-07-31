@@ -16,8 +16,11 @@ const providerOptions = {
   providerBaseUrl: baseUrl,
   providerBranch: 'main',
   providerTags: ['main'],
+  tags: ['mainBranch'],
   provider: 'berlin_clock_app',
   providerVersion: versionFromGitTag(),
+  providerEnvironments: ['dev'],
+  environments: ['local'],
   matchingRules: {
     body: {},
   },
