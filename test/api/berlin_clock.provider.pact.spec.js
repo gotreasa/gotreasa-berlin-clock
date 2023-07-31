@@ -14,6 +14,7 @@ const providerOptions = {
   logLevel: 'INFO',
   providerBaseUrl: baseUrl,
   branch: 'main',
+  tags: ['main'],
   provider: 'berlin_clock_app',
   providerVersion: versionFromGitTag(),
   matchingRules: {
