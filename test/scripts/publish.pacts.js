@@ -1,5 +1,6 @@
 const pact = require('@pact-foundation/pact-node');
-const { versionFromGitTag } = require('@pact-foundation/absolute-version');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const { versionFromGitTag } = require('absolute-version');
 const path = require('path');
 
 const options = {
