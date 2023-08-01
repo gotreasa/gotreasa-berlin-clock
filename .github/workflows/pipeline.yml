@@ -177,7 +177,7 @@ jobs:
             --show-current)+$(git rev-parse --short HEAD) \
             --broker-base-url https://gotreasa.pactflow.io \
             --broker-token ${{ secrets.PACT_BROKER_TOKEN }} \
-            --environment test
+            --to-environment test
           echo "🚂 The Test environment can be deployed"
 
   build_image:
