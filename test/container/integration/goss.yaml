@@ -67,3 +67,7 @@ http:
     status: 200
     body:
       - '{"seconds":"Y","firstRow":"RRRR","secondRow":"RRRO","thirdRow":"YYRYYRYYRYY","fourthRow":"YYYY"}'
+
+  documentation:
+    url: http://localhost:9080/api-docs/
+    status: 200
