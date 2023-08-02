@@ -129,7 +129,13 @@ jobs:
 
   test_and_coverage:
     runs-on: ubuntu-latest
-    needs: [eslint-verify, prettier-verify, hadolint]
+    needs:
+      [
+        eslint-verify,
+        hadolint,
+        prettier-verify,
+        test_swagger_editor_validator_remote,
+      ]
 
     steps:
       - uses: warchant/setup-sonar-scanner@master
@@ -155,7 +161,8 @@ jobs:
 
   pact_test:
     runs-on: ubuntu-latest
-    needs: [eslint-verify, prettier-verify]
+    needs:
+      [eslint-verify, prettier-verify, test_swagger_editor_validator_remote]
 
     steps:
       - name: Checkout the code
