@@ -55,6 +55,10 @@ jobs:
         with:
           node-version: 18.16
           cache: 'npm'
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
       - run: npm ci
       - name: Lint the code
         run: npm run lint:verify
@@ -82,6 +86,10 @@ jobs:
         with:
           node-version: 18.16
           cache: 'npm'
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
       - run: npm ci
       - name: Prettify the code
         run: npm run prettier:verify
@@ -95,6 +103,10 @@ jobs:
         with:
           node-version: 18.16
           cache: 'npm'
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
       - run: npm ci
       - name: Detect any secrets in the code
         run: npm run detect-secrets $(git ls-files)
@@ -129,6 +141,10 @@ jobs:
         with:
           node-version: 18.16
           cache: 'npm'
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
       - run: npm ci
       - run: touch .env
       - name: Run all of the tests
@@ -148,6 +164,10 @@ jobs:
         with:
           node-version: 18.16
           cache: 'npm'
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
       - run: npm ci
       - run: touch .env
       - run: npm run test:api:consumer
@@ -167,6 +187,10 @@ jobs:
         with:
           node-version: 18.16
           cache: 'npm'
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
       - run: npm ci
       - name: Check if it can be deployed
         run: |
@@ -302,6 +326,14 @@ jobs:
 
       - name: Pull the container image for testing
         run: docker pull ${{ env.OKTETO_IMAGE_TAG }}
+      - uses: actions/setup-node@main
+        with:
+          node-version: 18.16
+          cache: 'npm'
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
 
       - name: Run Security test on container image
         env:
@@ -350,6 +382,10 @@ jobs:
         with:
           node-version: 18.16
           cache: 'npm'
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
       - run: npm ci
 
       - name: Log in to Okteto Container Registry
@@ -389,6 +425,10 @@ jobs:
         with:
           node-version: 18.16
           cache: 'npm'
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
       - run: npm ci
       - run: touch .env
       - name: Smoke test using pact tests
