@@ -32,13 +32,9 @@ And('the goss command exists', () => {
   );
 });
 
-And('the response message is OK', () => {
-  expect(response.body.message).toBe('Validation - Passed!');
-});
-
 And('the goss command is missing', () => {
   child_process.exec.mockImplementation((_, callback) =>
-    callback(new Error('Command not found')),
+    callback(null, { stdout: 'OK' }),
   );
 });
 

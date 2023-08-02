@@ -6,7 +6,6 @@ Feature: API endpoints
 
         When I call the endpoint
         Then the response is 200
-        And the response message is OK
 
     Scenario: Goss is missing for the API /health
         Given the API endpoint /health

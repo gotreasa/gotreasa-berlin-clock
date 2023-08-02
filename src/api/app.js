@@ -11,9 +11,9 @@ app.use(helmet());
 
 app.use('/health', (_, response) => {
   exec('test -f "/goss/goss" && /goss/goss validate', (error) => {
-    if (error) return response.sendStatus(200);
+    console.log('Health check output', error);
 
-    return response.status(200).json({ message: 'Validation - Passed!' });
+    return response.sendStatus(200);
   });
 });
 
