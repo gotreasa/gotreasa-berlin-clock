@@ -1,6 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
 
+const { exec } = require('child_process');
 const swaggerUi = require('swagger-ui-express');
 const openApiSpecification = require('../../openapi.json');
 const getTime = require('./Time');
@@ -8,7 +9,13 @@ const getTime = require('./Time');
 const app = express();
 app.use(helmet());
 
-app.use('/health', (_, response) => response.sendStatus(200));
+app.use('/health', (_, response) => {
+  exec('test -f "/goss/goss" && /goss/goss validate', (error) => {
+    if (error) return response.sendStatus(200);
+
+    return response.status(200).json({ message: 'Validation - Passed!' });
+  });
+});
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiSpecification));
 

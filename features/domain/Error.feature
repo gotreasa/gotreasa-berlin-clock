@@ -1,7 +1,7 @@
 Feature: The API errors
 
     Scenario Outline: Errors for the API (<time>)
-        Given the API endpoint /time
+        Given the API endpoint /api/v1/time
 
         When I request the time for <time>
         Then the response is 400

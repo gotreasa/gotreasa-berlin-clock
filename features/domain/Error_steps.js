@@ -6,8 +6,8 @@ const app = require('../../src/api/app');
 let endpoint;
 let response;
 
-Given('the API endpoint /time', () => {
-  endpoint = '/api/v1/time';
+Given(/^the API endpoint (.*)$/, (path) => {
+  endpoint = path;
 });
 
 When(/^I request the time for (.*)$/, async (time) => {
