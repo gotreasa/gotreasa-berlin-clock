@@ -57,7 +57,13 @@ jobs:
           echo "🔌 Install Anchore/Syft"
           curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
           echo "📁 catalogue the versions inside the container..."
-          syft ${{ env.OKTETO_IMAGE_TAG }} --scope all-layers -o text=/tmp/syft/sbom.txt -o spdx-json=/tmp/syft/sbom.spdx.json -o cyclonedx-json=/tmp/syft/sbom.cyclonedx.json -o json=/tmp/syft/sbom.json -o table
+          syft ${{ env.OKTETO_IMAGE_TAG }} --scope all-layers \
+            -o text=/tmp/syft/sbom.txt \
+            -o spdx-json=/tmp/syft/sbom.spdx.json \
+            -o cyclonedx-json=/tmp/syft/sbom.cyclonedx.json \
+            -o json=/tmp/syft/sbom.json \
+            -o table=/tmp/syft/sbom.table.txt \
+            -o table
       - name: Run release
         env:
           TYPE_ARG: ${{ fromJSON('{"auto":"", "patch":"--patch", "minor":"--minor", "major":"--major"}')[github.event.inputs.type] }}
