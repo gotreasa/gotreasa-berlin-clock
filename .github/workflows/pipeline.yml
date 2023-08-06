@@ -350,7 +350,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
           npm ci
-          npx snyk container test ${{ env.OKTETO_IMAGE_TAG }}
+          npx snyk container test ${{ env.OKTETO_IMAGE_TAG }} --file=Dockerfile --fail-on=upgradable
 
   check_container_software_list:
     runs-on: ubuntu-latest
