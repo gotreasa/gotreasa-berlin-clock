@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.1.0](https://github.com/gotreasa/gotreasa-berlin-clock/compare/2.0.17...2.1.0) (2023-08-06)
+
+### Features
+
+- integrate the Goss checks into the /health endpoint ([40a41d7](https://github.com/gotreasa/gotreasa-berlin-clock/commit/40a41d7debe8b2eb192ddef6d9032ccb050d67b8))
+
+### Bug Fixes
+
+- adding back in the generation of the pact tests ([53b19fd](https://github.com/gotreasa/gotreasa-berlin-clock/commit/53b19fd75835207547f1b6f99d503e5ab0a3abaa))
+- simplify the health check to alway pass even if goss is not loaded ([e9c77e3](https://github.com/gotreasa/gotreasa-berlin-clock/commit/e9c77e3a744c983256f36a8a25fafd908e50fd93))
+
 ## [2.0.17](https://github.com/gotreasa/gotreasa-berlin-clock/compare/2.0.16...2.0.17) (2023-08-01)
 
 ## [2.0.16](https://github.com/gotreasa/gotreasa-berlin-clock/compare/2.0.15...2.0.16) (2023-07-29)
