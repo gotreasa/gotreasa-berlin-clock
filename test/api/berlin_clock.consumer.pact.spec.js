@@ -3,7 +3,7 @@ const axios = require('axios');
 
 const OK = 200;
 const BAD_REQUEST = 400;
-const JSON_BODY = 'application/json; charset=utf-8';
+const HTML_BODY = 'text/html; charset=utf-8';
 const TIME_ENDPOINT = '/api/v1/time';
 
 const YELLOW_LIGHT = 'Y';
@@ -52,6 +52,9 @@ pactWith(
             },
             willRespondWith: {
               status: OK,
+              headers: {
+                'Content-Type': HTML_BODY,
+              },
             },
           });
         });
@@ -75,9 +78,6 @@ pactWith(
             },
             willRespondWith: {
               status: OK,
-              headers: {
-                'Content-Type': JSON_BODY,
-              },
               body: {
                 seconds: 'O',
                 firstRow: 'OOOO',
@@ -133,9 +133,6 @@ pactWith(
             },
             willRespondWith: {
               status: OK,
-              headers: {
-                'Content-Type': JSON_BODY,
-              },
               body: {
                 seconds: 'Y',
                 firstRow: 'RROO',
@@ -190,9 +187,6 @@ pactWith(
             },
             willRespondWith: {
               status: BAD_REQUEST,
-              headers: {
-                'Content-Type': JSON_BODY,
-              },
               body: {
                 message: 'Your input should be in the format of HH:MM:ss',
               },
