@@ -110,7 +110,10 @@
         "description": "OpenAPI documentation endpoint",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/html": {}
+            }
           }
         }
       }
