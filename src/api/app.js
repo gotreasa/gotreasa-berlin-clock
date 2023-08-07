@@ -1,7 +1,7 @@
+const { exec } = require('child_process');
 const express = require('express');
 const helmet = require('helmet');
 
-const { exec } = require('child_process');
 const swaggerUi = require('swagger-ui-express');
 const openApiSpecification = require('../../openapi.json');
 const getTime = require('./Time');
@@ -10,7 +10,7 @@ const app = express();
 app.use(helmet());
 
 app.use('/health', (_, response) => {
-  exec('test -f "/goss/goss" && /goss/goss validate', (error) => {
+  exec('/usr/bin/test -f "/goss/goss" && /goss/goss validate', (error) => {
     console.log('Health check output', error);
 
     return response.sendStatus(200);
