@@ -42,7 +42,7 @@
     "test:api:watch": "export SERVER_PORT=9999 && env-cmd jest test/**/*.pact.spec.js --testTimeout 30000 --watch",
     "test:bdd": "jest ./features",
     "test:bdd:watch": "npm run test:bdd -- --watch",
-    "test:security": "env-cmd snyk test",
+    "test:security": "env-cmd snyk test --all-projects",
     "test:security:dev": "npm run test:security -- --dev",
     "test:unit": "jest ./test --testPathIgnorePatterns test/**/*.pact.spec.js",
     "test:unit:container": "inspec exec test/container/unit/*.rb --chef-license accept",
