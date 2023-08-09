@@ -59,7 +59,9 @@ jobs:
         id: npm-cache-dir
         shell: bash
         run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
-      - run: npm ci
+      - run: |
+          run: npm ci
+          echo -e "{ \"timestamp\": \"$(date -u)\"}" > timestamp.json
       - name: Lint the code
         run: npm run lint:verify
 
