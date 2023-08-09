@@ -278,3 +278,6 @@ test/mock/postman_collection.json
 
 ## Newman
 newman/
+
+## Build timestamp
+timestamp.json
