@@ -14,7 +14,6 @@
   "author": "Gearoid O'Treasaigh",
   "main": "src/gotreasa-berlin-clock.js",
   "scripts": {
-    "build:postman": "portman --cliOptionsFile portman/portman-cli.json",
     "clean": "rimraf pact",
     "detect-secrets": "cross-env-shell docker run --platform linux/amd64 --rm -v ${INIT_CWD}:/code icr.io/git-defenders/detect-secrets-hook:0.13.1.ibm.56.dss --baseline .secrets.baseline",
     "detect-secrets:audit": "cross-env-shell docker run -it --platform linux/amd64 --rm -v ${INIT_CWD}:/code icr.io/git-defenders/detect-secrets:0.13.1.ibm.56.dss audit --report --fail-on-unaudited --fail-on-live --fail-on-audited-real .secrets.baseline",
@@ -35,14 +34,12 @@
     "start:app:watch": "export SERVER_PORT=9080 && nodemon app.js",
     "start:cli": "node src/cli/time.js",
     "test": "rimraf pact/pacts/* && export SERVER_PORT=9998 && npm run test:api:consumer && npm run publish:pact && env-cmd jest --testTimeout 30000 && npm run test:unit:container && npx swagger-mock-validator openapi.json pact/pacts/berlin_clock_client-berlin_clock_app.json",
-    "test:api": "npm run build:postman && newman run test/mock/postman_collection.json -r cli,json",
-    "test:api:all": "rimraf pact/pacts/* && export SERVER_PORT=9999 && env-cmd jest test/**/*.pact.spec.js --testTimeout 30000",
-    "test:api:all:watch": "export SERVER_PORT=9999 && env-cmd jest test/**/*.pact.spec.js --testTimeout 30000 --watch",
+    "test:api": "rimraf pact/pacts/* && rimraf pact/postman/* && npm run test:api:consumer && npm run test:api:provider && ./test/scripts/generate_postman.sh && newman run pact/postman/collections/postman_collection.json -r cli,json --env-var 'url=http://localhost:9080'",
     "test:api:consumer": "jest test/**/*.consumer.pact.spec.js",
     "test:api:consumer:watch": "npm run test:api:consumer -- --watch",
     "test:api:provider": "export SERVER_PORT=9999 && env-cmd jest test/**/*.provider.pact.spec.js --testTimeout 30000",
     "test:api:provider:watch": "npm run test:api:provider -- --watch",
-    "test:api:watch": "npm run build:postman && chokidar '*.js' 'src/**/*.js' 'test/mock/postman_collection.json' --initial -c 'npm run test:api'",
+    "test:api:watch": "export SERVER_PORT=9999 && env-cmd jest test/**/*.pact.spec.js --testTimeout 30000 --watch",
     "test:bdd": "jest ./features",
     "test:bdd:watch": "npm run test:bdd -- --watch",
     "test:security": "env-cmd snyk test",
@@ -79,7 +76,6 @@
     "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
-    "@apideck/portman": "^1.22.0",
     "@commitlint/cli": "^17.6.7",
     "@commitlint/config-conventional": "^17.6.7",
     "@pact-foundation/pact": "^12.1.0",
