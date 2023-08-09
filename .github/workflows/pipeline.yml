@@ -8,7 +8,7 @@ env:
   APP_HOST: ${{ vars.APP_HOST }}
   OKTETO_TOKEN: ${{ secrets.OKTETO_TOKEN }}
   OKTETO_REGISTRY: registry.cloud.okteto.net
-  OKTETO_IMAGE_TAG: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock:latest
+  OKTETO_DEV_IMAGE_TAG: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock:build
 
 on:
   push:
@@ -246,7 +246,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ env.OKTETO_IMAGE_TAG }}
+          tags: ${{ env.OKTETO_DEV_IMAGE_TAG }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -266,12 +266,12 @@ jobs:
           password: ${{ secrets.OKTETO_TOKEN }}
 
       - name: Pull the container image for testing
-        run: docker pull ${{ env.OKTETO_IMAGE_TAG }}
+        run: docker pull ${{ env.OKTETO_DEV_IMAGE_TAG }}
 
       - name: Run tests on the container structure
         uses: plexsystems/container-structure-test-action@main
         with:
-          image: ${{ env.OKTETO_IMAGE_TAG }}
+          image: ${{ env.OKTETO_DEV_IMAGE_TAG }}
           config: test/container/structure/config.yaml
 
   check_container_runs_correctly:
@@ -286,12 +286,12 @@ jobs:
           password: ${{ secrets.OKTETO_TOKEN }}
 
       - name: Pull the container image for testing
-        run: docker pull ${{ env.OKTETO_IMAGE_TAG }}
+        run: docker pull ${{ env.OKTETO_DEV_IMAGE_TAG }}
 
       - name: Run the goss tests on the image
         run: |
           docker run --name goss aelsabbahy/goss goss
-          docker run --rm -d --volumes-from goss --name app ${{ env.OKTETO_IMAGE_TAG }}
+          docker run --rm -d --volumes-from goss --name app ${{ env.OKTETO_DEV_IMAGE_TAG }}
           sleep 20
           docker exec app /goss/goss validate --format tap
 
@@ -307,13 +307,13 @@ jobs:
           password: ${{ secrets.OKTETO_TOKEN }}
 
       - name: Pull the container image for testing
-        run: docker pull ${{ env.OKTETO_IMAGE_TAG }}
+        run: docker pull ${{ env.OKTETO_DEV_IMAGE_TAG }}
 
       - name: Analyse the container for waste using dive
         run: |
           docker run --rm \
             -v /var/run/docker.sock:/var/run/docker.sock \
-            wagoodman/dive:latest --ci ${{ env.OKTETO_IMAGE_TAG }} \
+            wagoodman/dive:latest --ci ${{ env.OKTETO_DEV_IMAGE_TAG }} \
             --lowestEfficiency=0.90 --highestUserWastedPercent=0.20 \
             --highestWastedBytes=40MB
 
@@ -332,7 +332,7 @@ jobs:
           password: ${{ secrets.OKTETO_TOKEN }}
 
       - name: Pull the container image for testing
-        run: docker pull ${{ env.OKTETO_IMAGE_TAG }}
+        run: docker pull ${{ env.OKTETO_DEV_IMAGE_TAG }}
       - uses: actions/setup-node@main
         with:
           node-version: 18.16
@@ -350,7 +350,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
           npm ci
-          npx snyk container test ${{ env.OKTETO_IMAGE_TAG }} --file=Dockerfile --fail-on=upgradable
+          npx snyk container test ${{ env.OKTETO_DEV_IMAGE_TAG }} --file=Dockerfile --fail-on=upgradable
 
   check_container_software_list:
     runs-on: ubuntu-latest
@@ -364,14 +364,14 @@ jobs:
           password: ${{ secrets.OKTETO_TOKEN }}
 
       - name: Pull the container image for testing
-        run: docker pull ${{ env.OKTETO_IMAGE_TAG }}
+        run: docker pull ${{ env.OKTETO_DEV_IMAGE_TAG }}
 
       - name: 🚓 Generate SBOM
         run: |
           echo "🔌 Install Anchore/Syft"
           curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
           echo "📁 catalogue the versions inside the container..."
-          syft ${{ env.OKTETO_IMAGE_TAG }} --scope all-layers \
+          syft ${{ env.OKTETO_DEV_IMAGE_TAG }} --scope all-layers \
             -o table
 
   deploy_image:
@@ -406,7 +406,7 @@ jobs:
           password: ${{ secrets.OKTETO_TOKEN }}
 
       - name: Pull latest image
-        run: docker pull ${{ env.OKTETO_IMAGE_TAG }}
+        run: docker pull ${{ env.OKTETO_DEV_IMAGE_TAG }}
 
       - name: Install okteto CLI
         run: curl https://get.okteto.com -sSfL | sh

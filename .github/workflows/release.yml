@@ -17,7 +17,7 @@ env:
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
   OKTETO_REGISTRY: registry.cloud.okteto.net
-  OKTETO_IMAGE_TAG: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock:latest
+  OKTETO_DEV_IMAGE_TAG: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock:build
 
 jobs:
   release:
@@ -44,7 +44,7 @@ jobs:
           password: ${{ secrets.OKTETO_TOKEN }}
 
       - name: Pull the container image for testing
-        run: docker pull ${{ env.OKTETO_IMAGE_TAG }}
+        run: docker pull ${{ env.OKTETO_DEV_IMAGE_TAG }}
 
       - name: Install Inspec
         run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
@@ -57,7 +57,7 @@ jobs:
           echo "🔌 Install Anchore/Syft"
           curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
           echo "📁 catalogue the versions inside the container..."
-          syft ${{ env.OKTETO_IMAGE_TAG }} --scope all-layers \
+          syft ${{ env.OKTETO_DEV_IMAGE_TAG }} --scope all-layers \
             -o text=/tmp/syft/sbom.txt \
             -o spdx-json=/tmp/syft/sbom.spdx.json \
             -o cyclonedx-json=/tmp/syft/sbom.cyclonedx.json \
