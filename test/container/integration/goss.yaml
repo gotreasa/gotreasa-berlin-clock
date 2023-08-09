@@ -43,7 +43,7 @@ file:
   /usr/src/app/app.js:
     exists: true
     mode: '0775'
-    size: 267
+    size: 307
     owner: node
     group: root
     filetype: file
