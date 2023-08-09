@@ -18,7 +18,7 @@ COPY app.js ./
 COPY openapi.json ./
 COPY src src
 COPY test/container/integration/goss.yaml goss.yaml
-RUN echo -e "{ \"timestamp\": \"$(date -u)\"}" > timestamp.json
+RUN sed -i "s/REPLACE_ME/$(date -u)/" app.js
 
 # Build final image using small base image.
 FROM node:18-alpine
