@@ -180,6 +180,10 @@ jobs:
       - run: npm run test:api:consumer
       - run: npm run publish:pact
       - run: export CI=true && npm run test:api:provider
+      - run: npm start &
+      - run: |
+          ./test/scripts/generate_postman.sh
+          npx newman run pact/postman/collections/postman_collection.json -r cli,json --env-var 'url=http://localhost:9080'
 
   can-i-deploy:
     runs-on: ubuntu-latest
@@ -443,6 +447,9 @@ jobs:
       - run: touch .env
       - name: Smoke test using pact tests
         run: npm run test:api:consumer && export SMOKE_TEST=true && npm run test:api:provider -- --collectCoverage=false
+      - run: |
+          ./test/scripts/generate_postman.sh
+          npx newman run pact/postman/collections/postman_collection.json -r cli,json --env-var 'url=${{ env.APP_HOST }}'
 
   snyk_monitor:
     runs-on: ubuntu-latest
