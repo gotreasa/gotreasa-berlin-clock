@@ -26,8 +26,7 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(cookieParser(COOKIES_SECRET));
-app.set('trust proxy', 2);
-app.get('/ip', (request, response) => response.send(request.ip));
+app.set('trust proxy', 1);
 
 app.use('/health', limiter, csrfProtect, (_, response) => {
   exec('/usr/bin/test -f "/goss/goss" && /goss/goss validate', (error) => {
