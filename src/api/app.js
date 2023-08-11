@@ -24,11 +24,11 @@ const getTime = require('./Time');
 const csrfProtect = csrf({ cookie: true });
 const app = express();
 app.use(helmet());
-app.use(cors());
+// app.use(cors());
 app.use(cookieParser(COOKIES_SECRET));
 app.set('trust proxy', 1);
 
-app.use('/health', limiter, csrfProtect, (_, response) => {
+app.use('/health', limiter, cors(), csrfProtect, (_, response) => {
   exec('/usr/bin/test -f "/goss/goss" && /goss/goss validate', (error) => {
     console.log('Health check output', error);
 
@@ -43,7 +43,7 @@ app.use(
   swaggerUi.setup(openApiSpecification),
 );
 
-app.get('/api/v1/time/:time', csrfProtect, (req, response) => {
+app.get('/api/v1/time/:time', cors(), csrfProtect, (req, response) => {
   try {
     return response.status(200).json(getTime(req.params.time));
   } catch (error) {
