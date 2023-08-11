@@ -501,3 +501,11 @@ jobs:
         with:
           command: monitor
           args: --all-projects
+
+  dast_scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Dastardly Action Step
+        uses: PortSwigger/dastardly-github-action@main
+        with:
+          target-url: ${{ env.APP_HOST }}/api/v1/time/00:00
