@@ -509,7 +509,7 @@ jobs:
         continue-on-error: true # This allows subsequent steps to run even if this step fails
         uses: PortSwigger/dastardly-github-action@main
         with:
-          target-url: ${{ env.APP_HOST }}/api-docs
+          target-url: ${{ env.APP_HOST }}
       - name: Publish Test Report
         if: always() # Forces this step to always run
         uses: mikepenz/action-junit-report@v3
