@@ -17,7 +17,7 @@ env:
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
   OKTETO_REGISTRY: registry.cloud.okteto.net
-  OKTETO_DEV_IMAGE_TAG: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock:build
+  OKTETO_DEV_IMAGE_TAG: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock-gotreasa-berlin-clock:build
 
 jobs:
   release:
