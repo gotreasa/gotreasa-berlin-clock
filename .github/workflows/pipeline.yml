@@ -62,6 +62,7 @@ jobs:
       - run: npm ci
       - name: Lint the code
         run: npm run lint:verify --
+          --format @microsoft/eslint-formatter-sarif
           --output-file eslint-results.sarif
         continue-on-error: true
       - name: Upload analysis results to GitHub
@@ -133,7 +134,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           command: test
-          args: --all-projects
+          args: --all-projects --sarif-file-output=snyk.sarif
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
@@ -148,11 +149,11 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           command: code
-          args: test --sarif-file-output=snyk.sarif2
+          args: test --sarif-file-output=snyk-code.sarif
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: snyk.sarif2
+          sarif_file: snyk-code.sarif
 
   test_and_coverage:
     runs-on: ubuntu-latest
