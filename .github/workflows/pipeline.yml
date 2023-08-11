@@ -117,6 +117,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@main
+      - name: Test the dependencies for security vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          # In order to use the Snyk Action you will need to have a Snyk API token.
+          # More details in https://github.com/snyk/actions#getting-your-snyk-token
+          # or you can signup for free at https://snyk.io/login
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: test
+          args: --all-projects
       - name: Test the code for security vulnerabilities
         uses: snyk/actions/node@master
         env:
@@ -125,7 +135,8 @@ jobs:
           # or you can signup for free at https://snyk.io/login
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          command: test --all-projects
+          command: code
+          args: test --all-projects
 
   test_and_coverage:
     runs-on: ubuntu-latest
@@ -465,4 +476,5 @@ jobs:
           # or you can signup for free at https://snyk.io/login
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          command: monitor --all-projects
+          command: monitor
+          args: --all-projects
