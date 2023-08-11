@@ -14,6 +14,17 @@ module.exports = {
   },
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'feature'],
   moduleNameMapper: { '^uuid$': 'uuid' },
+  reporters: [
+    'default',
+    [
+      'jest-junit',
+      {
+        outputDirectory: 'reports',
+        outputName: 'jest-junit.xml',
+        uniqueOutputName: 'true',
+      },
+    ],
+  ],
   resetMocks: true,
   resetModules: true,
   testEnvironment: 'node',
