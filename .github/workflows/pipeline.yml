@@ -467,7 +467,7 @@ jobs:
 
       - name: Deploy the containers using Okteto
         run: |
-          okteto pipeline --wait
+          okteto pipeline deploy --wait
           npx pact-broker record-deployment \
           --broker-base-url https://gotreasa.pactflow.io \
           --broker-token $PACT_BROKER_TOKEN \
@@ -518,7 +518,7 @@ jobs:
 
   dast_scan:
     runs-on: ubuntu-latest
-    # needs: [deploy_image]
+    needs: [deploy_image]
     steps:
       - uses: actions/checkout@main
       - name: Run Dastardly Action Step
