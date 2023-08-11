@@ -406,7 +406,7 @@ jobs:
 
   check_container_software_list:
     runs-on: ubuntu-latest
-    # needs: [build_image]
+    needs: [build_image]
     steps:
       - name: 🔐 Log in to Okteto Container Registry
         uses: docker/login-action@master
