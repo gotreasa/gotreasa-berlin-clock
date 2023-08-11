@@ -517,13 +517,20 @@ jobs:
 
   dast_scan:
     runs-on: ubuntu-latest
-    needs: [deploy_image]
+    # needs: [deploy_image]
     steps:
       - name: Run Dastardly Action Step
         continue-on-error: true # This allows subsequent steps to run even if this step fails
         uses: PortSwigger/dastardly-github-action@main
         with:
           target-url: ${{ env.APP_HOST }}/api-docs/
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure() # run this step even if previous step failed
+        with:
+          name: Dastardly Tests # Name of the check run which will be created
+          path: '**/dastardly-report.xml' # Path to test results
+          reporter: jest-junit # Format of test results
       - name: Publish Test Report
         if: always() # Forces this step to always run
         uses: mikepenz/action-junit-report@v3
