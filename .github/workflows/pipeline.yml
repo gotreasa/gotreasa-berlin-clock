@@ -199,6 +199,7 @@ jobs:
         with:
           report_paths: 'reports/jest-junit.xml*'
           require_tests: true
+          check_name: Jest Results
 
   pact_test:
     runs-on: ubuntu-latest
@@ -538,3 +539,4 @@ jobs:
         with:
           report_paths: '**/dastardly-report.xml' # You need to update this path if you pass in a different output filename to the Dastardly action
           require_tests: true
+          check_name: DAST Scan Results
