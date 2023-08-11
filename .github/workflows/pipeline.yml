@@ -400,6 +400,7 @@ jobs:
           npx snyk container test ${{ env.OKTETO_DEV_IMAGE_TAG }} --file=Dockerfile --fail-on=upgradable --sarif-file-output=snyk.sarif
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
+        if: always()
         with:
           sarif_file: snyk.sarif
 
@@ -434,6 +435,7 @@ jobs:
 
       - name: ⏫ Upload Anchore scan SARIF report
         uses: github/codeql-action/upload-sarif@v2
+        if: always()
         with:
           sarif_file: ${{ steps.scan.outputs.sarif }}
 
