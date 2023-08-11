@@ -61,7 +61,14 @@ jobs:
         run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
       - run: npm ci
       - name: Lint the code
-        run: npm run lint:verify
+        run: npm run lint:verify --
+          --output-file eslint-results.sarif
+        continue-on-error: true
+      - name: Upload analysis results to GitHub
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: eslint-results.sarif
+          wait-for-processing: true
 
   inspec:
     name: Unit test docker image
