@@ -5,6 +5,15 @@ const helmet = require('helmet');
 const csrf = require('csurf');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  // store: ... , // Use an external store for more precise rate limiting
+});
 
 const swaggerUi = require('swagger-ui-express');
 const openApiSpecification = require('../../openapi.json');
@@ -18,7 +27,7 @@ app.use(helmet());
 app.use(cors());
 app.use(cookieParser(COOKIES_SECRET));
 
-app.use('/health', csrfProtect, (_, response) => {
+app.use('/health', limiter, csrfProtect, (_, response) => {
   exec('/usr/bin/test -f "/goss/goss" && /goss/goss validate', (error) => {
     console.log('Health check output', error);
 
