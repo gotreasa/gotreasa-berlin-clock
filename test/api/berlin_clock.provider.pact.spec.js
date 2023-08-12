@@ -18,7 +18,9 @@ const providerOptions = {
   providerBaseUrl: baseUrl,
   provider: 'berlin_clock_app',
   providerBranch: branchName(),
-  providerVersion: versionFromGitTag(),
+  providerVersion: versionFromGitTag({
+    tagGlob: '[0-9]*',
+  }),
   matchingRules: {
     body: {},
   },
