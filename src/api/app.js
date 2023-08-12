@@ -21,7 +21,7 @@ const openApiSpecification = require('../../openapi.json');
 const COOKIES_SECRET = crypto.randomBytes(32).toString('hex');
 const getTime = require('./Time');
 
-const csrfProtect = csrf({ cookie: true, httpOnly: true, secure: true });
+const csrfProtect = csrf({ cookie: { secure: true } });
 const app = express();
 app.use(helmet());
 
