@@ -82,7 +82,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@main
 
-      - name: Install Inspec
+      - name: 💿 Install Inspec
         run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
 
       - name: Run Inspec tests
@@ -170,7 +170,7 @@ jobs:
 
     steps:
       - uses: warchant/setup-sonar-scanner@master
-      - name: Install Inspec
+      - name: 💿 Install Inspec
         run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
       - name: 📂 Checkout the code
         uses: actions/checkout@main
@@ -245,7 +245,7 @@ jobs:
         shell: bash
         run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
       - run: npm ci
-      - name: Check if it can be deployed
+      - name: 🧾 Check if it can be deployed
         run: |
           npx pact-broker can-i-deploy --pacticipant berlin_clock_app \
             --version $(npx absolute-version) \

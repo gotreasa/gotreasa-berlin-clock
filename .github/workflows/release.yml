@@ -46,17 +46,17 @@ jobs:
         run: |
           npm ci
           touch .env
-      - name: Log in to Okteto Container Registry
+      - name: 🔐 Log in to Okteto Container Registry
         uses: docker/login-action@master
         with:
           registry: ${{ env.OKTETO_REGISTRY }}
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.OKTETO_TOKEN }}
 
-      - name: Pull the container image for testing
+      - name: ⏬ Pull the container image for testing
         run: docker pull ${{ env.OKTETO_DEV_IMAGE_TAG }}
 
-      - name: Install Inspec
+      - name: 💿 Install Inspec
         run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
       - name: Initialise Git user
         run: |
@@ -74,12 +74,12 @@ jobs:
             -o json=/tmp/syft/sbom.json \
             -o table=/tmp/syft/sbom.table.txt \
             -o table
-      - name: Run release
+      - name: 🎬 Run release
         env:
           TYPE_ARG: ${{ fromJSON('{"auto":"", "patch":"--patch", "minor":"--minor", "major":"--major"}')[github.event.inputs.type] }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run release -- --ci --verbose $TYPE_ARG
-      - name: Re-tag the docker image
+      - name: 🔖 Re-tag the docker image
         run: |
           export NEW_VERSION=$(node -p "require('./package.json').version")
           docker tag ${{ env.OKTETO_DEV_IMAGE_TAG }} registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock-gotreasa-berlin-clock:${NEW_VERSION}
@@ -107,7 +107,7 @@ jobs:
           npm run publish:pact
           export CI=true
           npm run test:api:provider
-      - name: Check if it can be deployed
+      - name: 🧾 Check if it can be deployed
         run: |
           npx pact-broker can-i-deploy --pacticipant berlin_clock_app \
             --version $(npx absolute-version) \
