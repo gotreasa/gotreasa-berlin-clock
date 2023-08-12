@@ -9,6 +9,9 @@ env:
   OKTETO_TOKEN: ${{ secrets.OKTETO_TOKEN }}
   OKTETO_REGISTRY: registry.cloud.okteto.net
   OKTETO_DEV_IMAGE_TAG: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock-gotreasa-berlin-clock:build
+  CLAIR_DB: arminc/clair-db:latest
+  CLAIR_SCAN: arminc/clair-local-scan
+  CLAIR_VERSION: v12
 
 on:
   push:
@@ -466,6 +469,44 @@ jobs:
         if: always()
         with:
           sarif_file: 'trivy-results.sarif'
+
+  check_container_security_with_clair:
+    runs-on: ubuntu-latest
+    needs: [build_image]
+    steps:
+      - name: 🔐 Log in to Okteto Container Registry
+        uses: docker/login-action@master
+        with:
+          registry: ${{ env.OKTETO_REGISTRY }}
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.OKTETO_TOKEN }}
+
+      - name: ⏬ Pull the container image for testing
+        run: docker pull ${{ env.OKTETO_DEV_IMAGE_TAG }}
+
+      - name: 🚓 Check - Image scan by Clair
+        run: |
+          mkdir ./report
+          echo "🔌 Download the latest clair-scanner version"
+          wget --no-verbose https://github.com/arminc/clair-scanner/releases/download/${{ env.CLAIR_VERSION }}/clair-scanner_linux_amd64
+          echo "📀 Install clair-scanner"
+          mv ./clair-scanner_linux_amd64 ./clair-scanner
+          chmod +x ./clair-scanner
+          echo "👉 Run ${{ env.CLAIR_DB }}"
+          docker run --rm -d --name clair-db ${{ env.CLAIR_DB }}
+          echo "👉 Run ${{ env.CLAIR_SCAN }}"
+          docker run --rm -p 6060:6060 --link clair-db:postgres -d --name clair ${{ env.CLAIR_SCAN }}
+          echo "ℹ️ getting MY_IP"
+          MY_IP=$(ifconfig eth0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
+          sleep 10
+          echo "ℹ️ getting CLAIR_IP"
+          CLAIR_IP=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' clair)
+          echo "👉 run clair-scanner on $MY_IP pointing http://$CLAIR_IP:6060"
+          ./clair-scanner --ip $MY_IP --clair http://$CLAIR_IP:6060 -t High --reportAll=false ${{ env.OKTETO_DEV_IMAGE_TAG }} | tee ./report/clair-image-scan-report.txt
+          echo "🧹 clean up"
+          docker stop clair
+          docker stop clair-db
+          docker image rm ${{ env.CLAIR_DB }}
 
   deploy_image:
     runs-on: ubuntu-latest
