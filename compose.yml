@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  gotreasa-berlin-clock-dev:
-    container_name: gotreasa-berlin-clock-dev
+  gotreasa-berlin-clock:
+    container_name: gotreasa-berlin-clock
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -22,7 +22,7 @@ services:
       start_period: 10s
   goss:
     image: aelsabbahy/goss
-    container_name: goss-dev
+    container_name: goss
     volumes:
       - goss:/goss
     command: ['tail', '-f', '/dev/null']

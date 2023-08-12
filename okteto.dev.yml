@@ -1,5 +1,5 @@
-name: gotreasa-berlin-clock-dev
-namespace: gotreasa-berlin-clock-dev
+name: gotreasa-berlin-clock
+namespace: gotreasa-berlin-clock
 
 # The build section defines how to build the images of your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#build
@@ -9,7 +9,7 @@ build:
   #  - OKTETO_BUILD_GOTREASA_BERLIN_CLOCK_REPOSITORY: image repo
   #  - OKTETO_BUILD_GOTREASA_BERLIN_CLOCK_IMAGE: image name
   #  - OKTETO_BUILD_GOTREASA_BERLIN_CLOCK_SHA: image tag sha256
-  gotreasa-berlin-clock-dev:
+  gotreasa-berlin-clock:
     context: .
     dockerfile: Dockerfile
 
@@ -26,7 +26,7 @@ deploy:
 # The dev section defines how to activate a development container
 # More info: https://www.okteto.com/docs/reference/manifest/#dev
 dev:
-  gotreasa-berlin-clock-dev:
+  gotreasa-berlin-clock:
     image: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock-gotreasa-berlin-clock:build
     imagePullPolicy: Always
     command: npm ci --omit=dev --ignore-scripts && npm run start:app
@@ -35,7 +35,7 @@ dev:
       - 9229:9229
       - 9080:9080
     services:
-      - name: gotreasa-berlin-clock-dev-goss
+      - name: gotreasa-berlin-clock-goss
         image: aelsabbahy/goss
         environment:
           - NODE_ENV=production
