@@ -23,6 +23,15 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      - name: Check ref
+        run: echo 'The ref is ${{ github.ref }}'
+      - name: Wait for pipeline checks to succeed
+        uses: lewagon/wait-on-check-action@v1.3.1
+        with:
+          ref: ${{ github.ref }}
+          running-workflow-name: 'Pipeline'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
       - name: Check out the repo
         uses: actions/checkout@main
         with:
