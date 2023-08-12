@@ -32,6 +32,7 @@ jobs:
           ref: ${{ github.sha }}
           running-workflow-name: 'Release a new version'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
       - name: Check out the repo
         uses: actions/checkout@main
         with:
@@ -100,7 +101,7 @@ jobs:
         run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
       - run: |
           npm ci
-          echo "The release version is $(npx absolute-version)?"
+          echo "The release version is $(npx absolute-version --tagGlob '[0-9]*')?"
           npm run test:api:consumer
           npm run publish:pact
           export CI=true

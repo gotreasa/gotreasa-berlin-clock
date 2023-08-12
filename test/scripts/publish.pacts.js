@@ -9,7 +9,9 @@ const options = {
   pactFilesOrDirs: [path.resolve(__dirname, '../../pact/pacts')],
   pactBroker: 'https://gotreasa.pactflow.io/',
   pactBrokerToken: process.env.PACT_BROKER_TOKEN,
-  consumerVersion: versionFromGitTag(),
+  consumerVersion: versionFromGitTag({
+    tagGlob: '[0-9]*',
+  }),
   branch: branchName(),
 };
 
