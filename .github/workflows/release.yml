@@ -69,3 +69,8 @@ jobs:
           TYPE_ARG: ${{ fromJSON('{"auto":"", "patch":"--patch", "minor":"--minor", "major":"--major"}')[github.event.inputs.type] }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run release -- --ci --verbose $TYPE_ARG
+      - name: Re-tag the docker image
+        run: |
+          export NEW_VERSION=$(node -p "require('./package.json').version")
+          docker tag ${{ env.OKTETO_DEV_IMAGE_TAG }} registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock-gotreasa-berlin-clock:${NEW_VERSION}
+          docker push registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock-gotreasa-berlin-clock:${NEW_VERSION}
