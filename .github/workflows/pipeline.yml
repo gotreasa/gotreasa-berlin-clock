@@ -230,13 +230,10 @@ jobs:
           ./test/scripts/generate_postman.sh
           npx newman run pact/postman/collections/postman_collection.json -r cli,json --env-var 'url=http://localhost:9080'
 
-  can-i-deploy:
+  can_i_deploy:
     runs-on: ubuntu-latest
     needs: [pact_test]
     steps:
-      - uses: warchant/setup-sonar-scanner@master
-      - name: Install Inspec
-        run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
       - name: 📂 Checkout the code
         uses: actions/checkout@main
       - uses: actions/setup-node@main
@@ -514,7 +511,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       [
-        can-i-deploy,
+        can_i_deploy,
         check_container_efficiency,
         check_container_runs_correctly,
         check_container_security_with_clair,
