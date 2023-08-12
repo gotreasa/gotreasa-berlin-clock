@@ -432,6 +432,7 @@ jobs:
 
       - name: 🕵️‍♂️ Scan image
         uses: anchore/scan-action@v3
+        id: scan
         with:
           image: ${{ env.OKTETO_DEV_IMAGE_TAG }}
           severity-cutoff: high
@@ -472,7 +473,7 @@ jobs:
 
   check_container_security_with_clair:
     runs-on: ubuntu-latest
-    needs: [build_image]
+    # needs: [build_image]
     steps:
       - name: 🔐 Log in to Okteto Container Registry
         uses: docker/login-action@master
@@ -506,6 +507,8 @@ jobs:
           echo "🧹 clean up"
           docker stop clair
           docker stop clair-db
+          docker ps -a 
+          docker images
           docker image rm ${{ env.CLAIR_DB }}
 
   deploy_image:
@@ -513,12 +516,13 @@ jobs:
     needs:
       [
         can-i-deploy,
-        check_container_structure,
-        check_container_runs_correctly,
         check_container_efficiency,
+        check_container_runs_correctly,
+        check_container_security_with_clair,
         check_container_security_with_snyk,
         check_container_security_with_trivy,
         check_container_software_list,
+        check_container_structure,
       ]
     steps:
       - name: 📂 Checkout the code
