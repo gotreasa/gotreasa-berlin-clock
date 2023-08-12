@@ -507,8 +507,7 @@ jobs:
           echo "🧹 clean up"
           docker stop clair
           docker stop clair-db
-          docker ps -a 
-          docker images
+          sleep 5
           docker image rm ${{ env.CLAIR_DB }}
 
   deploy_image:
