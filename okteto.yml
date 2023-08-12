@@ -1,5 +1,4 @@
 name: gotreasa-berlin-clock
-namespace: gotreasa-berlin-clock
 
 # The build section defines how to build the images of your development environment
 # More info: https://www.okteto.com/docs/reference/manifest/#build
