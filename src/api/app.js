@@ -21,14 +21,17 @@ const openApiSpecification = require('../../openapi.json');
 const COOKIES_SECRET = crypto.randomBytes(32).toString('hex');
 const getTime = require('./Time');
 
-const csrfProtect = csrf({ cookie: true });
+const csrfProtect = csrf({ cookie: true, httpOnly: true, secure: true });
 const app = express();
 app.use(helmet());
-// app.use(cors());
+
+const corsOptions = {
+  origin: ['localhost', /\.okteto\.net$/], // Compliant
+};
 app.use(cookieParser(COOKIES_SECRET));
 app.set('trust proxy', 1);
 
-app.use('/health', limiter, cors(), csrfProtect, (_, response) => {
+app.use('/health', limiter, cors(corsOptions), csrfProtect, (_, response) => {
   exec('/usr/bin/test -f "/goss/goss" && /goss/goss validate', (error) => {
     console.log('Health check output', error);
 
@@ -43,12 +46,17 @@ app.use(
   swaggerUi.setup(openApiSpecification),
 );
 
-app.get('/api/v1/time/:time', cors(), csrfProtect, (req, response) => {
-  try {
-    return response.status(200).json(getTime(req.params.time));
-  } catch (error) {
-    return response.status(400).json({ message: error.message });
-  }
-});
+app.get(
+  '/api/v1/time/:time',
+  cors(corsOptions),
+  csrfProtect,
+  (req, response) => {
+    try {
+      return response.status(200).json(getTime(req.params.time));
+    } catch (error) {
+      return response.status(400).json({ message: error.message });
+    }
+  },
+);
 
 module.exports = app;
