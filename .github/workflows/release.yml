@@ -24,11 +24,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check ref
-        run: echo 'The ref is ${{ github.ref }}'
+        run: echo 'The ref is ${{ github.sha }}'
       - name: Wait for pipeline checks to succeed
         uses: lewagon/wait-on-check-action@v1.3.1
         with:
-          ref: ${{ github.ref }}
+          ref: ${{ github.sha }}
           running-workflow-name: 'Pipeline'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
