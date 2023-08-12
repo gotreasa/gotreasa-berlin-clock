@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.2.0](https://github.com/gotreasa/gotreasa-berlin-clock/compare/0.1.1...0.2.0) (2023-08-12)
+
+### Features
+
+- enable csrf and cors ([0e1b70d](https://github.com/gotreasa/gotreasa-berlin-clock/commit/0e1b70dfe75881dde0c2ca9fc2d053fac53dd6b7))
+- enable rate limiting for the health endpoint ([625f92a](https://github.com/gotreasa/gotreasa-berlin-clock/commit/625f92add85ed422b46a1b65b3f192301d92c704))
+
+### Bug Fixes
+
+- add cors options ([5f8cb1f](https://github.com/gotreasa/gotreasa-berlin-clock/commit/5f8cb1f3b115566d58af2bca75f3e968371374b9))
+- add the missing checkout for running the dastardly report ([ac83c74](https://github.com/gotreasa/gotreasa-berlin-clock/commit/ac83c7482fee9eb1d4f0af65a7bdd14c79f2a5d7))
+- add the missing checout for running the dastardly report ([67f5afc](https://github.com/gotreasa/gotreasa-berlin-clock/commit/67f5afcaf2fcc9a04796ad6549334f493bf811b5))
+- remove run infront of the npm ci command ([0a7a17c](https://github.com/gotreasa/gotreasa-berlin-clock/commit/0a7a17cb26519aa8febe3bc411f17907af21ef2b))
+- remove the cors integration on the api-docs endpoint ([298e4ae](https://github.com/gotreasa/gotreasa-berlin-clock/commit/298e4ae342d1b31e0343368d06e86ec637c512e5))
+- simplifying the secure cookie configuration ([24af311](https://github.com/gotreasa/gotreasa-berlin-clock/commit/24af3110472496ec38f35c4159c3d46004232922))
+- sort out missing timestamp.json ([116b533](https://github.com/gotreasa/gotreasa-berlin-clock/commit/116b533cd60e2458414c89b7f0832293faf84435))
+- update the ESLint output to be in JSON format ([828772d](https://github.com/gotreasa/gotreasa-berlin-clock/commit/828772d81bec327a820358cdfcf1d9c71671dc2c))
+- update the snyk testing to work correctly with container and publishing ([1f81c5e](https://github.com/gotreasa/gotreasa-berlin-clock/commit/1f81c5eb31d439a766a51581821d66df6198d46d))
+
+### Reverts
+
+- go to one proxy level ([dc059a1](https://github.com/gotreasa/gotreasa-berlin-clock/commit/dc059a12ff4c774da54873584781f60fe8ea6ade))
+- moving back to the api-docs to do the DAST testing ([812c63c](https://github.com/gotreasa/gotreasa-berlin-clock/commit/812c63c3123e6df449523df303d89fce709e66cf))
+- remove redundant upload of results from the Snyk monitor ([35ec369](https://github.com/gotreasa/gotreasa-berlin-clock/commit/35ec3691a974c48dfb8d45adb54e16a57bc547e6))
+- remove the code depending on the timestamp.json ([916e632](https://github.com/gotreasa/gotreasa-berlin-clock/commit/916e63289409ebe0996f24e57ff1ccda753d21f6))
+- rollback all of the AWS code ([c9bd595](https://github.com/gotreasa/gotreasa-berlin-clock/commit/c9bd595f4086e08c4639c191b9701000eea30f2f))
+- switch grype back to use sarif for the output ([4a3b3af](https://github.com/gotreasa/gotreasa-berlin-clock/commit/4a3b3aff73bd77ea95ccd97bfe5c1801618502f0))
+
 ## [0.1.1](https://github.com/gotreasa/gotreasa-berlin-clock/compare/0.1.0...0.1.1) (2023-08-09)
 
 ## 0.1.0 (2023-08-08)
