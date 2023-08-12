@@ -14,6 +14,7 @@ on:
 
 env:
   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+  APP_HOST: ${{ vars.APP_HOST }}
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
   OKTETO_REGISTRY: registry.cloud.okteto.net
@@ -103,6 +104,8 @@ jobs:
       - run: |
           npm ci
           echo "The release version is $(npx absolute-version-from-git-tag --tagGlob '[0-9]*')?"
+          echo -e "The value of APP_HOST using a variable ${APP_HOST}"
+          echo "The value of APP_HOST using the environment ${{ env.APP_HOST }}"
           touch .env
           npm run test:api:consumer
           npm run publish:pact
@@ -159,8 +162,8 @@ jobs:
           --broker-base-url https://gotreasa.pactflow.io \
           --broker-token $PACT_BROKER_TOKEN \
           --pacticipant berlin_clock_app \
-          --version $(git rev-parse --short HEAD)-$(git branch --show-current)+$(git rev-parse --short HEAD) \
-          --environment test
+          --version $(npx absolute-version --tagGlob '[0-9]*') \
+          --environment production
           echo "🚀 Marked $(git rev-parse --short HEAD)-$(git branch --show-current)+$(git rev-parse --short HEAD) as deployed"
 
   smoke_test:
