@@ -1,0 +1,158 @@
+name: Deploy
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        description: Choose environment type
+        type: string
+        default: test
+
+env:
+  PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+  APP_HOST: ${{ vars.APP_HOST }}
+  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+  OKTETO_REGISTRY: registry.cloud.okteto.net
+  OKTETO_BASE_IMAGE: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock-gotreasa-berlin-clock
+  OKTETO_DEV_IMAGE_TAG: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock-gotreasa-berlin-clock:build
+
+jobs:
+  can_i_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📂 Checkout the code
+        uses: actions/checkout@main
+      - uses: actions/setup-node@main
+        with:
+          node-version: 18.17
+          cache: 'npm'
+      - name: 🗂️ Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+      - run: |
+          npm ci
+          echo "The release version is $(npx absolute-version-from-git-tag --tagGlob '[0-9]*')?"
+          echo -e "The value of APP_HOST using a variable ${APP_HOST}"
+          echo "The value of APP_HOST using the environment ${{ env.APP_HOST }}"
+          touch .env
+          npm run test:api:consumer
+          npm run publish:pact
+          export CI=true
+          npm run test:api:provider
+      - name: 🧾 Check if it can be deployed
+        run: |
+          npx pact-broker can-i-deploy --pacticipant berlin_clock_app \
+            --version $(npx absolute-version --tagGlob '[0-9]*') \
+            --participant berlin_clock_client \
+            --version $(git rev-parse --short HEAD)-$(git branch \
+            --show-current)+$(git rev-parse --short HEAD) \
+            --broker-base-url https://gotreasa.pactflow.io \
+            --broker-token ${{ secrets.PACT_BROKER_TOKEN }} \
+            --to-environment ${{ github.event.inputs.type }}
+          echo "🚂 The Production environment can be deployed"
+
+  deploy_image:
+    runs-on: ubuntu-latest
+    needs: [can_i_deploy]
+    steps:
+      - name: 📂 Checkout the code
+        uses: actions/checkout@main
+      - uses: actions/setup-node@main
+        with:
+          node-version: 18.17
+          cache: 'npm'
+      - name: 🗂️ Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+      - run: npm ci
+
+      - name: 🔐 Log in to Okteto Container Registry
+        uses: docker/login-action@master
+        with:
+          registry: ${{ env.OKTETO_REGISTRY }}
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.OKTETO_TOKEN }}
+
+      - name: ⏬ Pull latest image
+        run: docker pull ${{ env.OKTETO_DEV_IMAGE_TAG }}
+
+      - name: 💿 Install okteto CLI
+        run: curl https://get.okteto.com -sSfL | sh
+
+      - name: Setup the Okteto context
+        run: okteto context use --token ${{ secrets.OKTETO_TOKEN }}
+
+      - name: Deploy the containers using Okteto
+        run: |
+          okteto pipeline deploy --wait
+          npx pact-broker record-deployment \
+          --broker-base-url https://gotreasa.pactflow.io \
+          --broker-token $PACT_BROKER_TOKEN \
+          --pacticipant berlin_clock_app \
+          --version $(npx absolute-version --tagGlob '[0-9]*') \
+          --environment ${{ github.event.inputs.type }}
+          echo "🚀 Marked $(git rev-parse --short HEAD)-$(git branch --show-current)+$(git rev-parse --short HEAD) as deployed"
+
+  smoke_test:
+    runs-on: ubuntu-latest
+    needs: [deploy_image]
+    steps:
+      - name: 📂 Checkout the code
+        uses: actions/checkout@main
+      - uses: actions/setup-node@main
+        with:
+          node-version: 18.17
+          cache: 'npm'
+      - name: 🗂️ Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+      - run: npm ci
+      - run: touch .env
+      - name: Smoke test using pact tests
+        run: npm run test:api:consumer && export SMOKE_TEST=true && npm run test:api:provider -- --collectCoverage=false
+      - run: |
+          ./test/scripts/generate_postman.sh
+          npx newman run pact/postman/collections/postman_collection.json -r cli,json --env-var 'url=${{ env.APP_HOST }}'
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure() # run this step even if previous step failed
+        with:
+          name: Pact Tests # Name of the check run which will be created
+          path: reports/jest-junit.xml* # Path to test results
+          reporter: jest-junit # Format of test results
+      - name: Publish Test Report
+        if: always() # Forces this step to always run
+        uses: mikepenz/action-junit-report@v3
+        with:
+          report_paths: 'reports/jest-junit.xml*'
+          require_tests: true
+          check_name: Pact Results
+
+  dast_scan:
+    runs-on: ubuntu-latest
+    needs: [deploy_image]
+    steps:
+      - uses: actions/checkout@main
+      - name: Run Dastardly Action Step
+        continue-on-error: true # This allows subsequent steps to run even if this step fails
+        uses: PortSwigger/dastardly-github-action@main
+        with:
+          target-url: ${{ env.APP_HOST }}/api-docs/
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure() # run this step even if previous step failed
+        with:
+          name: Dastardly Tests # Name of the check run which will be created
+          path: '**/dastardly-report.xml' # Path to test results
+          reporter: jest-junit # Format of test results
+      - name: Publish Test Report
+        if: always() # Forces this step to always run
+        uses: mikepenz/action-junit-report@v3
+        with:
+          report_paths: '**/dastardly-report.xml' # You need to update this path if you pass in a different output filename to the Dastardly action
+          require_tests: true
+          check_name: DAST Scan Results
