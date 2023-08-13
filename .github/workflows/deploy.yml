@@ -6,7 +6,6 @@ on:
         required: true
         description: Choose environment type
         type: string
-        default: test
 
 env:
   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
@@ -50,7 +49,7 @@ jobs:
             --show-current)+$(git rev-parse --short HEAD) \
             --broker-base-url https://gotreasa.pactflow.io \
             --broker-token ${{ secrets.PACT_BROKER_TOKEN }} \
-            --to-environment ${{ github.event.inputs.type }}
+            --to-environment ${{ github.event.inputs.environment }}
           echo "🚂 The Production environment can be deployed"
 
   deploy_image:
@@ -93,7 +92,7 @@ jobs:
           --broker-token $PACT_BROKER_TOKEN \
           --pacticipant berlin_clock_app \
           --version $(npx absolute-version --tagGlob '[0-9]*') \
-          --environment ${{ github.event.inputs.type }}
+          --environment ${{ github.event.inputs.environment }}
           echo "🚀 Marked $(git rev-parse --short HEAD)-$(git branch --show-current)+$(git rev-parse --short HEAD) as deployed"
 
   smoke_test:
