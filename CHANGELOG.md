@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.6](https://github.com/gotreasa/gotreasa-berlin-clock/compare/0.2.5...0.2.6) (2023-08-12)
+
+### Reverts
+
+- move back from dev in the docker and okteto files ([781b11b](https://github.com/gotreasa/gotreasa-berlin-clock/commit/781b11bf0648538ce1b5cfc07520b869bb07afda))
+- remove the namespace ([f52a7c5](https://github.com/gotreasa/gotreasa-berlin-clock/commit/f52a7c5fc4c05e01ac73f717539e47beeda05363))
+- rename the okteto file again along with the workflows where they are used ([ce09c28](https://github.com/gotreasa/gotreasa-berlin-clock/commit/ce09c2861ac0611d8077884d7075943782c73cad))
+
 ## [0.2.5](https://github.com/gotreasa/gotreasa-berlin-clock/compare/0.2.4...0.2.5) (2023-08-12)
 
 ## [0.2.4](https://github.com/gotreasa/gotreasa-berlin-clock/compare/0.2.3...0.2.4) (2023-08-12)
