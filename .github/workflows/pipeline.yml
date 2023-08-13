@@ -494,6 +494,7 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     with:
       environment: test
+    secrets: inherit
 
   snyk_monitor:
     runs-on: ubuntu-latest
