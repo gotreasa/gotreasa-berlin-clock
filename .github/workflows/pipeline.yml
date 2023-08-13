@@ -498,7 +498,16 @@ jobs:
 
   snyk_monitor:
     runs-on: ubuntu-latest
-    needs: [deploy]
+    needs:
+      [
+        check_container_efficiency,
+        check_container_runs_correctly,
+        check_container_security_with_clair,
+        check_container_security_with_snyk,
+        check_container_security_with_trivy,
+        check_container_software_list,
+        check_container_structure,
+      ]
 
     steps:
       - uses: actions/checkout@main
