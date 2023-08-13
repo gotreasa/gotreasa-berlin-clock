@@ -28,13 +28,6 @@ jobs:
     steps:
       - name: Check ref
         run: echo 'The ref is ${{ github.sha }}'
-      - name: Wait for pipeline checks to succeed
-        uses: lewagon/wait-on-check-action@v1.3.1
-        with:
-          ref: ${{ github.sha }}
-          running-workflow-name: 'Release a new version'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
       - name: Check out the repo
         uses: actions/checkout@main
         with:
@@ -54,6 +47,14 @@ jobs:
           registry: ${{ env.OKTETO_REGISTRY }}
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.OKTETO_TOKEN }}
+      - name: Wait for pipeline checks to succeed
+        uses: lewagon/wait-on-check-action@v1.3.1
+        with:
+          ref: ${{ github.sha }}
+          running-workflow-name: 'Release a new version'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+          allowed-conclusions: success, skipped
 
       - name: ⏬ Pull the container image for testing
         run: docker pull ${{ env.OKTETO_DEV_IMAGE_TAG }}
