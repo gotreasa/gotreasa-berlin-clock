@@ -79,7 +79,7 @@ jobs:
             -o table
       - name: 🎬 Run release
         env:
-          TYPE_ARG: ${{ fromJSON('{"auto":"", "patch":"--patch", "minor":"--minor", "major":"--major"}')[github.event.inputs.type] }}
+          TYPE_ARG: ${{ fromJSON('{"auto":"", "patch":"--increment=patch", "minor":"--increment=minor", "major":"--increment=major"}')[github.event.inputs.type] }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run release -- --ci --verbose $TYPE_ARG
       - name: 🔖 Re-tag the docker image
