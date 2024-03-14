@@ -12,6 +12,7 @@ env:
   CLAIR_DB: arminc/clair-db:latest
   CLAIR_SCAN: arminc/clair-local-scan
   CLAIR_VERSION: v12
+  CHEF_LICENSE_KEY: ${{ secrets.CHEF_LICENSE_KEY }}
 
 on:
   push:
