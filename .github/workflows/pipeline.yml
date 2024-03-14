@@ -36,6 +36,9 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.actor }} != "dependabot[bot]"
     steps:
+      - name: 🪪 Check if it's Dependabot's PR
+        run: |
+          echo "The github actor is '${{ github.actor }}'"
       - uses: actions/checkout@main
         with:
           fetch-depth: 0
