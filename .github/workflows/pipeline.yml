@@ -69,7 +69,7 @@ jobs:
           --output-file eslint-results.sarif
         continue-on-error: true
       - name: Upload analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: eslint-results.sarif
           wait-for-processing: true
@@ -139,7 +139,7 @@ jobs:
           command: test
           args: --all-projects --sarif-file-output=snyk.sarif
       - name: Upload result to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: snyk.sarif
       - name: Test the code for security vulnerabilities
@@ -154,7 +154,7 @@ jobs:
           command: code
           args: test --sarif-file-output=snyk-code.sarif
       - name: Upload result to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: snyk-code.sarif
 
@@ -357,7 +357,7 @@ jobs:
           npm ci
           npx snyk container test ${{ env.DOCKER_IMAGE_TAG }} --file=Dockerfile --fail-on=upgradable --sarif-file-output=snyk.sarif
       - name: Upload result to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
           sarif_file: snyk.sarif
@@ -393,7 +393,7 @@ jobs:
           output-format: sarif
 
       - name: ⏫ Upload Anchore scan SARIF report
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
           sarif_file: ${{ steps.scan.outputs.sarif }}
@@ -419,7 +419,7 @@ jobs:
           output: 'trivy-results.sarif'
 
       - name: ⏫ Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
           sarif_file: 'trivy-results.sarif'
@@ -462,21 +462,21 @@ jobs:
           sleep 5
           docker image rm ${{ env.CLAIR_DB }}
 
-  deploy:
-    needs:
-      [
-        check_container_efficiency,
-        check_container_runs_correctly,
-        check_container_security_with_clair,
-        check_container_security_with_snyk,
-        check_container_security_with_trivy,
-        check_container_software_list,
-        check_container_structure,
-      ]
-    uses: ./.github/workflows/deploy.yml
-    with:
-      environment: test
-    secrets: inherit
+  # deploy:
+  #   needs:
+  #     [
+  #       check_container_efficiency,
+  #       check_container_runs_correctly,
+  #       check_container_security_with_clair,
+  #       check_container_security_with_snyk,
+  #       check_container_security_with_trivy,
+  #       check_container_software_list,
+  #       check_container_structure,
+  #     ]
+  #   uses: ./.github/workflows/deploy.yml
+  #   with:
+  #     environment: test
+  #   secrets: inherit
 
   snyk_monitor:
     runs-on: ubuntu-latest
