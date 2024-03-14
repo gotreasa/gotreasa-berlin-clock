@@ -1,0 +1,24 @@
+name: Auto Merge Dependabot PRs
+
+on:
+  pull_request_target:
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🪪 Check if it's Dependabot's PR
+        run: |
+          if [[ "${{ github.actor }}" != "dependabot[bot]" ]]; then
+            echo "Not a Dependabot PR, skipping auto-merge..."
+            exit 0
+          fi
+
+      - name: 🛒 Check out to get the configuration file .github/auto-merge.yml
+        uses: actions/checkout@v4
+
+      - name: 🤖 DependaBot AutoMerge
+        uses: ahmadnassri/action-dependabot-auto-merge@v2
+        with:
+          github-token: ${{ secrets.DEPENDABOT }}
+          command: merge
