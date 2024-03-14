@@ -35,6 +35,12 @@ jobs:
     name: Verify commits are linted
     runs-on: ubuntu-latest
     steps:
+      - name: 🪪 Check if it's Dependabot's PR
+        run: |
+          if [[ "${{ github.actor }}" == "dependabot[bot]" ]]; then
+            echo "A Dependabot PR, skipping commitlint check..."
+            exit 0
+          fi
       - uses: actions/checkout@main
         with:
           fetch-depth: 0
