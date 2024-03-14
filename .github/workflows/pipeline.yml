@@ -37,6 +37,7 @@ jobs:
     steps:
       - name: 🪪 Check if it's Dependabot's PR
         run: |
+          echo "The github actor is ${{ github.actor }}"
           if [[ "${{ github.actor }}" == "dependabot[bot]" ]]; then
             echo "A Dependabot PR, skipping commitlint check..."
             exit 0
