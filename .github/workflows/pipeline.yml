@@ -32,9 +32,9 @@ jobs:
           definition-file: openapi.json
 
   commitlint:
+    if: github.actor != 'dependabot[bot]'
     name: Verify commits are linted
     runs-on: ubuntu-latest
-    if: ${{ github.actor }} != "dependabot[bot]"
     steps:
       - name: 🪪 Check if it's Dependabot's PR
         run: |
