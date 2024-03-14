@@ -20,7 +20,18 @@ on:
     branches: [main]
 
 jobs:
+  not-dependabot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🪪 Check if it's Dependabot's PR
+        run: |
+          if [[ "${{ github.actor }}" == "dependabot[bot]" ]]; then
+            echo "This is a Dependabot PR, skipping checks..."
+            exit 0
+          fi
+
   test_swagger_editor_validator_remote:
+    needs: [not-dependabot]
     runs-on: ubuntu-latest
     name: Swagger Editor Validator Remote
 
@@ -32,6 +43,7 @@ jobs:
           definition-file: openapi.json
 
   commitlint:
+    needs: [not-dependabot]
     name: Verify commits are linted
     runs-on: ubuntu-latest
     steps:
@@ -41,6 +53,7 @@ jobs:
       - uses: wagoid/commitlint-github-action@master
 
   hadolint:
+    needs: [not-dependabot]
     name: Verify dockerfile is linted
     runs-on: ubuntu-latest
     steps:
@@ -50,6 +63,7 @@ jobs:
           dockerfile: Dockerfile
 
   eslint-verify:
+    needs: [not-dependabot]
     runs-on: ubuntu-latest
     steps:
       - name: 📂 Checkout the code
@@ -89,6 +103,7 @@ jobs:
         run: inspec exec test/container/unit/*.rb --chef-license accept-silent
 
   prettier-verify:
+    needs: [not-dependabot]
     runs-on: ubuntu-latest
     steps:
       - name: 📂 Checkout the code
@@ -106,6 +121,7 @@ jobs:
         run: npm run prettier:verify
 
   detect-secrets:
+    needs: [not-dependabot]
     runs-on: ubuntu-latest
     steps:
       - name: 📂 Checkout the code
