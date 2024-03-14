@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.0.0](https://github.com/gotreasa/gotreasa-berlin-clock/compare/0.2.8...1.0.0) (2023-08-14)
+
 ## [0.2.8](https://github.com/gotreasa/gotreasa-berlin-clock/compare/0.2.7...0.2.8) (2023-08-13)
 
 ## [0.2.7](https://github.com/gotreasa/gotreasa-berlin-clock/compare/0.2.6...0.2.7) (2023-08-13)

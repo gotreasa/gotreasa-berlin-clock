@@ -1,6 +1,6 @@
 {
   "name": "gotreasa-berlin-clock",
-  "version": "0.2.8",
+  "version": "1.0.0",
   "description": "Berlin Clock by Gearoid repository",
   "homepage": "https://github.com/gotreasa/gotreasa-berlin-clock#readme",
   "bugs": {
@@ -105,7 +105,7 @@
     "@types/swagger-ui-express": "^4.1.3",
     "absolute-version": "^1.0.2",
     "auto-changelog": "^2.4.0",
-    "axios": "^1.4.0",
+    "axios": "^1.6.0",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^8.2.0",
     "cross-env": "^7.0.3",
