@@ -138,7 +138,7 @@
     "rimraf": "^5.0.1",
     "snyk": "^1.1284.0",
     "sonarqube-scanner": "^3.3.0",
-    "sort-package-json": "^2.5.1",
+    "sort-package-json": "^2.8.0",
     "supertest": "^6.3.3",
     "swagger-cli": "^4.0.4",
     "swagger-mock-validator": "^10.1.4",
