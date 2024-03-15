@@ -80,7 +80,7 @@
     "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.7.1",
+    "@commitlint/cli": "^19.2.0",
     "@commitlint/config-conventional": "^17.7.0",
     "@microsoft/eslint-formatter-sarif": "^3.0.0",
     "@pact-foundation/pact": "^12.1.0",
