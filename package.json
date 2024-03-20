@@ -100,7 +100,7 @@
     "@types/newman": "^5.3.6",
     "@types/nodemon": "^1.19.6",
     "@types/prettier": "^3.0.0",
-    "@types/rimraf": "^3.0.2",
+    "@types/rimraf": "^4.0.5",
     "@types/supertest": "^6.0.2",
     "@types/swagger-ui-express": "^4.1.6",
     "absolute-version": "^1.0.2",
