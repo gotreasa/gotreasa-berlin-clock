@@ -141,7 +141,7 @@
     "sort-package-json": "^2.8.0",
     "supertest": "^6.3.4",
     "swagger-cli": "^4.0.4",
-    "swagger-mock-validator": "^10.1.4",
+    "swagger-mock-validator": "^11.0.0",
     "typesync": "^0.12.1"
   },
   "engines": {
