@@ -79,6 +79,7 @@ jobs:
           wait-for-processing: true
 
   inspec:
+    if: github.actor != 'dependabot[bot]'
     name: Unit test docker image
     needs: [hadolint]
     runs-on: ubuntu-latest
