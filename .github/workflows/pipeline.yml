@@ -128,6 +128,7 @@ jobs:
         run: npm run detect-secrets $(git ls-files)
 
   snyk_test:
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     needs: [eslint-verify, prettier-verify]
 
