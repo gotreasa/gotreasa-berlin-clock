@@ -1,5 +1,6 @@
 const { pactWith } = require('jest-pact');
 const axios = require('axios');
+const http = require('http');
 
 const OK = 200;
 const BAD_REQUEST = 400;
@@ -17,6 +18,7 @@ pactWith(
       beforeAll(() => {
         instance = axios.create({
           baseURL: provider.mockService.baseUrl,
+          httpAgent: new http.Agent({ keepAlive: false }),
         });
       });
 
