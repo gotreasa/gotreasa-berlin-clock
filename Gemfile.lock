@@ -30,6 +30,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  arm64-darwin-23
 
 DEPENDENCIES
   bundler
@@ -40,4 +41,4 @@ DEPENDENCIES
   syntax_tree-rbs
 
 BUNDLED WITH
-   2.4.14
+   2.5.6

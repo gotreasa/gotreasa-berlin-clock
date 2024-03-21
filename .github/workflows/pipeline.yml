@@ -60,7 +60,7 @@ jobs:
         uses: actions/checkout@main
       - uses: actions/setup-node@main
         with:
-          node-version: 18.17
+          node-version: 20.11
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir
@@ -101,7 +101,7 @@ jobs:
         uses: actions/checkout@main
       - uses: actions/setup-node@main
         with:
-          node-version: 18.17
+          node-version: 20.11
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir
@@ -118,7 +118,7 @@ jobs:
         uses: actions/checkout@main
       - uses: actions/setup-node@main
         with:
-          node-version: 18.17
+          node-version: 20.11
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir
@@ -184,7 +184,7 @@ jobs:
         uses: actions/checkout@main
       - uses: actions/setup-node@main
         with:
-          node-version: 18.17
+          node-version: 20.11
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir
@@ -223,7 +223,7 @@ jobs:
         uses: actions/checkout@main
       - uses: actions/setup-node@main
         with:
-          node-version: 18.17
+          node-version: 20.11
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir
@@ -348,7 +348,7 @@ jobs:
         run: docker pull ${{ env.DOCKER_IMAGE_TAG }}
       - uses: actions/setup-node@main
         with:
-          node-version: 18.17
+          node-version: 20.11
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir

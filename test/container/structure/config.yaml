@@ -13,11 +13,11 @@ commandTests:
     args: ['node']
     exitCode: 0
     expectedOutput: ['/usr/local/bin/node']
-  - name: '🔎  node is version 18'
+  - name: '🔎  node is version 20'
     command: 'node'
     args: ['--version']
     exitCode: 0
-    expectedOutput: ['v18.']
+    expectedOutput: ['v20.']
 
 fileContentTests:
   - name: '📦 Package JSON'
