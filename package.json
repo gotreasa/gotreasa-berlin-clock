@@ -130,7 +130,7 @@
     "newman": "^6.1.2",
     "nodemon": "^3.1.0",
     "npm-check-updates": "^16.14.18",
-    "pmpact": "^0.4.2",
+    "pmpact": "^0.4.4",
     "prettier": "^3.2.5",
     "prettier-plugin-gherkin": "^2.2.1",
     "prettier-plugin-sh": "^0.14.0",
