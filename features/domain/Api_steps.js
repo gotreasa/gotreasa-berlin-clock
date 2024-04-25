@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 const child_process = require('child_process');
 const { Given, When, Then, And, Fusion } = require('jest-cucumber-fusion');
 const request = require('supertest');

@@ -201,7 +201,6 @@ pactWith(
             await instance.get(invalidTime);
             expect(true).toBe(false);
           } catch (error) {
-            // eslint-disable-next-line jest/no-conditional-expect
             expect(error.response.status).toBe(BAD_REQUEST);
           }
         });
@@ -211,7 +210,6 @@ pactWith(
             await instance.get(invalidTime);
             expect(true).toBe(false);
           } catch (error) {
-            // eslint-disable-next-line jest/no-conditional-expect
             expect(error.response.data.message).toBe(
               'Your input should be in the format of HH:MM:ss',
             );

@@ -1,8 +1,6 @@
 const path = require('path');
-// eslint-disable-next-line import/no-extraneous-dependencies
 const { versionFromGitTag } = require('absolute-version');
 const { Verifier } = require('@pact-foundation/pact');
-// eslint-disable-next-line import/no-extraneous-dependencies
 const branchName = require('current-git-branch');
 const server = require('../../app');
 
