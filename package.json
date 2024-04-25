@@ -139,7 +139,7 @@
     "snyk": "^1.1290.0",
     "sonarqube-scanner": "^3.4.0",
     "sort-package-json": "^2.10.0",
-    "supertest": "^6.3.4",
+    "supertest": "^7.0.0",
     "swagger-cli": "^4.0.4",
     "swagger-mock-validator": "^11.0.0",
     "typesync": "^0.12.1"
