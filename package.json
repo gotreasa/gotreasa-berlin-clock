@@ -12,6 +12,7 @@
   },
   "license": "Apache-2.0",
   "author": "Gearoid O'Treasaigh",
+  "type": "module",
   "main": "src/gotreasa-berlin-clock.js",
   "scripts": {
     "clean": "rimraf pact",

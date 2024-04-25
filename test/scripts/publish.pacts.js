@@ -1,12 +1,13 @@
-const path = require('path');
-const pact = require('@pact-foundation/pact-node');
-// eslint-disable-next-line import/no-extraneous-dependencies
-const { versionFromGitTag } = require('absolute-version');
-// eslint-disable-next-line import/no-extraneous-dependencies
-const branchName = require('current-git-branch');
+import pact from '@pact-foundation/pact-node';
+import { versionFromGitTag } from 'absolute-version';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+import branchName from 'current-git-branch';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const options = {
-  pactFilesOrDirs: [path.resolve(__dirname, '../../pact/pacts')],
+  pactFilesOrDirs: [resolve(__dirname, '../../pact/pacts')],
   pactBroker: 'https://gotreasa.pactflow.io/',
   pactBrokerToken: process.env.PACT_BROKER_TOKEN,
   consumerVersion: versionFromGitTag({
