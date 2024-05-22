@@ -106,7 +106,7 @@
     "@types/swagger-ui-express": "^4.1.6",
     "absolute-version": "^1.0.2",
     "auto-changelog": "^2.4.0",
-    "axios": "^1.7.1",
+    "axios": "^1.7.2",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",
