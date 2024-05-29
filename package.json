@@ -130,7 +130,7 @@
     "lint-staged": "^15.2.5",
     "mockdate": "^3.0.5",
     "newman": "^6.1.2",
-    "nodemon": "^3.1.1",
+    "nodemon": "^3.1.2",
     "npm-check-updates": "^16.14.20",
     "pmpact": "^0.4.4",
     "prettier": "^3.2.5",
