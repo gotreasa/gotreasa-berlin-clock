@@ -134,7 +134,7 @@
     "npm-check-updates": "^16.14.20",
     "pmpact": "^0.4.5",
     "prettier": "^3.3.2",
-    "prettier-plugin-gherkin": "^2.2.1",
+    "prettier-plugin-gherkin": "^2.3.0",
     "prettier-plugin-sh": "^0.14.0",
     "release-it": "^17.3.0",
     "rimraf": "^5.0.7",
