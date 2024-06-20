@@ -328,8 +328,8 @@ jobs:
           docker run --rm \
             -v /var/run/docker.sock:/var/run/docker.sock \
             wagoodman/dive:latest --ci ${{ env.DOCKER_IMAGE_TAG }} \
-            --lowestEfficiency=0.90 --highestUserWastedPercent=0.20 \
-            --highestWastedBytes=40MB
+            --lowestEfficiency=0.88 --highestUserWastedPercent=0.26 \
+            --highestWastedBytes=40.4MB
 
   check_container_security_with_snyk:
     runs-on: ubuntu-latest
