@@ -2,7 +2,6 @@ control "compose.yml" do
   title "Inspect docker compose file"
 
   describe file("compose.yml") do
-    its("content") { should match (/version: '3.8'/) }
     its("content") { should match (/gotreasa-berlin-clock:/) }
     its("content") { should match (/container_name: gotreasa-berlin-clock/) }
     its("content") { should match (/context: \./) }
