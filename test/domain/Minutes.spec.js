@@ -1,4 +1,4 @@
-const { getFourthRow, getThirdRow } = require('../../src/domain/Minutes');
+import { getFourthRow, getThirdRow } from '../../src/domain/Minutes';
 
 describe('Handle the minutes', () => {
   test('should return OOOOOOOOOOO on the third row when the input is 00:00:00', () => {

@@ -1,8 +1,8 @@
-const path = require('path');
-const { versionFromGitTag } = require('absolute-version');
-const { Verifier } = require('@pact-foundation/pact');
-const branchName = require('current-git-branch');
-const server = require('../../app');
+import path from 'path';
+import { versionFromGitTag } from 'absolute-version';
+import { Verifier } from '@pact-foundation/pact';
+import branchName from 'current-git-branch';
+import server from '../../app';
 
 let baseUrl;
 if (process.env.SMOKE_TEST) {

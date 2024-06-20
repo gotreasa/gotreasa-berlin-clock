@@ -1,4 +1,4 @@
-const { YELLOW_LIGHT, RED_LIGHT, LIGHT_OFF } = require('./constants');
+import { YELLOW_LIGHT, RED_LIGHT, LIGHT_OFF } from './constants.js';
 
 const getMinutes = (time) => parseInt(time.split(':')[1], 10);
 const getRedLights = (numberOfLitLights, lights) => {
@@ -14,7 +14,7 @@ const getRedLights = (numberOfLitLights, lights) => {
   return markedLights.join('');
 };
 
-const getThirdRow = (time) => {
+export const getThirdRow = (time) => {
   const numberOfLitLights = Math.floor(getMinutes(time) / 5);
 
   let lights =
@@ -26,7 +26,7 @@ const getThirdRow = (time) => {
   return lights;
 };
 
-const getFourthRow = (time) => {
+export const getFourthRow = (time) => {
   const minutes = getMinutes(time);
   const numberOfYellowLights = minutes % 5;
 
@@ -34,9 +34,4 @@ const getFourthRow = (time) => {
     YELLOW_LIGHT.repeat(numberOfYellowLights) +
     LIGHT_OFF.repeat(4 - numberOfYellowLights)
   );
-};
-
-module.exports = {
-  getThirdRow,
-  getFourthRow,
 };

@@ -1,4 +1,4 @@
-const app = require('./src/api/app');
+import app from './src/api/app.js';
 
 const port = process.env.SERVER_PORT;
 
@@ -10,4 +10,4 @@ const server = app.listen(port, () => {
   );
 });
 
-module.exports = server;
+export default server;

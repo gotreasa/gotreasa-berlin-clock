@@ -1,5 +1,5 @@
-const getTime = require('../../src/api/Time');
-const { LIGHT_OFF } = require('../../src/domain/constants');
+import { getTime } from '../../src/api/Time';
+import { LIGHT_OFF } from '../../src/domain/constants';
 
 describe('Retrieve the time', () => {
   test('should return O for the seconds when the seconds are even', () => {

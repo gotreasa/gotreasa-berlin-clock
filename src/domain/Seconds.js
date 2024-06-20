@@ -1,6 +1,6 @@
-const { YELLOW_LIGHT, LIGHT_OFF } = require('./constants');
+import { YELLOW_LIGHT, LIGHT_OFF } from './constants.js';
 
-const getSeconds = (time) => {
+export const getSeconds = (time) => {
   const seconds = parseInt(time.split(':')[2], 10);
 
   if (seconds % 2 === 1) {
@@ -9,4 +9,3 @@ const getSeconds = (time) => {
 
   return LIGHT_OFF;
 };
-module.exports = getSeconds;

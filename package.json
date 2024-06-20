@@ -81,6 +81,7 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.24.7",
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
@@ -88,6 +89,7 @@
     "@pact-foundation/pact-node": "^10.18.0",
     "@prettier/plugin-ruby": "^4.0.4",
     "@release-it/conventional-changelog": "^8.0.1",
+    "@types/babel__preset-env": "~7.9.7",
     "@types/cookie-parser": "^1.4.7",
     "@types/cors": "^2.8.17",
     "@types/csurf": "^1.11.5",
@@ -107,6 +109,7 @@
     "absolute-version": "^1.0.2",
     "auto-changelog": "^2.4.0",
     "axios": "^1.7.2",
+    "babel-jest": "^29.7.0",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",

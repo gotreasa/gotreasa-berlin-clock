@@ -1,6 +1,6 @@
-const { pactWith } = require('jest-pact');
-const axios = require('axios');
-const http = require('http');
+import { pactWith } from 'jest-pact';
+import axios from 'axios';
+import http from 'http';
 
 const OK = 200;
 const BAD_REQUEST = 400;

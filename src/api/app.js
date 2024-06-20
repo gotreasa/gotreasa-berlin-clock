@@ -1,11 +1,14 @@
-const { exec } = require('child_process');
-const crypto = require('crypto');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
-const csrf = require('csurf');
-const express = require('express');
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
+import { exec } from 'child_process';
+import crypto from 'crypto';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import csrf from 'csurf';
+import express from 'express';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import { readFileSync } from 'fs';
+import swaggerUi from 'swagger-ui-express';
+import { getTime } from './Time.js';
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -14,12 +17,9 @@ const limiter = rateLimit({
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
   // store: ... , // Use an external store for more precise rate limiting
 });
-
-const swaggerUi = require('swagger-ui-express');
-const openApiSpecification = require('../../openapi.json');
+const openApiSpecification = JSON.parse(readFileSync('openapi.json'));
 
 const COOKIES_SECRET = crypto.randomBytes(32).toString('hex');
-const getTime = require('./Time');
 
 const csrfProtect = csrf({ cookie: { secure: true } });
 const app = express();
@@ -59,4 +59,4 @@ app.get(
   },
 );
 
-module.exports = app;
+export default app;

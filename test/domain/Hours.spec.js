@@ -1,4 +1,4 @@
-const { getFirstRow, getSecondRow } = require('../../src/domain/Hours');
+import { getFirstRow, getSecondRow } from '../../src/domain/Hours';
 
 describe('Retrieving the hours', () => {
   test.each`

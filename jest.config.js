@@ -28,6 +28,9 @@ export default {
   resetMocks: true,
   resetModules: true,
   testEnvironment: 'node',
-  testMatch: [...defaults.testMatch, '**/*_steps.js'],
+  testMatch: [...defaults.testMatch, '**/*_steps.js', '**/*.spec.mjs'],
+  transform: {
+    '^.+\\.(js|jsx)$': 'babel-jest',
+  },
   watchPathIgnorePatterns: ['pact/logs/*', 'pact/pacts/*'],
 };

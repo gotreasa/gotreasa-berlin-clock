@@ -1,8 +1,8 @@
-const { RED_LIGHT, LIGHT_OFF } = require('./constants');
+import { RED_LIGHT, LIGHT_OFF } from './constants.js';
 
 const getHours = (time) => parseInt(time.split(':')[0], 10);
 
-const getFirstRow = (time) => {
+export const getFirstRow = (time) => {
   const hours = getHours(time);
   const numberOfRedLights = Math.floor(hours / 5);
 
@@ -12,7 +12,7 @@ const getFirstRow = (time) => {
   );
 };
 
-const getSecondRow = (time) => {
+export const getSecondRow = (time) => {
   const hours = getHours(time);
   const singleHoursModuloFive = hours % 5;
 
@@ -21,5 +21,3 @@ const getSecondRow = (time) => {
     LIGHT_OFF.repeat(4 - singleHoursModuloFive)
   );
 };
-
-module.exports = { getFirstRow, getSecondRow };

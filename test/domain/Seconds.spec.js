@@ -1,5 +1,5 @@
-const getSeconds = require('../../src/domain/Seconds');
-const { YELLOW_LIGHT, LIGHT_OFF } = require('../../src/domain/constants');
+import { getSeconds } from '../../src/domain/Seconds';
+import { YELLOW_LIGHT, LIGHT_OFF } from '../../src/domain/constants';
 
 describe('Retrieving the seconds', () => {
   test('should return O when an even value', () => {

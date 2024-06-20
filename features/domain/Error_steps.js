@@ -1,6 +1,6 @@
-const { Given, When, Then, And, Fusion } = require('jest-cucumber-fusion');
-const request = require('supertest');
-const app = require('../../src/api/app');
+import { Given, When, Then, And, Fusion } from 'jest-cucumber-fusion';
+import request from 'supertest';
+import app from '../../src/api/app';
 
 let endpoint;
 let response;
