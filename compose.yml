@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   gotreasa-berlin-clock:
     container_name: gotreasa-berlin-clock
