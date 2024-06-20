@@ -125,7 +125,7 @@ jobs:
           reporter: jest-junit # Format of test results
       - name: Publish Test Report
         if: always() # Forces this step to always run
-        uses: mikepenz/action-junit-report@v3
+        uses: mikepenz/action-junit-report@v4
         with:
           report_paths: 'reports/jest-junit.xml*'
           require_tests: true
@@ -150,7 +150,7 @@ jobs:
           reporter: jest-junit # Format of test results
       - name: Publish Test Report
         if: always() # Forces this step to always run
-        uses: mikepenz/action-junit-report@v3
+        uses: mikepenz/action-junit-report@v4
         with:
           report_paths: '**/dastardly-report.xml' # You need to update this path if you pass in a different output filename to the Dastardly action
           require_tests: true
