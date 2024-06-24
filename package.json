@@ -106,7 +106,7 @@
     "@types/rimraf": "^4.0.5",
     "@types/supertest": "^6.0.2",
     "@types/swagger-ui-express": "^4.1.6",
-    "absolute-version": "^1.0.2",
+    "absolute-version": "^2.0.0",
     "auto-changelog": "^2.4.0",
     "axios": "^1.7.2",
     "babel-jest": "^29.7.0",
