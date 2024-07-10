@@ -140,7 +140,7 @@
     "prettier-plugin-gherkin": "^2.4.0",
     "prettier-plugin-sh": "^0.14.0",
     "release-it": "^17.5.0",
-    "rimraf": "^5.0.8",
+    "rimraf": "^6.0.0",
     "snyk": "^1.1292.1",
     "sonarqube-scanner": "^4.0.1",
     "sort-package-json": "^2.10.0",
