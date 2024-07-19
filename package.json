@@ -24,7 +24,7 @@
     "lint:verify": "eslint .",
     "pre-push": "concurrently 'npm test' 'npm run test:security'",
     "precommit": "lint-staged --relative --verbose",
-    "prepare": "husky install",
+    "prepare": "husky",
     "prettier:fix": "prettier --write",
     "prettier:verify": "prettier --check \"*.{css,feature,js,json,rb,md,sh,yaml,yml}\"",
     "publish:pact": "env-cmd node test/scripts/publish.pacts.js",
