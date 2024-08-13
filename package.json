@@ -141,7 +141,7 @@
     "prettier-plugin-sh": "^0.14.0",
     "release-it": "^17.6.0",
     "rimraf": "^6.0.1",
-    "snyk": "^1.1292.3",
+    "snyk": "^1.1292.4",
     "sonarqube-scanner": "^4.2.0",
     "sort-package-json": "^2.10.0",
     "supertest": "^7.0.0",
