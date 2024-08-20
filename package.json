@@ -132,7 +132,7 @@
     "jest-pact": "^0.11.1",
     "lint-staged": "^15.2.9",
     "mockdate": "^3.0.5",
-    "newman": "^6.2.0",
+    "newman": "^6.2.1",
     "nodemon": "^3.1.4",
     "npm-check-updates": "^17.0.6",
     "pmpact": "^0.4.5",
