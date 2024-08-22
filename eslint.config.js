@@ -18,7 +18,7 @@ export default [
         myCustomGlobal: 'readonly',
       },
     },
-
+    ignores: [".husky/_/**"],
     plugins: {
       jestFormatting: jestFormatting,
       jest: jest,
