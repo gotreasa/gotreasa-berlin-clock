@@ -88,7 +88,7 @@
     "@pact-foundation/pact": "^13.1.2",
     "@pact-foundation/pact-node": "^10.18.0",
     "@prettier/plugin-ruby": "^4.0.4",
-    "@release-it/conventional-changelog": "^8.0.1",
+    "@release-it/conventional-changelog": "^8.0.2",
     "@types/babel__preset-env": "~7.9.7",
     "@types/cookie-parser": "^1.4.7",
     "@types/cors": "^2.8.17",
