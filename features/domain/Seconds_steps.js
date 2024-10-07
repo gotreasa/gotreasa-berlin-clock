@@ -4,16 +4,17 @@ import request from 'supertest';
 
 import app from '../../src/api/app';
 
-let endpoint;
+const endpoint = '/api/v1/time';
+let time;
 let response;
 const YELLOW_LIGHT = 'Y';
 const LIGHT_OFF = 'O';
 
-Given('the API endpoint /time', () => {
-  endpoint = '/api/v1/time';
+Given(/^a time of (.*)$/, (inputTime) => {
+  time = inputTime;
 });
 
-When(/^I request the time for (.*)$/, async (time) => {
+When('I get the berlin clock time', async () => {
   response = await request(app)
     .get(`${endpoint}/${time}`)
     .set({
@@ -46,7 +47,7 @@ Then('the status is BAD_REQUEST', () => {
   expect(response.status).toBe(400);
 });
 
-And('the message is Your input should be in the format of HH:MM:ss', () => {
+And("the message is 'Your input should be in the format of HH:MM:ss'", () => {
   expect(response.body.message).toBe(
     'Your input should be in the format of HH:MM:ss',
   );
