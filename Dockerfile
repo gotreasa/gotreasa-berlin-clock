@@ -1,4 +1,4 @@
-FROM node:20 AS BUILD
+FROM node:23 AS BUILD
 
 WORKDIR /usr/src/app
 
@@ -21,7 +21,7 @@ COPY test/container/integration/goss.yaml goss.yaml
 RUN sed -i "s/REPLACE_ME/$(date -u)/" app.js
 
 # Build final image using small base image.
-FROM node:20-alpine
+FROM node:23-alpine
 
 # Update any out of date packages
 RUN apk update && apk upgrade
