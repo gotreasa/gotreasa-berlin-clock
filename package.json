@@ -134,7 +134,7 @@
     "mockdate": "^3.0.5",
     "newman": "^6.2.1",
     "nodemon": "^3.1.7",
-    "npm-check-updates": "^17.1.4",
+    "npm-check-updates": "^17.1.6",
     "pmpact": "^0.4.6",
     "prettier": "^3.3.3",
     "prettier-plugin-gherkin": "^3.1.0",
