@@ -281,3 +281,6 @@ newman/
 
 ## Test reports
 reports/
+
+# stryker temp files
+.stryker-tmp

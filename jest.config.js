@@ -32,5 +32,5 @@ export default {
   transform: {
     '^.+\\.(js|jsx)$': 'babel-jest',
   },
-  watchPathIgnorePatterns: ['pact/logs/*', 'pact/pacts/*'],
+  watchPathIgnorePatterns: ['pact/logs/*', 'pact/pacts/*', '.stryker-tmp/*'],
 };
