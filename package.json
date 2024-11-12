@@ -150,7 +150,7 @@
     "supertest": "^7.0.0",
     "swagger-cli": "^4.0.4",
     "swagger-mock-validator": "^11.0.0",
-    "typesync": "^0.13.3"
+    "typesync": "^0.13.4"
   },
   "engines": {
     "node": "v20.11.1"
