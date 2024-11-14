@@ -5,10 +5,8 @@ const getRedLights = (numberOfLitLights, lights) => {
   const markedLights = lights.split('');
 
   const numberOfRedFifteenMinuteLights = Math.floor(numberOfLitLights / 3);
-  if (numberOfRedFifteenMinuteLights) {
-    for (let i = 0; i < numberOfRedFifteenMinuteLights; i += 1) {
-      markedLights[i * 3 + 2] = RED_LIGHT;
-    }
+  for (let i = 0; i < numberOfRedFifteenMinuteLights; i += 1) {
+    markedLights[i * 3 + 2] = RED_LIGHT;
   }
 
   return markedLights.join('');
