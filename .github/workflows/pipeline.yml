@@ -60,7 +60,7 @@ jobs:
         uses: actions/checkout@main
       - uses: actions/setup-node@main
         with:
-          node-version: 20.11
+          node-version: 22.11
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir
@@ -80,7 +80,6 @@ jobs:
           wait-for-processing: true
 
   inspec:
-    if: github.actor != 'dependabot[bot]'
     name: Unit test docker image
     needs: [hadolint]
     runs-on: ubuntu-latest
@@ -101,7 +100,7 @@ jobs:
         uses: actions/checkout@main
       - uses: actions/setup-node@main
         with:
-          node-version: 20.11
+          node-version: 22.11
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir
@@ -118,7 +117,7 @@ jobs:
         uses: actions/checkout@main
       - uses: actions/setup-node@main
         with:
-          node-version: 20.11
+          node-version: 22.11
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir
@@ -183,7 +182,7 @@ jobs:
         uses: actions/checkout@main
       - uses: actions/setup-node@main
         with:
-          node-version: 20.11
+          node-version: 22.11
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir
@@ -222,7 +221,7 @@ jobs:
         uses: actions/checkout@main
       - uses: actions/setup-node@main
         with:
-          node-version: 20.11
+          node-version: 22.11
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir
@@ -269,7 +268,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          push: github.actor != 'dependabot[bot]'
+          push: ${{github.actor != 'dependabot[bot]'}}
           tags: ${{ env.DOCKER_IMAGE_TAG }}
 
   check_container_structure:
@@ -352,7 +351,7 @@ jobs:
         run: docker pull ${{ env.DOCKER_IMAGE_TAG }}
       - uses: actions/setup-node@main
         with:
-          node-version: 20.11
+          node-version: 22.11
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir
