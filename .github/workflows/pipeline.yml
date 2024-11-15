@@ -420,6 +420,9 @@ jobs:
 
       - name: 🏃‍♂️ Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
+        env:
+          TRIVY_DB_REPOSITORY: public.ecr.aws/aquasecurity/trivy-db
+          TRIVY_JAVA_DB_REPOSITORY: public.ecr.aws/aquasecurity/trivy-java-db
         with:
           image-ref: ${{ env.DOCKER_IMAGE_TAG }}
           format: 'sarif'
