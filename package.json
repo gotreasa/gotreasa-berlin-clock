@@ -38,7 +38,7 @@
     "test:api": "rimraf pact/pacts/* && rimraf pact/postman/* && npm run test:api:consumer && npm run test:api:provider && ./test/scripts/generate_postman.sh && newman run pact/postman/collections/postman_collection.json -r cli,json --env-var 'url=http://localhost:9080'",
     "test:api:consumer": "jest test/**/*.consumer.pact.spec.js",
     "test:api:consumer:watch": "npm run test:api:consumer -- --watch",
-    "test:api:provider": "export SERVER_PORT=$(($RANDOM%(65535-3000+1)+3000)) && env-cmd jest test/**/*.provider.pact.spec.js --testTimeout 30000",
+    "test:api:provider": "export SERVER_PORT=$(( $RANDOM % (65535 - 3000 + 1) + 3000)) && env-cmd jest test/**/*.provider.pact.spec.js --testTimeout 30000",
     "test:api:provider:watch": "npm run test:api:provider -- --watch",
     "test:api:watch": "export SERVER_PORT=$(($RANDOM%(65535-3000+1)+3000)) && env-cmd jest test/**/*.pact.spec.js --testTimeout 30000 --watch",
     "test:bdd": "jest ./features",
