@@ -6,6 +6,7 @@ name: Pipeline
 env:
   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
   APP_HOST: ${{ vars.APP_HOST }}
+  DOCKER_IMAGE_NAME: gearoid9/gotreasa-berlin-clock
   DOCKER_IMAGE_TAG: gearoid9/gotreasa-berlin-clock:latest
   CLAIR_DB: arminc/clair-db:latest
   CLAIR_SCAN: arminc/clair-local-scan
@@ -243,6 +244,11 @@ jobs:
           npx newman run pact/postman/collections/postman_collection.json -r cli,json --env-var 'url=http://localhost:9080'
 
   build_image:
+    permissions:
+      id-token: write
+      packages: write
+      contents: read
+      attestations: write
     runs-on: ubuntu-latest
     needs: [pact_test, test_and_coverage, detect-secrets]
     steps:
@@ -265,6 +271,13 @@ jobs:
           file: ./Dockerfile
           push: ${{github.actor != 'dependabot[bot]'}}
           tags: ${{ env.DOCKER_IMAGE_TAG }}
+      - name: Attest
+        uses: actions/attest-build-provenance@v1
+        id: attest
+        with:
+          subject-name: ${{ env.DOCKER_IMAGE_NAME }}
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
 
   check_container_structure:
     if: github.actor != 'dependabot[bot]'

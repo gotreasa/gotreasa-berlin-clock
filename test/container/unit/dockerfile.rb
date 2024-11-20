@@ -20,7 +20,7 @@ control "Dockerfile" do
     its("content") { should match (/node:22-alpine/) }
     its("content") { should match (%r{WORKDIR /usr/src/app}) }
     its("content") do
-      should match (%r{COPY --from=BUILD /usr/src/app /usr/src/app})
+      should match (%r{COPY --from=build /usr/src/app /usr/src/app})
     end
     its("content") do
       should match (
