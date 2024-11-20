@@ -274,6 +274,7 @@ jobs:
           tags: ${{ env.DOCKER_IMAGE_TAG }}
       - run: echo ${{ steps.push.outputs.digest }}
       - name: Attest
+        if: github.actor != 'dependabot[bot]'
         uses: actions/attest-build-provenance@v1
         id: attest
         with:
