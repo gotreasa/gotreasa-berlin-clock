@@ -271,13 +271,13 @@ jobs:
           context: .
           file: ./Dockerfile
           push: ${{github.actor != 'dependabot[bot]'}}
-          tags: index.docker.io/${{ env.DOCKER_IMAGE_TAG }}
+          tags: ${{ env.DOCKER_IMAGE_TAG }}
       - run: echo ${{ steps.push.outputs.digest }}
       - name: Attest
         uses: actions/attest-build-provenance@v1
         id: attest
         with:
-          subject-name: index.docker.io/${{ env.DOCKER_IMAGE_NAME }}
+          subject-name: ${{ env.DOCKER_IMAGE_NAME }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
 
