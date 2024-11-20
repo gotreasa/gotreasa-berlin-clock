@@ -1,4 +1,4 @@
-FROM node:22 AS BUILD
+FROM node:22 AS build
 
 WORKDIR /usr/src/app
 
@@ -28,7 +28,7 @@ RUN apk update && apk upgrade
 
 WORKDIR /usr/src/app
 
-COPY --from=BUILD /usr/src/app /usr/src/app
+COPY --from=build /usr/src/app /usr/src/app
 
 # Set permissions for node app folder after copy.
 RUN chown -R node:root /usr/src/app/ && chmod -R 775 /usr/src/app/
