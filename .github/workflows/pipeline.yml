@@ -265,12 +265,14 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push Docker image
+        id: push
         uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
           push: ${{github.actor != 'dependabot[bot]'}}
           tags: index.docker.io/${{ env.DOCKER_IMAGE_TAG }}
+      - run: echo ${{ steps.push.outputs.digest }}
       - name: Attest
         uses: actions/attest-build-provenance@v1
         id: attest
@@ -278,7 +280,6 @@ jobs:
           subject-name: index.docker.io/${{ env.DOCKER_IMAGE_NAME }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
-      - run: echo ${{ steps.push.outputs.digest }}
 
   check_container_structure:
     if: github.actor != 'dependabot[bot]'
