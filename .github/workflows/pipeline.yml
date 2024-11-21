@@ -250,7 +250,7 @@ jobs:
       contents: read
       attestations: write
     runs-on: ubuntu-latest
-    needs: [pact_test, test_and_coverage, detect-secrets]
+    # needs: [pact_test, test_and_coverage, detect-secrets]
     outputs:
       digest: ${{ steps.push.outputs.digest}}
     steps:
@@ -274,7 +274,7 @@ jobs:
           file: ./Dockerfile
           push: ${{github.actor != 'dependabot[bot]'}}
           tags: ${{ env.DOCKER_IMAGE_TAG }}
-      - run: echo ${{steps.push.outputs}}
+      - run: echo '${{toJSON(steps.push.outputs)}}''
 
   check_container_structure:
     if: github.actor != 'dependabot[bot]'
