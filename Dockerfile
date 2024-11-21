@@ -8,17 +8,13 @@ RUN curl -sfL https://gobinaries.com/tj/node-prune | bash -s -- -b /usr/local/bi
 
 COPY package*.json ./
 
-# Locally we will run it using
-RUN npm ci --omit=dev --ignore-scripts
-
-# Prune the source code.
-RUN npm prune --omit=dev && /usr/local/bin/node-prune
+# Install the production packages and then prune the source code
+RUN npm ci --omit=dev --ignore-scripts && npm prune --omit=dev && /usr/local/bin/node-prune
 
 COPY app.js ./
 COPY openapi.json ./
 COPY src src
 COPY test/container/integration/goss.yaml goss.yaml
-RUN sed -i "s/REPLACE_ME/$(date -u)/" app.js
 
 # Build final image using small base image.
 FROM node:22-alpine

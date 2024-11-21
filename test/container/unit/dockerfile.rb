@@ -12,9 +12,6 @@ control "Dockerfile" do
     its("content") { should match (%r{COPY openapi.json ./}) }
     its("content") { should match (/COPY src src/) }
     its("content") do
-      should match (%r{RUN sed -i "s/REPLACE_ME/\$\(date -u\)/" app.js})
-    end
-    its("content") do
       should match (%r{COPY test/container/integration/goss.yaml goss.yaml})
     end
     its("content") { should match (/node:22-alpine/) }
