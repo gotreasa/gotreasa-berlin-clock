@@ -6,7 +6,7 @@ control "Dockerfile" do
     its("content") { should match (%r{COPY package\*.json ./}) }
     its("content") do
       should match (
-                     %r{/RUN npm ci --omit=dev --ignore-scripts/ && RUN npm prune --omit=dev && /usr/local/bin/node-prune}
+                     %r{/RUN npm ci --omit=dev --ignore-scripts/ && npm prune --omit=dev && /usr/local/bin/node-prune}
                    )
     end
     its("content") { should match (%r{COPY app.js ./}) }
