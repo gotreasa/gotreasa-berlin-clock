@@ -274,6 +274,7 @@ jobs:
           file: ./Dockerfile
           push: ${{github.actor != 'dependabot[bot]'}}
           tags: ${{ env.DOCKER_IMAGE_TAG }}
+      - run: echo ${{steps.push.outputs}}
 
   check_container_structure:
     if: github.actor != 'dependabot[bot]'
