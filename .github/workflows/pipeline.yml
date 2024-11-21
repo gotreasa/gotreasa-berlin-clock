@@ -274,7 +274,6 @@ jobs:
           file: ./Dockerfile
           push: ${{github.actor != 'dependabot[bot]'}}
           tags: ${{ env.DOCKER_IMAGE_TAG }}
-      - run: echo '${{toJSON(steps.push.outputs)}}''
 
   check_container_structure:
     if: github.actor != 'dependabot[bot]'
@@ -395,14 +394,14 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: ⏬ Pull the container image for testing
-        run: docker pull ${{ needs.build_image.outputs.digest }}
+        run: docker pull '${{ env.DOCKER_IMAGE_NAME }}@${{ needs.build_image.outputs.digest }}'
 
       - name: 🚓 Generate SBOM
         run: |
           echo "🔌 Install Anchore/Syft"
           curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
           echo "📁 catalogue the versions inside the container..."
-          syft ${{ needs.build_image.outputs.digest }} --scope all-layers \
+          syft '${{env.DOCKER_IMAGE_NAME}}@${{ needs.build_image.outputs.digest }}' --scope all-layers \
             -o spdx-json=/tmp/syft/sbom.spdx.json \
             -o table
 
