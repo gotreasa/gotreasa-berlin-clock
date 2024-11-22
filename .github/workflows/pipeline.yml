@@ -419,7 +419,7 @@ jobs:
         uses: anchore/scan-action@v5
         id: scan
         with:
-          image: ${{ env.DOCKER_IMAGE_TAG }}
+          image: '${{env.DOCKER_IMAGE_NAME}}@${{ needs.build_image.outputs.digest }}'
           severity-cutoff: high
           output-format: sarif
 
