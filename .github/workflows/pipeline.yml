@@ -379,7 +379,7 @@ jobs:
 
   check_container_software_list:
     permissions:
-      actions: write
+      actions: read
       id-token: write
       packages: write
       contents: write
@@ -410,7 +410,6 @@ jobs:
             -o table
 
       - name: Attest
-        if: github.actor != 'dependabot[bot]'
         uses: actions/attest-sbom@v1
         id: attest
         with:
@@ -432,6 +431,7 @@ jobs:
         if: always()
         with:
           sarif_file: ${{ steps.scan.outputs.sarif }}
+          wait-for-processing: true
 
   check_container_security_with_trivy:
     if: github.actor != 'dependabot[bot]'
