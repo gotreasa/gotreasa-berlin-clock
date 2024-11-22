@@ -30,7 +30,7 @@ COPY --from=build /usr/src/app /usr/src/app
 RUN chown -R node:root /usr/src/app/ && chmod -R 775 /usr/src/app/
 
 # Temporary fix
-RUN rm -r /usr/local/lib/node_modules/npm/node_modules/cross-spawn/
+RUN rm -rf /usr/local/lib/node_modules/npm/node_modules/cross-spawn/
 
 # Switch to node user.
 USER node
