@@ -16,9 +16,6 @@ COPY openapi.json ./
 COPY src src
 COPY test/container/integration/goss.yaml goss.yaml
 
-# Temporary fix
-RUN rm -r /usr/local/lib/node_modules/npm/node_modules/cross-spawn/
-
 # Build final image using small base image.
 FROM node:22-alpine
 
@@ -31,6 +28,9 @@ COPY --from=build /usr/src/app /usr/src/app
 
 # Set permissions for node app folder after copy.
 RUN chown -R node:root /usr/src/app/ && chmod -R 775 /usr/src/app/
+
+# Temporary fix
+RUN rm -r /usr/local/lib/node_modules/npm/node_modules/cross-spawn/
 
 # Switch to node user.
 USER node
