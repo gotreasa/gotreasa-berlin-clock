@@ -16,6 +16,9 @@ COPY openapi.json ./
 COPY src src
 COPY test/container/integration/goss.yaml goss.yaml
 
+# Temporary fix
+RUN rm -r /usr/local/lib/node_modules/npm/node_modules/cross-spawn/
+
 # Build final image using small base image.
 FROM node:22-alpine
 
