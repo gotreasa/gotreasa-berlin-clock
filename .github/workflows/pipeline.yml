@@ -379,6 +379,7 @@ jobs:
 
   check_container_software_list:
     permissions:
+      actions: read
       id-token: write
       packages: write
       contents: read
