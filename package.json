@@ -93,7 +93,7 @@
     "@stryker-mutator/core": "^8.6.0",
     "@stryker-mutator/jest-runner": "^8.6.0",
     "@types/babel__preset-env": "~7.9.7",
-    "@types/cookie-parser": "^1.4.7",
+    "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.17",
     "@types/csurf": "^1.11.5",
     "@types/current-git-branch": "^1.1.6",
