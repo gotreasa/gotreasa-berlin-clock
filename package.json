@@ -145,7 +145,7 @@
     "release-it": "^17.10.0",
     "rimraf": "^6.0.1",
     "snyk": "^1.1294.1",
-    "sonarqube-scanner": "^4.2.5",
+    "sonarqube-scanner": "^4.2.6",
     "sort-package-json": "^2.12.0",
     "supertest": "^7.0.0",
     "swagger-cli": "^4.0.4",
