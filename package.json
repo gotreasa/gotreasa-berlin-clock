@@ -76,7 +76,7 @@
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "csurf": "^1.11.0",
-    "express": "^4.21.1",
+    "express": "^4.21.2",
     "express-rate-limit": "^7.4.1",
     "helmet": "^8.0.0",
     "swagger-ui-express": "^5.0.1"
@@ -91,7 +91,7 @@
     "@prettier/plugin-ruby": "^4.0.4",
     "@release-it/conventional-changelog": "^9.0.3",
     "@stryker-mutator/core": "^8.7.0",
-    "@stryker-mutator/jest-runner": "^8.6.0",
+    "@stryker-mutator/jest-runner": "^8.7.0",
     "@types/babel__preset-env": "~7.9.7",
     "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.17",
