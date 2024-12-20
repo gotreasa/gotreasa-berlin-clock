@@ -380,6 +380,8 @@ jobs:
   check_container_software_list:
     permissions:
       id-token: write
+      security-events: write
+      actions: read
       packages: write
       contents: write
       attestations: write
