@@ -108,7 +108,7 @@
     "axios": "^1.7.9",
     "babel-jest": "^29.7.0",
     "chokidar-cli": "^3.0.0",
-    "concurrently": "^9.1.0",
+    "concurrently": "^9.1.1",
     "cross-env": "^7.0.3",
     "current-git-branch": "^1.1.0",
     "env-cmd": "^10.1.0",
