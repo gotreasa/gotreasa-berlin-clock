@@ -133,7 +133,7 @@
     "nodemon": "^3.1.9",
     "npm-check-updates": "^17.1.14",
     "pmpact": "^0.4.6",
-    "prettier": "^3.5.0",
+    "prettier": "^3.5.1",
     "prettier-plugin-gherkin": "^3.1.1",
     "prettier-plugin-sh": "^0.14.0",
     "release-it": "^18.1.2",
