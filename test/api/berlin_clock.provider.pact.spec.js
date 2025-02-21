@@ -1,7 +1,7 @@
 import path from 'path';
 import { versionFromGitTag } from 'absolute-version';
 import { Verifier } from '@pact-foundation/pact';
-import branchName from 'current-git-branch';
+import getCurrentBranchName from 'node-git-current-branch';
 import server from '../../app';
 
 let baseUrl;
@@ -15,7 +15,7 @@ const providerOptions = {
   logLevel: 'INFO',
   providerBaseUrl: baseUrl,
   provider: 'berlin_clock_app',
-  providerBranch: branchName(),
+  providerBranch: getCurrentBranchName(),
   providerVersion: versionFromGitTag({
     tagGlob: '[0-9]*',
   }),
