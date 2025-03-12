@@ -117,7 +117,7 @@ jobs:
           ./test/scripts/generate_postman.sh
           npx newman run pact/postman/collections/postman_collection.json -r cli,json --env-var 'url=${{ env.APP_HOST }}'
       - name: Test Report
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v2
         if: success() || failure() # run this step even if previous step failed
         with:
           name: Pact Tests # Name of the check run which will be created
@@ -142,7 +142,7 @@ jobs:
         with:
           target-url: ${{ env.APP_HOST }}/api-docs/
       - name: Test Report
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v2
         if: success() || failure() # run this step even if previous step failed
         with:
           name: Dastardly Tests # Name of the check run which will be created
