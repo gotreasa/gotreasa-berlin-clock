@@ -145,7 +145,7 @@
     "supertest": "^7.1.0",
     "swagger-cli": "^4.0.4",
     "swagger-mock-validator": "^11.0.0",
-    "typesync": "^0.14.2"
+    "typesync": "^0.14.3"
   },
   "engines": {
     "node": "v22.11.0"
