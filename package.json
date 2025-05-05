@@ -137,7 +137,7 @@
     "prettier": "^3.5.3",
     "prettier-plugin-gherkin": "^3.1.2",
     "prettier-plugin-sh": "^0.17.2",
-    "release-it": "^19.0.1",
+    "release-it": "^19.0.2",
     "rimraf": "^6.0.1",
     "snyk": "^1.1296.2",
     "sonarqube-scanner": "^4.3.0",
