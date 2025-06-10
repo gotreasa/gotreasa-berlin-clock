@@ -106,7 +106,7 @@
     "absolute-version": "^2.0.0",
     "auto-changelog": "^2.5.0",
     "axios": "^1.9.0",
-    "babel-jest": "^29.7.0",
+    "babel-jest": "^30.0.0",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
