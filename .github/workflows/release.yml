@@ -48,7 +48,7 @@ jobs:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.OKTETO_TOKEN }}
       - name: Wait for pipeline checks to succeed
-        uses: lewagon/wait-on-check-action@v1.3.4
+        uses: lewagon/wait-on-check-action@v1.4.0
         with:
           ref: ${{ github.sha }}
           running-workflow-name: 'Release a new version'
