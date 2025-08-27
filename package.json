@@ -132,7 +132,7 @@
     "newman": "^6.2.1",
     "node-git-current-branch": "^2.0.1",
     "nodemon": "^3.1.10",
-    "npm-check-updates": "^18.0.2",
+    "npm-check-updates": "^18.0.3",
     "pmpact": "^0.4.6",
     "prettier": "^3.6.2",
     "prettier-plugin-gherkin": "^3.1.2",
