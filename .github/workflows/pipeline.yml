@@ -420,7 +420,7 @@ jobs:
           push-to-registry: true
 
       - name: 🕵️‍♂️ Scan image
-        uses: anchore/scan-action@v6
+        uses: anchore/scan-action@v7
         id: scan
         with:
           image: '${{env.DOCKER_IMAGE_NAME}}@${{ needs.build_image.outputs.digest }}'
