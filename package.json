@@ -86,7 +86,7 @@
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@pact-foundation/pact": "^15.0.1",
+    "@pact-foundation/pact": "^16.0.0",
     "@pact-foundation/pact-node": "^10.18.0",
     "@prettier/plugin-ruby": "^4.0.4",
     "@release-it/conventional-changelog": "^10.0.1",
