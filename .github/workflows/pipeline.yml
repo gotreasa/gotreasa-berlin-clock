@@ -201,13 +201,13 @@ jobs:
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
       - name: Test Report
         uses: dorny/test-reporter@v2
-        if: github.actor != 'dependabot[bot]' && always() # Forces this step to always run
+        if: always() # Forces this step to always run
         with:
           name: JEST Tests # Name of the check run which will be created
           path: reports/jest-junit.xml* # Path to test results
           reporter: jest-junit # Format of test results
       - name: Publish Test Report
-        if: github.actor != 'dependabot[bot]' && always() # Forces this step to always run
+        if: always() # Forces this step to always run
         uses: mikepenz/action-junit-report@v5
         with:
           report_paths: 'reports/jest-junit.xml*'
