@@ -12,7 +12,7 @@ env:
   CLAIR_SCAN: arminc/clair-local-scan
   CLAIR_VERSION: v12
   CHEF_LICENSE_KEY: ${{ secrets.CHEF_LICENSE_KEY }}
-  CHEF_LICENSE: ${{ secrets.CHEF_LICENSE_KEY }}
+  CHEF_LICENSE: accept-silent
   DOCKER_USERNAME: gearoid9
 
 on:
@@ -94,7 +94,7 @@ jobs:
         run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
 
       - name: Run Inspec tests
-        run: inspec exec test/container/unit/*.rb --chef-license accept-no-persist --chef-license-key ${CHEF_LICENSE_KEY}
+        run: inspec exec test/container/unit/*.rb
 
   prettier-verify:
     runs-on: ubuntu-latest
