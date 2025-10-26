@@ -91,10 +91,26 @@ jobs:
         uses: actions/checkout@main
 
       - name: 💿 Install Inspec
-        run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
+        run: bundle install
 
       - name: Run Inspec tests
-        run: inspec exec test --reporter junit:reports/inspec_junit.xml cli;
+        run: inspec exec test --reporter junit:reports/inspec_junit.xml cli
+
+      - name: Test Report
+        uses: dorny/test-reporter@v2
+        if: always() # Forces this step to always run
+        with:
+          name: Inspec Tests # Name of the check run which will be created
+          path: reports/inspec_junit.xml # Path to test results
+          reporter: jest-junit # Format of test results
+
+      - name: Publish Test Report
+        if: always() # Forces this step to always run
+        uses: mikepenz/action-junit-report@v5
+        with:
+          report_paths: 'reports/inspec_junit.xml'
+          require_tests: true
+          check_name: Jest Results
 
   prettier-verify:
     runs-on: ubuntu-latest
