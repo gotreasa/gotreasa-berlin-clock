@@ -1,3 +1,5 @@
+title "Check Tests"
+
 control "compose.yml" do
   title "Inspect docker compose file"
 

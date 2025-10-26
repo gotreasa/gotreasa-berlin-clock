@@ -94,7 +94,7 @@ jobs:
         run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
 
       - name: Run Inspec tests
-        run: inspec exec test/container/unit/*.rb
+        run: inspec exec test --reporter junit:reports/inspec_junit.xml cli;
 
   prettier-verify:
     runs-on: ubuntu-latest
