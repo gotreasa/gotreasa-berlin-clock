@@ -12,7 +12,7 @@ env:
   CLAIR_SCAN: arminc/clair-local-scan
   CLAIR_VERSION: v12
   CHEF_LICENSE_KEY: ${{ secrets.CHEF_LICENSE_KEY }}
-  CHEF_LICENSE: accept-silent
+  CHEF_LICENSE: accept-no-persist
   DOCKER_USERNAME: gearoid9
 
 on:
