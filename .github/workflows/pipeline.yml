@@ -249,7 +249,8 @@ jobs:
       - run: npm ci
       - run: |
           touch .env
-          ls .git/ && cat .git/HEAD
+          git status
+          echo ".git contains: " && ls .git/ && echo "branch" && cat .git/HEAD
       - run: npm run test:api:consumer
       - name: Publish consumer tests
         if: github.actor != 'dependabot[bot]'

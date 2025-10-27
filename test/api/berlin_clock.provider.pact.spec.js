@@ -11,6 +11,8 @@ if (process.env.SMOKE_TEST) {
   baseUrl = `http://localhost:${process.env.SERVER_PORT || 9080}`;
 }
 
+console.log('THE CURRENT BRANCH IS: ', getCurrentBranchName());
+
 const providerOptions = {
   logLevel: 'INFO',
   providerBaseUrl: baseUrl,
