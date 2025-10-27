@@ -12,7 +12,7 @@ env:
   CLAIR_SCAN: arminc/clair-local-scan
   CLAIR_VERSION: v12
   CHEF_LICENSE_KEY: ${{ secrets.CHEF_LICENSE_KEY }}
-  CHEF_LICENSE: ${{ secrets.CHEF_LICENSE_KEY }}
+  CHEF_LICENSE: accept-no-persist
   DOCKER_USERNAME: gearoid9
 
 on:
@@ -94,7 +94,23 @@ jobs:
         run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
 
       - name: Run Inspec tests
-        run: inspec exec test/container/unit/*.rb --chef-license accept-silent
+        run: inspec exec test --reporter junit:reports/inspec_junit.xml cli
+
+      - name: Test Report
+        uses: dorny/test-reporter@v2
+        if: always() # Forces this step to always run
+        with:
+          name: Inspec Tests # Name of the check run which will be created
+          path: reports/inspec_junit.xml # Path to test results
+          reporter: jest-junit # Format of test results
+
+      - name: Publish Test Report
+        if: always() # Forces this step to always run
+        uses: mikepenz/action-junit-report@v5
+        with:
+          report_paths: 'reports/inspec_junit.xml'
+          require_tests: true
+          check_name: Inspec Results
 
   prettier-verify:
     runs-on: ubuntu-latest
@@ -216,8 +232,8 @@ jobs:
 
   pact_test:
     runs-on: ubuntu-latest
-    needs:
-      [eslint-verify, prettier-verify, test_swagger_editor_validator_remote]
+    # needs:
+    #   [eslint-verify, prettier-verify, test_swagger_editor_validator_remote]
 
     steps:
       - name: 📂 Checkout the code
@@ -231,7 +247,10 @@ jobs:
         shell: bash
         run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
       - run: npm ci
-      - run: touch .env
+      - run: |
+          touch .env
+          git status
+          echo ".git contains: " && ls .git/ && echo "branch" && cat .git/HEAD
       - run: npm run test:api:consumer
       - name: Publish consumer tests
         if: github.actor != 'dependabot[bot]'

@@ -1,7 +1,7 @@
 import path from 'path';
 import { versionFromGitTag } from 'absolute-version';
 import { Verifier } from '@pact-foundation/pact';
-import getCurrentBranchName from 'node-git-current-branch';
+import { simpleGit } from 'simple-git';
 import server from '../../app';
 
 let baseUrl;
@@ -11,11 +11,17 @@ if (process.env.SMOKE_TEST) {
   baseUrl = `http://localhost:${process.env.SERVER_PORT || 9080}`;
 }
 
+let branchName = 'main';
+
+beforeAll(async () => {
+  branchName = await simpleGit().branchLocal(['--show-current']);
+});
+
 const providerOptions = {
   logLevel: 'INFO',
   providerBaseUrl: baseUrl,
   provider: 'berlin_clock_app',
-  providerBranch: getCurrentBranchName(),
+  providerBranch: branchName,
   providerVersion: versionFromGitTag({
     tagGlob: '[0-9]*',
   }),
