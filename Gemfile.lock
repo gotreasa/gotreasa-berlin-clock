@@ -797,7 +797,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler
-  inspec
+  inspec (~> 7.0)
   prettier_print
   simplecov
   syntax_tree
