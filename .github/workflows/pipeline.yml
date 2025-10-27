@@ -232,8 +232,8 @@ jobs:
 
   pact_test:
     runs-on: ubuntu-latest
-    needs:
-      [eslint-verify, prettier-verify, test_swagger_editor_validator_remote]
+    # needs:
+    #   [eslint-verify, prettier-verify, test_swagger_editor_validator_remote]
 
     steps:
       - name: 📂 Checkout the code
@@ -247,7 +247,9 @@ jobs:
         shell: bash
         run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
       - run: npm ci
-      - run: touch .env
+      - run: |
+          touch .env
+          ls .git/ && cat .git/HEAD
       - run: npm run test:api:consumer
       - name: Publish consumer tests
         if: github.actor != 'dependabot[bot]'
