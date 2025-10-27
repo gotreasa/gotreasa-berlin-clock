@@ -1,7 +1,7 @@
 import path from 'path';
 import { versionFromGitTag } from 'absolute-version';
 import { Verifier } from '@pact-foundation/pact';
-import getCurrentBranchName from 'node-git-current-branch';
+import branchName from 'current-git-branch';
 import server from '../../app';
 
 let baseUrl;
@@ -11,13 +11,13 @@ if (process.env.SMOKE_TEST) {
   baseUrl = `http://localhost:${process.env.SERVER_PORT || 9080}`;
 }
 
-console.log('THE CURRENT BRANCH IS: ', getCurrentBranchName());
+console.log('THE CURRENT BRANCH IS: ', branchName());
 
 const providerOptions = {
   logLevel: 'INFO',
   providerBaseUrl: baseUrl,
   provider: 'berlin_clock_app',
-  providerBranch: getCurrentBranchName(),
+  providerBranch: branchName(),
   providerVersion: versionFromGitTag({
     tagGlob: '[0-9]*',
   }),
