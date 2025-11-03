@@ -106,7 +106,7 @@ jobs:
 
       - name: Publish Test Report
         if: always() # Forces this step to always run
-        uses: mikepenz/action-junit-report@v5
+        uses: mikepenz/action-junit-report@v6
         with:
           report_paths: 'reports/inspec_junit.xml'
           require_tests: true
@@ -224,7 +224,7 @@ jobs:
           reporter: jest-junit # Format of test results
       - name: Publish Test Report
         if: always() # Forces this step to always run
-        uses: mikepenz/action-junit-report@v5
+        uses: mikepenz/action-junit-report@v6
         with:
           report_paths: 'reports/jest-junit.xml*'
           require_tests: true
