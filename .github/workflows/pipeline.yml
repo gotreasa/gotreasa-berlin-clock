@@ -210,7 +210,7 @@ jobs:
       - run: npm ci
       - run: touch .env
       - name: Run all of the tests
-        run: npx rimraf pact/pacts/* && export SERVER_PORT=9998 && npm run test:api:consumer && npx env-cmd jest --testTimeout 30000 --testPathIgnorePatterns '\.pact\.spec\.js' && npx swagger-mock-validator openapi.json pact/pacts/berlin_clock_client-berlin_clock_app.json
+        run: npx rimraf pact/pacts/* && export SERVER_PORT=9998 && npm run test:api:consumer && npx env-cmd jest --testTimeout 30000 --testPathIgnorePatterns '\.pact\.spec\.js' && node scripts/validateOpenApi.js
       - name: run the Sonar Scanner
         if: github.actor != 'dependabot[bot]'
         run: sonar-scanner
