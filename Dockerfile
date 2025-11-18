@@ -1,4 +1,4 @@
-FROM node:25 AS build
+FROM node:24 AS build
 
 WORKDIR /usr/src/app
 
@@ -17,7 +17,7 @@ COPY src src
 COPY test/container/integration/goss.yaml goss.yaml
 
 # Build final image using small base image.
-FROM node:25-alpine
+FROM node:24-alpine
 
 # Update any out of date packages
 RUN apk update && apk upgrade

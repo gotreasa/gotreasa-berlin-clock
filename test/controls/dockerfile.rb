@@ -2,7 +2,7 @@ control "Dockerfile" do
   title "Inspect dockerfile"
 
   describe file("Dockerfile") do
-    its("content") { should match (/node:22/) }
+    its("content") { should match (/node:24/) }
     its("content") { should match (%r{COPY package\*.json ./}) }
     its("content") do
       should match (
@@ -15,7 +15,7 @@ control "Dockerfile" do
     its("content") do
       should match (%r{COPY test/container/integration/goss.yaml goss.yaml})
     end
-    its("content") { should match (/node:22-alpine/) }
+    its("content") { should match (/node:24-alpine/) }
     its("content") { should match (%r{WORKDIR /usr/src/app}) }
     its("content") do
       should match (%r{COPY --from=build /usr/src/app /usr/src/app})

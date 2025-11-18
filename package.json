@@ -34,7 +34,7 @@
     "start:app": "export SERVER_PORT=9080 && node app.js",
     "start:app:watch": "export SERVER_PORT=9080 && nodemon app.js",
     "start:cli": "node src/cli/time.js",
-    "test": "rimraf pact/pacts/* && export SERVER_PORT=$(./scripts/get_random_number.sh) && npm run test:api:consumer && npm run publish:pact && env-cmd jest --testTimeout 30000 && npm run test:unit:container && npx swagger-mock-validator openapi.json pact/pacts/berlin_clock_client-berlin_clock_app.json",
+    "test": "rimraf pact/pacts/* && export SERVER_PORT=$(./scripts/get_random_number.sh) && npm run test:api:consumer && npm run publish:pact && env-cmd jest --testTimeout 30000 && npm run test:unit:container && node scripts/validateOpenApi.js",
     "test:api": "rimraf pact/pacts/* && rimraf pact/postman/* && npm run test:api:consumer && npm run test:api:provider && ./test/scripts/generate_postman.sh && newman run pact/postman/collections/postman_collection.json -r cli,json --env-var 'url=http://localhost:9080'",
     "test:api:consumer": "jest test/**/*.consumer.pact.spec.js",
     "test:api:consumer:watch": "npm run test:api:consumer -- --watch",
@@ -82,12 +82,15 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.28.5",
+    "@babel/plugin-syntax-import-assertions": "^7.27.1",
     "@babel/preset-env": "^7.28.5",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@pact-foundation/pact": "^16.0.2",
     "@pact-foundation/pact-node": "^10.18.0",
+    "@pactflow/openapi-pact-comparator": "^1.9.0",
     "@prettier/plugin-ruby": "^4.0.4",
     "@release-it/conventional-changelog": "^10.0.2",
     "@stryker-mutator/core": "^9.0.1",
@@ -141,10 +144,9 @@
     "sort-package-json": "^3.4.0",
     "supertest": "^7.1.4",
     "swagger-cli": "^4.0.4",
-    "swagger-mock-validator": "^11.0.0",
     "typesync": "^0.14.3"
   },
   "engines": {
-    "node": "v22.11.0"
+    "node": "v24.11.1"
   }
 }

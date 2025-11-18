@@ -3,6 +3,7 @@ import js from '@eslint/js';
 import jestFormatting from 'eslint-plugin-jest-formatting';
 import jest from 'eslint-plugin-jest';
 import sonarjs from 'eslint-plugin-sonarjs';
+import babelParser from '@babel/eslint-parser';
 
 export default [
   js.configs.recommended,
@@ -10,12 +11,19 @@ export default [
     files: ['**/*.js'],
     languageOptions: {
       ecmaVersion: 2024,
+      parser: babelParser,
       sourceType: 'module',
       globals: {
         ...globals.jest,
         ...globals.node,
         ...globals.es2021,
         myCustomGlobal: 'readonly',
+      },
+      parserOptions: {
+        requireConfigFile: false,
+        babelOptions: {
+          plugins: ['@babel/plugin-syntax-import-assertions'],
+        },
       },
     },
     ignores: ['.husky/_/**'],
