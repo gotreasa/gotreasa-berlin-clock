@@ -440,6 +440,7 @@ jobs:
 
       - name: 🕵️‍♂️ Scan image to sarif
         uses: anchore/scan-action@v7
+        if: always()
         id: scan
         with:
           image: '${{env.DOCKER_IMAGE_NAME}}@${{ needs.build_image.outputs.digest }}'
@@ -448,6 +449,7 @@ jobs:
 
       - name: 🕵️‍♂️ Scan image to table
         uses: anchore/scan-action@v7
+        if: always()
         with:
           image: '${{env.DOCKER_IMAGE_NAME}}@${{ needs.build_image.outputs.digest }}'
           severity-cutoff: high
