@@ -46,7 +46,7 @@ file:
     owner: node
     group: root
     filetype: file
-    contains: ['server.address().port']
+    contents: ['server.address().port']
 
 http:
   internal_midnight:

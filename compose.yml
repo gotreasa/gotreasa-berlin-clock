@@ -6,24 +6,8 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - .:/src
-      - goss:/goss
     environment:
       NODE_ENV: production
     ports:
       - 9080:9080
     restart: always
-    healthcheck:
-      test: ['CMD', '/goss/goss', 'validate']
-      interval: 10s
-      timeout: 10m
-      retries: 5
-      start_period: 10s
-  goss:
-    image: aelsabbahy/goss
-    container_name: goss
-    volumes:
-      - goss:/goss
-    command: ['tail', '-f', '/dev/null']
-
-volumes:
-  goss:

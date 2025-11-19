@@ -1,4 +1,4 @@
-FROM node:24 AS build
+FROM node:22 AS build
 
 WORKDIR /usr/src/app
 
@@ -17,23 +17,29 @@ COPY src src
 COPY test/container/integration/goss.yaml goss.yaml
 
 # Build final image using small base image.
-FROM node:24-alpine
+FROM node:22-alpine
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Update any out of date packages
-RUN apk update && apk upgrade
+RUN apk add --no-cache --virtual=goss-dependencies curl=8.14.1-r2 ca-certificates=20250911-r0 && \
+    curl -fsSL https://goss.rocks/install | sh && \
+    apk del goss-dependencies && \
+    # Update any out of date packages
+    apk update && apk upgrade
 
 WORKDIR /usr/src/app
 
 COPY --from=build /usr/src/app /usr/src/app
 
 # Set permissions for node app folder after copy.
-RUN chown -R node:root /usr/src/app/ && chmod -R 775 /usr/src/app/
-
-# Temporary fix
-RUN rm -rf /usr/local/lib/node_modules/npm/node_modules/cross-spawn/
+RUN chown -R node:root /usr/src/app/ && chmod -R 775 /usr/src/app/;  \
+    # Temporary fix
+    rm -rf /usr/local/lib/node_modules/npm/node_modules/cross-spawn/
 
 # Switch to node user.
 USER node
+
+# Use goss to run all our other checkes
+HEALTHCHECK --interval=10s --timeout=10m --start-period=10s --retries=5 CMD goss -g /usr/src/app/goss.yaml validate
 
 # Image start commands.
 EXPOSE 9080
