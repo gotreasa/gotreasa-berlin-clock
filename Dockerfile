@@ -18,7 +18,7 @@ COPY test/container/integration/goss.yaml goss.yaml
 
 # Build final image using small base image.
 FROM node:22-alpine
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
 RUN apk add --no-cache --virtual=goss-dependencies curl=8.14.1-r2 ca-certificates=20250911-r0 && \
     curl -fsSL https://goss.rocks/install | sh && \
