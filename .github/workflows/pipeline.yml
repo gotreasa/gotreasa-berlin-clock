@@ -438,13 +438,20 @@ jobs:
           sbom-path: '/tmp/syft/sbom.spdx.json'
           push-to-registry: true
 
-      - name: 🕵️‍♂️ Scan image
+      - name: 🕵️‍♂️ Scan image to sarif
         uses: anchore/scan-action@v7
         id: scan
         with:
           image: '${{env.DOCKER_IMAGE_NAME}}@${{ needs.build_image.outputs.digest }}'
           severity-cutoff: high
           output-format: sarif
+
+      - name: 🕵️‍♂️ Scan image to table
+        uses: anchore/scan-action@v7
+        with:
+          image: '${{env.DOCKER_IMAGE_NAME}}@${{ needs.build_image.outputs.digest }}'
+          severity-cutoff: high
+          output-format: table
 
       - name: ⏫ Upload Anchore scan SARIF report
         uses: github/codeql-action/upload-sarif@v4
