@@ -13,7 +13,7 @@ commandTests:
     args: ['node']
     exitCode: 0
     expectedOutput: ['/usr/local/bin/node']
-  - name: '🔎  node is version 24'
+  - name: '🔎  node is version 22'
     command: 'node'
     args: ['--version']
     exitCode: 0
