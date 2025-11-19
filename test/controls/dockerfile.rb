@@ -26,7 +26,11 @@ control "Dockerfile" do
                    )
     end
     its("content") { should match (/USER node/) }
-    its("content") { should match (/RUN apk update && apk upgrade/) }
+    its("content") do
+      should match (
+                     /apk add --no-cache --virtual=goss-dependencies curl=8.14.1-r2 ca-certificates=20250911-r0/
+                   )
+    end
     its("content") { should match (/EXPOSE 9080/) }
     its("content") { should match (/ENTRYPOINT \[ \"npm\" \]/) }
     its("content") { should match (/CMD \[ \"run\", \"start:app\" \]/) }
