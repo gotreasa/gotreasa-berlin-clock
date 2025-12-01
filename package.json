@@ -139,7 +139,7 @@
     "release-it": "^19.0.6",
     "rimraf": "^6.1.0",
     "simple-git": "^3.30.0",
-    "snyk": "^1.1300.2",
+    "snyk": "^1.1301.0",
     "sonarqube-scanner": "^4.3.2",
     "sort-package-json": "^3.4.0",
     "supertest": "^7.1.4",
