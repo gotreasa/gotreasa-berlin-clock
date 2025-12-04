@@ -32,7 +32,7 @@ app.use(cookieParser(COOKIES_SECRET));
 app.set('trust proxy', 1);
 
 app.use('/health', limiter, cors(corsOptions), csrfProtect, (_, response) => {
-  exec('/usr/bin/test -f "/goss/goss" && /goss/goss validate', (error) => {
+  exec('/usr/bin/test -f "goss" && goss validate', (error) => {
     console.log('Health check output', error);
 
     return response.sendStatus(200);
