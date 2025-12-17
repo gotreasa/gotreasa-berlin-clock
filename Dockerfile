@@ -20,7 +20,7 @@ COPY test/container/integration/goss.yaml goss.yaml
 FROM node:22-alpine
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
-RUN apk add --no-cache --virtual=goss-dependencies curl=8.14.1-r2 ca-certificates=20250911-r0 && \
+RUN apk add --no-cache --virtual=goss-dependencies curl=8.17.0-r1 ca-certificates=20251003-r0 && \
     curl -fsSL https://goss.rocks/install | sh && \
     apk del goss-dependencies && \
     # Update any out of date packages
