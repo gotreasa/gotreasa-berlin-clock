@@ -90,7 +90,7 @@
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@pact-foundation/pact": "^16.0.2",
     "@pact-foundation/pact-node": "^10.18.0",
-    "@pactflow/openapi-pact-comparator": "^1.9.0",
+    "@pactflow/openapi-pact-comparator": "^1.10.0",
     "@prettier/plugin-ruby": "^4.0.4",
     "@release-it/conventional-changelog": "^10.0.2",
     "@stryker-mutator/core": "^9.0.1",
