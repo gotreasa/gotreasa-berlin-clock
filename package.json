@@ -127,7 +127,7 @@
     "jest-cucumber-fusion": "^0.8.1",
     "jest-junit": "^16.0.0",
     "jest-pact": "^0.13.0",
-    "lint-staged": "^16.2.6",
+    "lint-staged": "^16.2.7",
     "mockdate": "^3.0.5",
     "newman": "^6.2.1",
     "nodemon": "^3.1.11",
