@@ -446,6 +446,10 @@ jobs:
           severity-cutoff: high
           output-format: sarif
 
+      - name: Debug
+        if: always()
+        run: echo ${{ steps.scan.outcome}}
+
       - name: 🕵️‍♂️ Identify vulnerabilities
         uses: anchore/scan-action@v7
         if: ${{ steps.scan.outcome != 'success' }}
