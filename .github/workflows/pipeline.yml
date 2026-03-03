@@ -452,7 +452,7 @@ jobs:
 
       - name: 🕵️‍♂️ Identify vulnerabilities
         uses: anchore/scan-action@v7
-        if: ${{ steps.scan.outcome != 'success' }}
+        if: ${{ steps.scan.outcome == 'failure' }}
         with:
           image: '${{env.DOCKER_IMAGE_NAME}}@${{ needs.build_image.outputs.digest }}'
           severity-cutoff: high
