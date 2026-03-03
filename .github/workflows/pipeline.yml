@@ -29,9 +29,10 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - name: Validate OpenAPI definition
-        uses: swaggerexpert/swagger-editor-validate@v1.5.1
+        uses: swaggerexpert/apidom-validate@v1
         with:
           definition-file: openapi.json
+          fails-on: 2
 
   commitlint:
     if: github.actor != 'dependabot[bot]'
