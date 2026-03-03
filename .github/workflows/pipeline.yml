@@ -29,7 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - name: Validate OpenAPI definition
-        uses: swaggerexpert/swagger-editor-validate@master
+        uses: swaggerexpert/swagger-editor-validate@v1.5.1
         with:
           definition-file: openapi.json
 
