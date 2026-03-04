@@ -29,9 +29,10 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - name: Validate OpenAPI definition
-        uses: swaggerexpert/swagger-editor-validate@master
+        uses: swaggerexpert/apidom-validate@v1
         with:
           definition-file: openapi.json
+          fails-on: 2
 
   commitlint:
     if: github.actor != 'dependabot[bot]'
@@ -62,7 +63,7 @@ jobs:
         uses: actions/checkout@main
       - uses: actions/setup-node@main
         with:
-          node-version: 24.11
+          node-version: 24.14
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir
@@ -119,7 +120,7 @@ jobs:
         uses: actions/checkout@main
       - uses: actions/setup-node@main
         with:
-          node-version: 24.11
+          node-version: 24.14
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir
@@ -136,7 +137,7 @@ jobs:
         uses: actions/checkout@main
       - uses: actions/setup-node@main
         with:
-          node-version: 24.11
+          node-version: 24.14
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir
@@ -201,7 +202,7 @@ jobs:
         uses: actions/checkout@main
       - uses: actions/setup-node@main
         with:
-          node-version: 24.11
+          node-version: 24.14
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir
@@ -240,7 +241,7 @@ jobs:
         uses: actions/checkout@main
       - uses: actions/setup-node@main
         with:
-          node-version: 24.11
+          node-version: 24.14
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir
@@ -374,7 +375,7 @@ jobs:
         run: docker pull '${{ env.DOCKER_IMAGE_NAME }}@${{ needs.build_image.outputs.digest }}'
       - uses: actions/setup-node@main
         with:
-          node-version: 24.11
+          node-version: 24.14
           cache: 'npm'
       - name: 🗂️ Get npm cache directory
         id: npm-cache-dir
@@ -445,6 +446,14 @@ jobs:
           image: '${{env.DOCKER_IMAGE_NAME}}@${{ needs.build_image.outputs.digest }}'
           severity-cutoff: high
           output-format: sarif
+
+      - name: 🕵️‍♂️ Identify vulnerabilities
+        uses: anchore/scan-action@v7
+        if: failure()
+        with:
+          image: '${{env.DOCKER_IMAGE_NAME}}@${{ needs.build_image.outputs.digest }}'
+          severity-cutoff: high
+          output-format: table
 
       - name: ⏫ Upload Anchore scan SARIF report
         uses: github/codeql-action/upload-sarif@v4
