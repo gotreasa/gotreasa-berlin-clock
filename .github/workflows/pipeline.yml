@@ -431,7 +431,7 @@ jobs:
             -o table
 
       - name: Attest
-        uses: actions/attest-sbom@v3
+        uses: actions/attest-sbom@v4
         id: attest
         with:
           subject-name: index.docker.io/${{ env.DOCKER_IMAGE_NAME }}
