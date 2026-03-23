@@ -97,7 +97,7 @@ jobs:
         run: inspec exec test --reporter junit:reports/inspec_junit.xml cli
 
       - name: Test Report
-        uses: dorny/test-reporter@v2
+        uses: dorny/test-reporter@v3
         if: always() # Forces this step to always run
         with:
           name: Inspec Tests # Name of the check run which will be created
@@ -216,7 +216,7 @@ jobs:
         run: sonar-scanner
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
       - name: Test Report
-        uses: dorny/test-reporter@v2
+        uses: dorny/test-reporter@v3
         if: always() # Forces this step to always run
         with:
           name: JEST Tests # Name of the check run which will be created
