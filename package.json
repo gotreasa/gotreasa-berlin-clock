@@ -126,7 +126,7 @@
     "jest": "^30.3.0",
     "jest-config": "^30.3.0",
     "jest-cucumber-fusion": "^0.8.1",
-    "jest-junit": "^16.0.0",
+    "jest-junit": "^17.0.0",
     "jest-pact": "^0.13.0",
     "lint-staged": "^16.4.0",
     "mockdate": "^3.0.5",
