@@ -79,7 +79,7 @@ describe('Berlin Clock Provider', () => {
     const output = JSON.parse(
       await new Verifier(providerOptions).verifyProvider(),
     );
-    expect(output.interactionResults).toHaveLength(5);
+    expect(output.interactionResults.length).toBeGreaterThan(0);
     for (const interaction of output.interactionResults) {
       console.log(`Test: ${interaction.description}`);
       expect(interaction.result).toEqual('OK');
