@@ -21,7 +21,7 @@ const providerOptions = {
   logLevel: 'INFO',
   providerBaseUrl: baseUrl,
   provider: 'berlin_clock_app',
-  providerBranch: branchName,
+  providerVersionBranch: branchName,
   providerVersion: versionFromGitTag({
     tagGlob: '[0-9]*',
   }),
@@ -34,6 +34,12 @@ const providerOptions = {
     },
     '12:17:57': () => {
       return '12:17:57';
+    },
+    '': () => {
+      return '';
+    },
+    'health check': () => {
+      return '';
     },
   },
 };
@@ -70,8 +76,17 @@ describe('Berlin Clock Provider', () => {
   });
 
   test('tests berlin clock api routes', async () => {
-    const output = await new Verifier(providerOptions).verifyProvider();
-    console.log(output);
-    expect(output).toContain('finished: 0');
+    const output = JSON.parse(
+      await new Verifier(providerOptions).verifyProvider(),
+    );
+    expect(output.interactionResults.length).toBeGreaterThan(0);
+    for (const interaction of output.interactionResults) {
+      console.log(`Test: ${interaction.description}`);
+      expect(interaction.result).toEqual('OK');
+    }
+    expect(output.result).toBe(true);
+    expect(output.notices.length).toBeLessThan(2);
+    expect(output.pendingErrors).toHaveLength(0);
+    expect(output.errors).toHaveLength(0);
   });
 });

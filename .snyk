@@ -5,6 +5,6 @@ ignore:
   SNYK-RUBY-FARADAY-15253521:
     - '*':
         reason: No proper fix available
-        expires: 2026-04-03T00:00:00.000Z
+        expires: 2026-06-03T00:00:00.000Z
         created: 2026-03-03T11:56:10.102Z
 patch: {}
