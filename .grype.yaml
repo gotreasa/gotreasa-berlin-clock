@@ -9,15 +9,6 @@
         type: npm
     - vulnerability: 'CVE-2025-60876'
       package:
-        name: busybox
-        type: apk
-    - vulnerability: 'CVE-2025-60876'
-      package:
-        name: busybox-binsh
-        type: apk
-    - vulnerability: 'CVE-2025-60876'
-      package:
-        name: ssl_client
         type: apk
     - vulnerability: 'GHSA-f886-m6hf-6m8v'
       package:
