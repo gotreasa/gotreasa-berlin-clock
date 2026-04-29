@@ -1,0 +1,16 @@
+ignore:
+  - vulnerability: 'GHSA-3v7f-55p6-f55p'
+    package:
+      name: picomatch
+      type: npm
+  - vulnerability: 'GHSA-c2c7-rcm5-vvqj'
+    package:
+      name: picomatch
+      type: npm
+  - vulnerability: 'CVE-2025-60876'
+    package:
+      type: apk
+  - vulnerability: 'GHSA-f886-m6hf-6m8v'
+    package:
+      name: brace-expansion
+      type: npm
