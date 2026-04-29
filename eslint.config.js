@@ -34,6 +34,7 @@ export default [
     },
     rules: {
       camelcase: 0,
+      complexity: ['warn', { max: 4 }],
       'jest/expect-expect': [
         'error',
         {
