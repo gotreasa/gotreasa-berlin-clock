@@ -12,19 +12,6 @@ Given(/^the API endpoint (.*)$/, (path) => {
   endpoint = path;
 });
 
-When('I call the endpoint', async () => {
-  response = await request(app)
-    .get(`${endpoint}`)
-    .set({
-      Accept: 'application/json',
-    })
-    .send();
-});
-
-Then('the response is 200', () => {
-  expect(response.status).toBe(200);
-});
-
 And('the goss command exists', () => {
   child_process.exec.mockImplementation((_, callback) =>
     callback(null, { stdout: 'OK' }),
@@ -35,6 +22,19 @@ And('the goss command is missing', () => {
   child_process.exec.mockImplementation((_, callback) =>
     callback(null, { stdout: 'OK' }),
   );
+});
+
+When('the endpoint is called', async () => {
+  response = await request(app)
+    .get(`${endpoint}`)
+    .set({
+      Accept: 'application/json',
+    })
+    .send();
+});
+
+Then('the response is 200', () => {
+  expect(response.status).toBe(200);
 });
 
 Fusion('Api.feature');
