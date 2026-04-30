@@ -85,7 +85,7 @@
     "@babel/eslint-parser": "^7.28.6",
     "@babel/plugin-syntax-import-assertions": "^7.28.6",
     "@babel/preset-env": "^7.29.2",
-    "@commitlint/cli": "^20.5.2",
+    "@commitlint/cli": "^20.5.3",
     "@commitlint/config-conventional": "^20.5.0",
     "@eslint/js": "^9.39.3",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
