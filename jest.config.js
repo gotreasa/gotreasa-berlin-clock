@@ -32,5 +32,11 @@ export default {
   transform: {
     '^.+\\.(js|jsx)$': 'babel-jest',
   },
+  // Some transitive deps ship pure ESM (e.g. https-proxy-agent@9 + agent-base,
+  // pulled in by @pact-foundation/pact). Un-ignore them so babel-jest transpiles
+  // them to CommonJS; extend the alternation when new ESM-only deps appear.
+  transformIgnorePatterns: [
+    '/node_modules/(?!(?:.*/)?(https-proxy-agent|agent-base)/)',
+  ],
   watchPathIgnorePatterns: ['pact/logs/*', 'pact/pacts/*', '.stryker-tmp/*'],
 };
