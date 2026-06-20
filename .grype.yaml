@@ -14,3 +14,7 @@ ignore:
     package:
       name: brace-expansion
       type: npm
+  - vulnerability: 'GHSA-9ppj-qmqm-q256'
+    package:
+      name: tar
+      type: npm
