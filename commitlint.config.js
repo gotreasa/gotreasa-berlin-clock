@@ -1,5 +1,6 @@
 export default {
   parserPreset: 'conventional-changelog-conventionalcommits',
+  ignores: [(message) => message.includes('Signed-off-by: dependabot[bot]')],
   rules: {
     'body-leading-blank': [1, 'always'],
     'body-max-line-length': [2, 'always', 100],
