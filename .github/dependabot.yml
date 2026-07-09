@@ -6,15 +6,27 @@ updates:
       interval: 'daily'
     commit-message:
       prefix: 'chore'
+    groups:
+      npm-dependencies:
+        patterns:
+          - '*'
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
       interval: 'daily'
     commit-message:
       prefix: 'ci'
+    groups:
+      github-actions:
+        patterns:
+          - '*'
   - package-ecosystem: 'docker'
     directory: '/'
     schedule:
       interval: 'daily'
     commit-message:
       prefix: 'build'
+    groups:
+      docker:
+        patterns:
+          - '*'
