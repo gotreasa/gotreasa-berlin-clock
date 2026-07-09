@@ -30,3 +30,13 @@ updates:
       docker:
         patterns:
           - '*'
+  - package-ecosystem: 'bundler'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    commit-message:
+      prefix: 'chore'
+    groups:
+      bundler:
+        patterns:
+          - '*'
