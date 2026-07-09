@@ -2,11 +2,6 @@
 version: v1.25.1
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  SNYK-RUBY-FARADAY-15253521:
-    - '*':
-        reason: No proper fix available
-        expires: 2026-06-03T00:00:00.000Z
-        created: 2026-03-03T11:56:10.102Z
   SNYK-RUBY-JWT-16755447:
     - '*':
         reason: No fix available; transitive via inspec (test tooling), not in shipped app
