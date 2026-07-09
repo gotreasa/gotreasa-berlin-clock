@@ -14,3 +14,11 @@ ignore:
     package:
       name: brace-expansion
       type: npm
+  # undici bundled inside npm in the node:24-alpine base image (npm's
+  # vendored HTTP client, not an app dependency). No fixed npm released
+  # yet — even npm 11.16.0 still ships undici 6.26.0. Remove when a
+  # patched npm/base image lands.
+  - vulnerability: 'GHSA-vxpw-j846-p89q'
+    package:
+      name: undici
+      type: npm

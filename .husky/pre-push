@@ -1,4 +1,4 @@
 #!/bin/bash
 
 npm run pre-push
-env-cmd sonar-scanner
+env-cmd sonar
