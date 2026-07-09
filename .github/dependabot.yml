@@ -32,6 +32,11 @@ updates:
       prefix: 'build'
     cooldown:
       semver-major-days: 30
+    ignore:
+      # Only upgrade Node on our terms (when the new even major reaches
+      # Active LTS); keep patch/minor updates on the current LTS line.
+      - dependency-name: 'node'
+        update-types: ['version-update:semver-major']
     groups:
       docker:
         patterns:
