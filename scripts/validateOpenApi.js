@@ -4,7 +4,7 @@ import pact from '../pact/pacts/berlin_clock_client-berlin_clock_app.json' with 
 import openapi from '../openapi.json' with { type: 'json' };
 
 // openapi is object from JSON.parse() or yaml.load()
-const comparator = new Comparator(openapi);
+const comparator = new Comparator({ oas: openapi });
 let results = [];
 
 // pacts is array of objects the same way
