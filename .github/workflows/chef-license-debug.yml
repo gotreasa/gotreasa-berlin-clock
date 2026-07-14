@@ -6,19 +6,31 @@ jobs:
   debug:
     runs-on: ubuntu-latest
     steps:
-      - name: Fingerprint the secret (no reveal)
-        env:
-          K: ${{ secrets.CHEF_LICENSE_KEY }}
-        run: |
-          echo "length      : ${#K}"
-          echo "sha256[0:12]: $(printf '%s' "$K" | sha256sum | cut -c1-12)"
-          if printf '%s' "$K" | grep -qE '^[a-z]{4}-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-[0-9]{1,4}$'; then
-            echo "shape       : OK"; else echo "shape       : MALFORMED"; fi
-      - name: Licensing API from the runner
+      - uses: actions/checkout@main
+
+      - name: Is the licensing API consistently wrong from this runner?
         env:
           K: ${{ secrets.CHEF_LICENSE_KEY }}
         run: |
           echo "egress IP: $(curl -s https://api.ipify.org || true)"
-          curl -sS -o body.txt -w 'http=%{http_code} type=%{content_type}\n' \
-            "https://services.chef.io/licensing/v1/validate?licenseId=${K}&version=2" || true
-          echo "--- body ---"; head -c 400 body.txt; echo
+          for i in 1 2 3; do
+            curl -sS -w ' [http=%{http_code}]\n' \
+              "https://services.chef.io/licensing/v1/validate?licenseId=${K}&version=2" || true
+            sleep 2
+          done
+
+      - name: 💿 Install Inspec
+        run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
+
+      - name: A — inspec exec WITHOUT a licence key (omnitruck build)
+        env:
+          CHEF_LICENSE: accept-no-persist
+        run: |
+          inspec exec test --reporter cli && echo "RESULT_A=PASS" || echo "RESULT_A=FAIL(exit $?)"
+
+      - name: B — inspec exec WITH the licence key
+        env:
+          CHEF_LICENSE: accept-no-persist
+          CHEF_LICENSE_KEY: ${{ secrets.CHEF_LICENSE_KEY }}
+        run: |
+          inspec exec test --reporter cli && echo "RESULT_B=PASS" || echo "RESULT_B=FAIL(exit $?)"
