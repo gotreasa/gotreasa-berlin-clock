@@ -1,0 +1,24 @@
+name: Chef License Debug
+on:
+  push:
+    branches: [chef-license-debug]
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fingerprint the secret (no reveal)
+        env:
+          K: ${{ secrets.CHEF_LICENSE_KEY }}
+        run: |
+          echo "length      : ${#K}"
+          echo "sha256[0:12]: $(printf '%s' "$K" | sha256sum | cut -c1-12)"
+          if printf '%s' "$K" | grep -qE '^[a-z]{4}-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-[0-9]{1,4}$'; then
+            echo "shape       : OK"; else echo "shape       : MALFORMED"; fi
+      - name: Licensing API from the runner
+        env:
+          K: ${{ secrets.CHEF_LICENSE_KEY }}
+        run: |
+          echo "egress IP: $(curl -s https://api.ipify.org || true)"
+          curl -sS -o body.txt -w 'http=%{http_code} type=%{content_type}\n' \
+            "https://services.chef.io/licensing/v1/validate?licenseId=${K}&version=2" || true
+          echo "--- body ---"; head -c 400 body.txt; echo
