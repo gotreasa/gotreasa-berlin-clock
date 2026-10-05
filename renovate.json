@@ -100,12 +100,11 @@
       "groupName": "jest majors"
     },
     {
-      "description": "Pact and jest-pact always move together, whatever the update type, in one branch (separateMajorMinor off): a pact major needs the matching jest-pact (pact 17 needs jest-pact 0.14), so splitting them left the pact PR unresolvable on its own. After the jest and npm development rules so jest-pact lands here. Not auto-merged: contract-test tooling gets a look.",
+      "description": "Pact and jest-pact always move together, whatever the update type, in one branch (separateMajorMinor off): a pact major needs the matching jest-pact (pact 17 needs jest-pact 0.14), so splitting them left the pact PR unresolvable on its own. After the jest and npm development rules so jest-pact lands here. Minor/patch-only pact PRs auto-merge (from the npm development rule); one carrying a major does not (catch-all rule below).",
       "matchManagers": ["npm"],
       "matchPackageNames": ["@pact-foundation/*", "@pactflow/*", "jest-pact"],
       "groupName": "pact",
-      "separateMajorMinor": false,
-      "automerge": false
+      "separateMajorMinor": false
     },
     {
       "description": "Stryker majors move together.",
@@ -150,11 +149,17 @@
       "automerge": true
     },
     {
-      "description": "Other container images (compose) together.",
+      "description": "Other container images (compose) minor, patch and digest together, auto-merged.",
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["minor", "patch", "digest"],
       "groupName": "docker",
-      "semanticCommitType": "build"
+      "semanticCommitType": "build",
+      "automerge": true
+    },
+    {
+      "description": "Catch-all: no major update ever auto-merges, whatever group it lands in. Majors can pass CI and still break what CI does not cover (#833's @sonar/scan 5 broke the local pre-push hook).",
+      "matchUpdateTypes": ["major"],
+      "automerge": false
     },
     {
       "description": "The Docker Hub node images are handled by the node-version custom manager instead, so Node majors stay LTS-only and move with every other pin.",
