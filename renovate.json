@@ -97,11 +97,12 @@
       "groupName": "jest majors"
     },
     {
-      "description": "Pact majors move together; after the jest rule so jest-pact lands here.",
+      "description": "Pact and jest-pact always move together, whatever the update type, in one branch (separateMajorMinor off): a pact major needs the matching jest-pact (pact 17 needs jest-pact 0.14), so splitting them left the pact PR unresolvable on its own. After the jest and npm development rules so jest-pact lands here. Not auto-merged: contract-test tooling gets a look.",
       "matchManagers": ["npm"],
-      "matchUpdateTypes": ["major"],
       "matchPackageNames": ["@pact-foundation/*", "@pactflow/*", "jest-pact"],
-      "groupName": "pact majors"
+      "groupName": "pact",
+      "separateMajorMinor": false,
+      "automerge": false
     },
     {
       "description": "Stryker majors move together.",
@@ -131,6 +132,12 @@
       "groupName": "github actions",
       "semanticCommitType": "ci",
       "automerge": true
+    },
+    {
+      "description": "faraday stays on 1.x: inspec ~> 7.0 requires faraday_middleware, which requires faraday ~> 1.0, so faraday 2 cannot resolve (PR #835). Revisit if InSpec drops faraday_middleware.",
+      "matchManagers": ["bundler"],
+      "matchPackageNames": ["faraday"],
+      "allowedVersions": "<2"
     },
     {
       "description": "Bundler (InSpec test tooling) minor and patch together.",
