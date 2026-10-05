@@ -4,12 +4,12 @@ version: v1.25.1
 ignore:
   SNYK-RUBY-JWT-16755447:
     - '*':
-        reason: No fix available; transitive via inspec (test tooling), not in shipped app
-        expires: 2026-10-07T00:00:00.000Z
+        reason: No fix available; fixed in jwt 3.2.0 but train 3.16.5 (latest) pins googleauth < 1.9.0, which caps jwt < 3.0. Transitive via inspec (test tooling), not in shipped app
+        expires: 2026-11-04T00:00:00.000Z
         created: 2026-07-09T09:53:11.000Z
-  SNYK-RUBY-EXCON-17394008:
+  SNYK-RUBY-RUBYZIP-19666145:
     - '*':
-        reason: No fix available; transitive via inspec (test tooling), not in shipped app
-        expires: 2026-10-07T00:00:00.000Z
-        created: 2026-07-09T09:53:11.000Z
+        reason: No fix available; chef-winrm-fs 1.4.2 (latest) pins rubyzip ~> 2.0, transitive via inspec (test tooling), not in shipped app
+        expires: 2026-11-04T00:00:00.000Z
+        created: 2026-10-05T09:30:00.000Z
 patch: {}
