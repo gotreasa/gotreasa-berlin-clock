@@ -1,4 +1,10 @@
-import { Given, When, Then, And, Fusion } from 'jest-cucumber-fusion';
+import {
+  Given,
+  When,
+  Then,
+  And,
+  Fusion,
+} from '@g_package/jest-cucumber-fusion';
 import request from 'supertest';
 import app from '../../src/api/app';
 
