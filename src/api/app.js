@@ -24,11 +24,20 @@ const COOKIES_SECRET = crypto.randomBytes(32).toString('hex');
 // Double Submit Cookie CSRF protection (stateless). GET, HEAD and OPTIONS are
 // not checked; any other method needs a valid token. With no sessions, tokens
 // are bound to the client IP (resolved through `trust proxy`).
-const { doubleCsrfProtection: csrfProtect } = doubleCsrf({
+const { doubleCsrfProtection, generateCsrfToken } = doubleCsrf({
   getSecret: () => COOKIES_SECRET,
   getSessionIdentifier: (request) => String(request.ip),
   cookieOptions: { secure: true },
 });
+// Issue a token cookie on every request (as csurf did), so a client can echo
+// it back in the x-csrf-token header on a state-changing request.
+const csrfProtect = [
+  doubleCsrfProtection,
+  (request, response, next) => {
+    generateCsrfToken(request, response);
+    next();
+  },
+];
 const app = express();
 app.use(helmet());
 

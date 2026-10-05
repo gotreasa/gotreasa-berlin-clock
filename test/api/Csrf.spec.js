@@ -27,6 +27,30 @@ describe('CSRF protection', () => {
     expect(response.status).toBe(403);
   });
 
+  test('should issue a CSRF token cookie on a GET', async () => {
+    const response = await request(app).get('/api/v1/time/12:17:57').send();
+
+    expect(response.headers['set-cookie']).toEqual(
+      expect.arrayContaining([
+        expect.stringMatching(/^__Host-psifi\.x-csrf-token=[^;]+\..+;.*Secure/),
+      ]),
+    );
+  });
+
+  test('should accept a POST that echoes the token issued by a GET', async () => {
+    const issued = await request(app).get('/api/v1/time/12:17:57').send();
+    const tokenCookie = issued.headers['set-cookie'][0].split(';')[0];
+    const token = decodeURIComponent(tokenCookie.split('=')[1]);
+
+    const response = await request(app)
+      .post('/health')
+      .set('Cookie', tokenCookie)
+      .set('x-csrf-token', token)
+      .send();
+
+    expect(response.status).toBe(200);
+  });
+
   test('should not require a CSRF token for a GET of the time', async () => {
     const response = await request(app).get('/api/v1/time/12:17:57').send();
 
