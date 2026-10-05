@@ -37,7 +37,7 @@ jobs:
       - name: Setup Node version
         uses: actions/setup-node@main
         with:
-          node-version: 24.14
+          node-version: 24.21
           cache: 'npm'
       - name: Install the dependencies
         run: |
