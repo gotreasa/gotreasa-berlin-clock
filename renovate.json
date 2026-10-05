@@ -4,6 +4,9 @@
   "ignorePresets": [":semanticPrefixFixDepsChoreOthers"],
   "semanticCommitType": "chore",
   "dependencyDashboardApproval": false,
+  "constraints": {
+    "npm": "^11"
+  },
   "timezone": "Europe/London",
   "schedule": ["before 6am on monday"],
   "labels": ["dependencies"],
