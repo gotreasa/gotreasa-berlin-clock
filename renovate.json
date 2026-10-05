@@ -1,0 +1,161 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":semanticCommits"],
+  "timezone": "Europe/London",
+  "schedule": ["before 6am on monday"],
+  "labels": ["dependencies"],
+  "prConcurrentLimit": 10,
+  "prHourlyLimit": 0,
+  "minimumReleaseAge": "3 days",
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/vendor/**",
+    "**/examples/**",
+    "**/__tests__/**",
+    "**/__fixtures__/**"
+  ],
+  "automergeType": "pr",
+  "automergeStrategy": "merge-commit",
+  "platformAutomerge": true,
+  "vulnerabilityAlerts": {
+    "labels": ["security"]
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Node major in the Dockerfile (node:24, node:24-alpine) and the InSpec Dockerfile control. node versioning cannot read -alpine tags, so these are read from Node's own releases instead of Docker Hub.",
+      "managerFilePatterns": [
+        "/(^|/)Dockerfile$/",
+        "/^test/controls/dockerfile\\.rb$/"
+      ],
+      "matchStrings": ["node:(?<currentValue>\\d+)(?:-alpine)?\\b"],
+      "depNameTemplate": "node",
+      "datasourceTemplate": "node-version",
+      "versioningTemplate": "node"
+    },
+    {
+      "customType": "regex",
+      "description": "Node major asserted by the container structure test (test name and expected node --version output).",
+      "managerFilePatterns": ["/^test/container/structure/config\\.yaml$/"],
+      "matchStrings": [
+        "node is version (?<currentValue>\\d+)'",
+        "expectedOutput: \\['v(?<currentValue>\\d+)\\.'\\]"
+      ],
+      "depNameTemplate": "node",
+      "datasourceTemplate": "node-version",
+      "versioningTemplate": "node"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "npm keeps package.json ranges current (as Dependabot did); other managers keep their default, so Gemfile constraints are not rewritten.",
+      "matchManagers": ["npm"],
+      "rangeStrategy": "bump"
+    },
+    {
+      "description": "npm runtime minor and patch, including the express-scoped qs override: one low-risk PR, auto-merged once the required checks pass.",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["dependencies", "overrides"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "npm production",
+      "automerge": true
+    },
+    {
+      "description": "npm tooling minor and patch: kept apart from runtime so a tooling break never holds back a runtime fix.",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "npm development",
+      "automerge": true
+    },
+    {
+      "description": "Majors wait 30 days so upstream peers can catch up (jest-pact 0.14 shipped after pact 17).",
+      "matchUpdateTypes": ["major"],
+      "minimumReleaseAge": "30 days"
+    },
+    {
+      "description": "Lint and Babel majors only work together (ESLint needs a matching @babel/eslint-parser and @babel/core).",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["major"],
+      "matchPackageNames": [
+        "eslint",
+        "@eslint/*",
+        "@babel/*",
+        "@types/babel__*"
+      ],
+      "groupName": "lint and babel majors"
+    },
+    {
+      "description": "Jest family majors move together.",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["major"],
+      "matchPackageNames": ["jest", "jest-*", "babel-jest", "@types/jest"],
+      "groupName": "jest majors"
+    },
+    {
+      "description": "Pact majors move together; after the jest rule so jest-pact lands here.",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["major"],
+      "matchPackageNames": ["@pact-foundation/*", "@pactflow/*", "jest-pact"],
+      "groupName": "pact majors"
+    },
+    {
+      "description": "Stryker majors move together.",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["major"],
+      "matchPackageNames": ["@stryker-mutator/*"],
+      "groupName": "stryker majors"
+    },
+    {
+      "description": "Release tooling majors move together.",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["major"],
+      "matchPackageNames": ["release-it", "@release-it/*", "auto-changelog"],
+      "groupName": "release majors"
+    },
+    {
+      "description": "Commitlint majors move together.",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["major"],
+      "matchPackageNames": ["@commitlint/*"],
+      "groupName": "commitlint majors"
+    },
+    {
+      "description": "GitHub Actions minor and patch together; each action's major arrives on its own.",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "groupName": "github actions",
+      "semanticCommitType": "ci",
+      "automerge": true
+    },
+    {
+      "description": "Bundler (InSpec test tooling) minor and patch together.",
+      "matchManagers": ["bundler"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "bundler",
+      "automerge": true
+    },
+    {
+      "description": "Other container images (compose) together.",
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "groupName": "docker",
+      "semanticCommitType": "build"
+    },
+    {
+      "description": "The Docker Hub node images are handled by the node-version custom manager instead, so Node majors stay LTS-only and move with every other pin.",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["node"],
+      "enabled": false
+    },
+    {
+      "description": "Node: LTS releases only (node versioning treats a new major as stable once it reaches LTS). One PR moves .nvmrc, package.json engines, the Dockerfile, the structure test and the InSpec control together. CI reads .nvmrc via setup-node. Never auto-merged.",
+      "matchDepNames": ["node"],
+      "versioning": "node",
+      "groupName": "node",
+      "semanticCommitType": "build",
+      "automerge": false
+    }
+  ]
+}
