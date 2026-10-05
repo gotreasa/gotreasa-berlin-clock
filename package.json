@@ -72,6 +72,11 @@
       "typesync ./package.json --silent"
     ]
   },
+  "overrides": {
+    "express": {
+      "qs": "^6.16.0"
+    }
+  },
   "dependencies": {
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
@@ -88,6 +93,7 @@
     "@commitlint/cli": "^21.2.0",
     "@commitlint/config-conventional": "^21.0.2",
     "@eslint/js": "^9.39.3",
+    "@g_package/jest-cucumber-fusion": "^2.0.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@pact-foundation/pact": "^16.5.0",
     "@pact-foundation/pact-node": "^10.18.0",
@@ -126,7 +132,6 @@
     "husky": "^9.1.7",
     "jest": "^30.4.2",
     "jest-config": "^30.3.0",
-    "jest-cucumber-fusion": "^0.8.1",
     "jest-junit": "^17.0.0",
     "jest-pact": "^0.13.0",
     "lint-staged": "^17.0.8",

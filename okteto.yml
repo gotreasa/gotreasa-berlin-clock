@@ -28,7 +28,7 @@ dev:
   gotreasa-berlin-clock:
     image: registry.cloud.okteto.net/gotreasa/gotreasa-berlin-clock-gotreasa-berlin-clock:build
     imagePullPolicy: Always
-    command: npm ci --omit=dev --ignore-scripts && npm run start:app
+    command: node app.js
     workdir: /usr/src/app
     forward:
       - 9229:9229

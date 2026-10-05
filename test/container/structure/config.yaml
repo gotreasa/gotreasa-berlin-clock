@@ -2,10 +2,13 @@ schemaVersion: '2.0.0'
 
 metadataTest:
   exposedPorts: ['9080']
-  entrypoint: ['npm']
-  cmd: ['run', 'start:app']
+  entrypoint: ['node']
+  cmd: ['app.js']
   workdir: '/usr/src/app'
-  user: 'node'
+  user: '1000'
+  envVars:
+    - key: 'SERVER_PORT'
+      value: '9080'
 
 commandTests:
   - name: '🔎  node is installed'
@@ -18,6 +21,12 @@ commandTests:
     args: ['--version']
     exitCode: 0
     expectedOutput: ['v24.']
+  - name: '🚫 npm is not shipped in the runtime image'
+    command: 'sh'
+    args: ['-c', 'command -v npm npx || echo absent']
+    exitCode: 0
+    expectedOutput: ['absent']
+    excludedOutput: ['/']
 
 fileContentTests:
   - name: '📦 Package JSON'

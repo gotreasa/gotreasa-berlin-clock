@@ -91,7 +91,7 @@ jobs:
         uses: actions/checkout@main
 
       - name: 💿 Install Inspec
-        run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
+        run: curl -fsSL "https://chefdownload-community.chef.io/install.sh?license_id=${CHEF_LICENSE_KEY}" | sudo -E bash -s -- -P inspec
 
       - name: Run Inspec tests
         run: inspec exec test --reporter junit:reports/inspec_junit.xml cli
@@ -195,7 +195,7 @@ jobs:
 
     steps:
       - name: 💿 Install Inspec
-        run: curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P inspec
+        run: curl -fsSL "https://chefdownload-community.chef.io/install.sh?license_id=${CHEF_LICENSE_KEY}" | sudo -E bash -s -- -P inspec
       - name: 📂 Checkout the code
         uses: actions/checkout@main
       - uses: actions/setup-node@main
