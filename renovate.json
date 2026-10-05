@@ -21,6 +21,7 @@
     "**/__tests__/**",
     "**/__fixtures__/**"
   ],
+  "automerge": true,
   "automergeType": "pr",
   "automergeStrategy": "merge-commit",
   "platformAutomerge": true,
@@ -157,9 +158,14 @@
       "automerge": true
     },
     {
-      "description": "Catch-all: no major update ever auto-merges, whatever group it lands in. Majors can pass CI and still break what CI does not cover (#833's @sonar/scan 5 broke the local pre-push hook).",
+      "description": "Every update auto-merges by default (top-level automerge) except majors, whatever group they land in. Majors can pass CI and still break what CI does not cover (#833's @sonar/scan 5 broke the local pre-push hook). GitHub Actions are the exception (next rule).",
       "matchUpdateTypes": ["major"],
       "automerge": false
+    },
+    {
+      "description": "GitHub Actions auto-merge at any version, majors included, once the required checks pass. Caveat: actions in jobs skipped for renovate[bot] (docker/login-action, snyk, trivy, anchore, attest, ...) or only in deploy.yml and release.yml do not run on the PR, so a major of one of those merges untested.",
+      "matchManagers": ["github-actions"],
+      "automerge": true
     },
     {
       "description": "The Docker Hub node images are handled by the node-version custom manager instead, so Node majors stay LTS-only and move with every other pin.",
