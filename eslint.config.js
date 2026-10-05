@@ -21,9 +21,6 @@ export default [
       },
       parserOptions: {
         requireConfigFile: false,
-        babelOptions: {
-          plugins: ['@babel/plugin-syntax-import-assertions'],
-        },
       },
     },
     ignores: ['.husky/_/**'],
