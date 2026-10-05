@@ -11,4 +11,4 @@ gem "syntax_tree-rbs"
 gem "inspec", "~> 7.0"
 
 # TEMPORARY: lock faraday for a security fix
-gem "faraday", "1.10.6"
+gem "faraday", "2.14.3"
