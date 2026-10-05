@@ -2,7 +2,7 @@ import { exec } from 'child_process';
 import crypto from 'crypto';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import csrf from 'csurf';
+import { doubleCsrf } from 'csrf-csrf';
 import express from 'express';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
@@ -21,7 +21,14 @@ const openApiSpecification = JSON.parse(readFileSync('openapi.json'));
 
 const COOKIES_SECRET = crypto.randomBytes(32).toString('hex');
 
-const csrfProtect = csrf({ cookie: { secure: true } });
+// Double Submit Cookie CSRF protection (stateless). GET, HEAD and OPTIONS are
+// not checked; any other method needs a valid token. With no sessions, tokens
+// are bound to the client IP (resolved through `trust proxy`).
+const { doubleCsrfProtection: csrfProtect } = doubleCsrf({
+  getSecret: () => COOKIES_SECRET,
+  getSessionIdentifier: (request) => String(request.ip),
+  cookieOptions: { secure: true },
+});
 const app = express();
 app.use(helmet());
 
