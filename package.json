@@ -100,7 +100,7 @@
     "@pactflow/openapi-pact-comparator": "^2.3.0",
     "@prettier/plugin-ruby": "^4.0.4",
     "@release-it/conventional-changelog": "^11.0.1",
-    "@sonar/scan": "^4.3.8",
+    "@sonar/scan": "^5.0.0",
     "@stryker-mutator/core": "^9.6.0",
     "@stryker-mutator/jest-runner": "^9.6.1",
     "@types/babel__core": "~7.20.5",
