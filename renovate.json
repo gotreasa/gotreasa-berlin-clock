@@ -28,6 +28,11 @@
   "vulnerabilityAlerts": {
     "labels": ["security"]
   },
+  "lockFileMaintenance": {
+    "description": "Weekly lockfile refresh, auto-merged once the required checks pass. Renovate only remediates alerts on direct dependencies, so this is what moves transitive dependencies to their patched versions (Dependabot security updates used to).",
+    "enabled": true,
+    "automerge": true
+  },
   "customManagers": [
     {
       "customType": "regex",
