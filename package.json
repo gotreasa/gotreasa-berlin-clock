@@ -75,6 +75,9 @@
   "overrides": {
     "express": {
       "qs": "^6.16.0"
+    },
+    "release-it": {
+      "undici": "^7.29.1"
     }
   },
   "dependencies": {
