@@ -21,9 +21,14 @@ const args = [
   versionFromGitTag({
     tagGlob: '[0-9]*',
   }),
-  '--branch',
-  branchName(),
 ];
+
+// CI checks out a detached HEAD, so prefer the branch GitHub Actions reports.
+const branch =
+  process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF_NAME || branchName();
+if (branch) {
+  args.push('--branch', branch);
+}
 
 const { status, error } = spawnSync(process.execPath, args, {
   stdio: 'inherit',
