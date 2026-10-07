@@ -26,6 +26,8 @@
   "automergeStrategy": "merge-commit",
   "platformAutomerge": true,
   "vulnerabilityAlerts": {
+    "description": "enabled is forced onto the rule Renovate adds for each alerted package, so a security advisory still opens a PR for a dependency an earlier rule disabled (the overrides rule below).",
+    "enabled": true,
     "labels": ["security"]
   },
   "lockFileMaintenance": {
@@ -74,7 +76,7 @@
       "automerge": true
     },
     {
-      "description": "Never update package.json overrides. Each one is a security floor that beats an exact pin (concurrently > shell-quote, release-it > undici, newman > postman-*); lock file maintenance already moves them to the newest in-range version. Renovate (<= 44.142.1) also commits a broken lockfile when a branch holds only nested-override updates: it deletes their lockfile entries and runs no npm (#851, renovatebot/renovate discussion #41519).",
+      "description": "No routine updates for package.json overrides. Each sets a minimum version that a parent's own pin or range would not reach; lock file maintenance moves the lockfile to the newest in-range version, so the floor text may lag the lockfile. The CI check `npm run check:overrides` fails when an override becomes redundant, unused or conflicting. Security advisories still open PRs (vulnerabilityAlerts.enabled). Why: a branch holding only nested-override updates gets a broken lockfile, because Renovate deletes their entries and runs no npm (#851; still unfixed upstream as of 44.142.1, renovatebot/renovate discussion #41519). Remove this rule once that is fixed.",
       "matchManagers": ["npm"],
       "matchDepTypes": ["overrides"],
       "enabled": false
