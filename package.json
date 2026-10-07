@@ -82,6 +82,9 @@
       "postman-collection-transformer": "^4.1.14",
       "postman-request": "^2.88.1-postman.49",
       "postman-runtime": "^7.56.1"
+    },
+    "release-it": {
+      "undici": "^7.29.1"
     }
   },
   "dependencies": {
