@@ -158,14 +158,189 @@ describe('Checking whether package.json overrides are still needed', () => {
     ]);
   });
 
-  test('should report redundant and unused overrides as problems', () => {
+  test('should report redundant, unused and conflicting overrides as problems', () => {
     const problems = problemsIn([
       { name: 'a', status: 'needed' },
       { name: 'b', status: 'redundant' },
       { name: 'c', status: 'unused' },
       { name: 'd', status: 'skipped' },
+      { name: 'e', status: 'conflicting' },
     ]);
 
-    expect(problems.map(({ name }) => name)).toEqual(['b', 'c']);
+    expect(problems.map(({ name }) => name)).toEqual(['b', 'c', 'e']);
+  });
+
+  const parentPinsC = {
+    'node_modules/p': { version: '1.0.0', dependencies: { c: '1.0.0' } },
+    'node_modules/c': { version: '1.0.0' },
+  };
+
+  test.each([
+    ['a $reference', '$c'],
+    ['a dist-tag', 'latest'],
+    ['an npm: alias', 'npm:other-c@^1.0.1'],
+    ['a git spec', 'github:owner/c#v1.0.1'],
+    ['an empty string', ''],
+  ])(
+    'should skip an override whose value is %s instead of crashing',
+    (_, value) => {
+      const [result] = checkOverrides(
+        { overrides: { p: { c: value } } },
+        lock(parentPinsC),
+      );
+
+      expect(result.status).toBe('skipped');
+    },
+  );
+
+  test('should skip a global override whose value is not a semver range', () => {
+    const [result] = checkOverrides(
+      { overrides: { c: '$c' } },
+      lock(parentPinsC),
+    );
+
+    expect(result.status).toBe('skipped');
+  });
+
+  test('should read a version-qualified parent key and judge only the matching copies', () => {
+    const results = checkOverrides(
+      { overrides: { 'p@1': { c: '^1.0.1' }, 'p@2': { c: '^1.0.1' } } },
+      lock({
+        'node_modules/p': { version: '1.0.0', dependencies: { c: '1.0.0' } },
+        'node_modules/x': { version: '1.0.0', dependencies: { p: '^2.0.0' } },
+        'node_modules/x/node_modules/p': {
+          version: '2.0.0',
+          dependencies: { c: '^1.0.2' },
+        },
+        'node_modules/c': { version: '1.0.0' },
+      }),
+    );
+
+    expect(results.map(({ scope, status }) => [scope, status])).toEqual([
+      ['p@1', 'needed'],
+      ['p@2', 'redundant'],
+    ]);
+  });
+
+  test('should judge every copy when the parent key carries a dist-tag', () => {
+    const [result] = checkOverrides(
+      { overrides: { 'p@latest': { c: '^1.0.1' } } },
+      lock(parentPinsC),
+    );
+
+    expect(result.status).toBe('needed');
+  });
+
+  test('should find a parent installed under an alias by its real package name', () => {
+    const [result] = checkOverrides(
+      { overrides: { p: { c: '^1.0.1' } } },
+      lock({
+        'node_modules/p-alias': { name: 'p', dependencies: { c: '1.0.0' } },
+        'node_modules/c': {},
+      }),
+    );
+
+    expect(result.declaredBy).toEqual([
+      { path: 'node_modules/p-alias', range: '1.0.0' },
+    ]);
+  });
+
+  test('should match a version-qualified global override key by package name', () => {
+    const [result] = checkOverrides(
+      { overrides: { 'c@1': '^1.0.1' } },
+      lock(parentPinsC),
+    );
+
+    expect(result).toMatchObject({ name: 'c', status: 'needed' });
+  });
+
+  test('should check the parent when it is only installed nested', () => {
+    const [result] = checkOverrides(
+      { overrides: { p: { c: '^1.0.1' } } },
+      lock({
+        'node_modules/x': { dependencies: { p: '1.0.0' } },
+        'node_modules/x/node_modules/p': { dependencies: { c: '1.0.0' } },
+        'node_modules/c': {},
+      }),
+    );
+
+    expect(result.status).toBe('needed');
+  });
+
+  test('should keep an override needed while any copy of the parent still pins below it', () => {
+    const [result] = checkOverrides(
+      { overrides: { p: { c: '^1.0.1' } } },
+      lock({
+        'node_modules/p': { dependencies: { c: '1.0.2' } },
+        'node_modules/x': { dependencies: { p: '0.9.0' } },
+        'node_modules/x/node_modules/p': { dependencies: { c: '1.0.0' } },
+        'node_modules/c': {},
+      }),
+    );
+
+    expect(result.status).toBe('needed');
+    expect(result.declaredBy.map(({ path }) => path)).toEqual([
+      'node_modules/p',
+      'node_modules/x/node_modules/p',
+    ]);
+  });
+
+  test('should count peer dependencies, which npm also overrides', () => {
+    const [result] = checkOverrides(
+      { overrides: { p: { c: '^1.0.1' } } },
+      lock({
+        'node_modules/p': { peerDependencies: { c: '1.0.0' } },
+        'node_modules/c': {},
+      }),
+    );
+
+    expect(result.status).toBe('needed');
+  });
+
+  test('should count an empty declared range, which npm reads as any version', () => {
+    const [result] = checkOverrides(
+      { overrides: { p: { c: '^1.0.1' } } },
+      lock({
+        'node_modules/p': { dependencies: { c: '' } },
+        'node_modules/c': {},
+      }),
+    );
+
+    expect(result.status).toBe('needed');
+  });
+
+  test('should mark an override as conflicting when the parent now asks for a newer major', () => {
+    const [result] = checkOverrides(
+      { overrides: { 'release-it': { undici: '^7.30.0' } } },
+      lock({
+        'node_modules/release-it': { dependencies: { undici: '^8.0.0' } },
+        'node_modules/undici': {},
+      }),
+    );
+
+    expect(result.status).toBe('conflicting');
+  });
+
+  test('should follow a linked workspace parent and resolve from the workspace upwards', () => {
+    const [result] = checkOverrides(
+      { overrides: { p: { c: '^1.0.1' } } },
+      lock({
+        'node_modules/p': { link: true, resolved: 'packages/p' },
+        'packages/p': { dependencies: { q: '^1.0.0' } },
+        'node_modules/q': { dependencies: { c: '1.0.0' } },
+        'node_modules/c': {},
+      }),
+    );
+
+    expect(result.status).toBe('needed');
+    expect(result.declaredBy).toEqual([
+      { path: 'node_modules/q', range: '1.0.0' },
+    ]);
+  });
+
+  test('should stop with a clear error when the lockfile has no packages map', () => {
+    expect(() =>
+      checkOverrides({ overrides: { p: { c: '^1.0.1' } } }, {}),
+    ).toThrow('lockfileVersion 2 or later');
   });
 });
