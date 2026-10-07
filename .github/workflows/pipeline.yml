@@ -129,6 +129,23 @@ jobs:
       - name: Prettify the code
         run: npm run prettier:verify
 
+  overrides-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📂 Checkout the code
+        uses: actions/checkout@main
+      - uses: actions/setup-node@main
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - name: 🗂️ Get npm cache directory
+        id: npm-cache-dir
+        shell: bash
+        run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+      - run: npm ci
+      - name: Fail on overrides their parent no longer needs
+        run: npm run check:overrides
+
   detect-secrets:
     runs-on: ubuntu-latest
     steps:
