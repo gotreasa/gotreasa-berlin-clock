@@ -66,12 +66,18 @@
       "rangeStrategy": "bump"
     },
     {
-      "description": "npm runtime minor and patch, including the express-scoped qs override: one low-risk PR, auto-merged once the required checks pass.",
+      "description": "npm runtime minor and patch: one low-risk PR, auto-merged once the required checks pass.",
       "matchManagers": ["npm"],
-      "matchDepTypes": ["dependencies", "overrides"],
+      "matchDepTypes": ["dependencies"],
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "npm production",
       "automerge": true
+    },
+    {
+      "description": "Never update package.json overrides. Each one is a security floor that beats an exact pin (concurrently > shell-quote, release-it > undici, newman > postman-*); lock file maintenance already moves them to the newest in-range version. Renovate (<= 44.142.1) also commits a broken lockfile when a branch holds only nested-override updates: it deletes their lockfile entries and runs no npm (#851, renovatebot/renovate discussion #41519).",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["overrides"],
+      "enabled": false
     },
     {
       "description": "npm tooling minor and patch: kept apart from runtime so a tooling break never holds back a runtime fix.",
