@@ -113,9 +113,20 @@ jobs:
       - run: touch .env
       - name: Smoke test using pact tests
         run: npm run test:api:consumer && export SMOKE_TEST=true && npm run test:api:provider -- --collectCoverage=false
-      - run: |
-          ./test/scripts/generate_postman.sh
-          npx newman run pact/postman/collections/postman_collection.json -r cli,json --env-var 'url=${{ env.APP_HOST }}'
+      - name: Install Hurl
+        env:
+          HURL_VERSION: 8.0.1
+        run: |
+          base="https://github.com/Orange-OpenSource/hurl/releases/download/${HURL_VERSION}"
+          deb="hurl_${HURL_VERSION}_amd64.deb"
+          curl --fail --silent --show-error --location --remote-name "${base}/${deb}"
+          curl --fail --silent --show-error --location --remote-name "${base}/${deb}.sha256"
+          echo "$(cat "${deb}.sha256")  ${deb}" | sha256sum --check
+          sudo apt-get install --yes "./${deb}"
+      - name: Smoke test the deployed app with Hurl
+        env:
+          API_URL: ${{ env.APP_HOST }}
+        run: npm run test:smoke
       - name: Test Report
         uses: dorny/test-reporter@v3
         if: success() || failure() # run this step even if previous step failed
