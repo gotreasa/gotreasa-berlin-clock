@@ -175,17 +175,19 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'npm'
       - run: npm ci
-      # --remote-repo-url tells Snyk these are scans of the public repository,
-      # which do not count towards the private test limit.
+      # No --remote-repo-url here: with --all-projects it gives every manifest's
+      # SARIF run the same category, which the CodeQL upload rejects.
       - name: Test the dependencies for security vulnerabilities
         id: snyk-deps
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        run: ./scripts/snyk.sh test --all-projects --remote-repo-url=https://github.com/${{ github.repository }} --sarif-file-output=snyk.sarif
+        run: ./scripts/snyk.sh test --all-projects --sarif-file-output=snyk.sarif
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: snyk.sarif
+      # --remote-repo-url tells Snyk this scans the public repository, whose
+      # tests do not count towards the private test limit.
       - name: Test the code for security vulnerabilities
         id: snyk-code
         continue-on-error: true # To make sure that SARIF upload gets called
