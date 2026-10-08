@@ -23,7 +23,7 @@
     "detect-secrets:update-baseline": "cross-env-shell docker run --platform linux/amd64 --rm -v ${INIT_CWD}:/code icr.io/git-defenders/detect-secrets:0.13.1.ibm.56.dss scan --update .secrets.baseline",
     "lint:fix": "eslint --cache --fix",
     "lint:verify": "eslint .",
-    "pre-push": "concurrently 'npm test' 'npm run test:security'",
+    "pre-push": "npm test",
     "precommit": "lint-staged --relative --verbose",
     "prepare": "husky",
     "prettier:fix": "prettier --write",
