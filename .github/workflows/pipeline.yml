@@ -175,17 +175,30 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'npm'
       - run: npm ci
-      # No --remote-repo-url here: with --all-projects it gives every manifest's
-      # SARIF run the same category, which the CodeQL upload rejects.
-      - name: Test the dependencies for security vulnerabilities
-        id: snyk-deps
+      # One manifest per scan, each uploaded under its own category: run on the
+      # runner (not in the action's container), --all-projects gave both SARIF
+      # runs the same category, which the CodeQL upload rejects. Add a step here
+      # for any new manifest.
+      - name: Test the npm dependencies for security vulnerabilities
+        id: snyk-deps-npm
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        run: ./scripts/snyk.sh test --all-projects --sarif-file-output=snyk.sarif
-      - name: Upload result to GitHub Code Scanning
+        run: ./scripts/snyk.sh test --file=package-lock.json --sarif-file-output=snyk-npm.sarif
+      - name: Test the Ruby dependencies for security vulnerabilities
+        id: snyk-deps-ruby
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: ./scripts/snyk.sh test --file=Gemfile.lock --sarif-file-output=snyk-ruby.sarif
+      - name: Upload npm result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v4
         with:
-          sarif_file: snyk.sarif
+          sarif_file: snyk-npm.sarif
+          category: snyk-open-source-npm
+      - name: Upload Ruby result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: snyk-ruby.sarif
+          category: snyk-open-source-ruby
       # --remote-repo-url tells Snyk this scans the public repository, whose
       # tests do not count towards the private test limit.
       - name: Test the code for security vulnerabilities
@@ -199,7 +212,7 @@ jobs:
         with:
           sarif_file: snyk-code.sarif
       - name: Fail when Snyk's test limit was reached
-        if: always() && (steps.snyk-deps.outputs.limit == 'true' || steps.snyk-code.outputs.limit == 'true')
+        if: always() && (steps.snyk-deps-npm.outputs.limit == 'true' || steps.snyk-deps-ruby.outputs.limit == 'true' || steps.snyk-code.outputs.limit == 'true')
         run: |
           echo "::error::Snyk's test limit was reached, so this job's scans are incomplete. See the Snyk step logs."
           exit 1
