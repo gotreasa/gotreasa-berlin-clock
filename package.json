@@ -36,7 +36,7 @@
     "start:app:watch": "export SERVER_PORT=9080 && nodemon app.js",
     "start:cli": "node src/cli/time.js",
     "test": "rimraf pact/pacts/* && export SERVER_PORT=$(./scripts/get_random_number.sh) && npm run test:api:consumer && npm run publish:pact && env-cmd jest --testTimeout 30000 && npm run test:unit:container && node scripts/validateOpenApi.js",
-    "test:api": "rimraf pact/pacts/* && rimraf pact/postman/* && npm run test:api:consumer && npm run test:api:provider && ./test/scripts/generate_postman.sh && newman run pact/postman/collections/postman_collection.json -r cli,json --env-var 'url=http://localhost:9080'",
+    "test:api": "rimraf pact/pacts/* && rimraf pact/postman/* && npm run test:api:consumer && npm run test:api:provider && ./test/scripts/generate_postman.sh && npm run test:smoke",
     "test:api:consumer": "jest test/**/*.consumer.pact.spec.js",
     "test:api:consumer:watch": "npm run test:api:consumer -- --watch",
     "test:api:provider": "export SERVER_PORT=$(./scripts/get_random_number.sh) && env-cmd jest test/**/*.provider.pact.spec.js --testTimeout 30000",
@@ -47,6 +47,7 @@
     "test:mutation": "export SERVER_PORT=$(./scripts/get_random_number.sh) && npx stryker run",
     "test:security": "env-cmd snyk test --all-projects && env-cmd snyk code test",
     "test:security:dev": "npm run test:security -- --dev",
+    "test:smoke": "node scripts/writeHurl.js pact/pacts/berlin_clock_client-berlin_clock_app.json pact/hurl/smoke.hurl && hurl --test --variable url=${API_URL:-http://localhost:9080} pact/hurl/smoke.hurl",
     "test:unit": "jest ./test --testPathIgnorePatterns test/**/*.pact.spec.js",
     "test:unit:container": "inspec exec test --chef-license accept-silent",
     "test:unit:container:watch": "chokidar '**.rb' 'Dockerfile' 'compose.yaml' --initial -c 'npm run test:unit:container'",
@@ -84,15 +85,6 @@
       "qs": "^6.16.0"
     },
     "jest-cucumber": {
-      "uuid": "^11.1.1"
-    },
-    "newman": {
-      "lodash": "^4.18.1",
-      "postman-collection": "^5.3.1",
-      "postman-collection-transformer": "^4.1.14",
-      "postman-request": "^2.88.1-postman.49",
-      "postman-runtime": "^7.56.1",
-      "qs": "^6.16.0",
       "uuid": "^11.1.1"
     },
     "release-it": {
@@ -133,7 +125,6 @@
     "@types/cookie-parser": "^1.4.10",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
-    "@types/newman": "^5.3.6",
     "@types/npm-package-arg": "~6.1.4",
     "@types/semver": "~7.8.0",
     "@types/supertest": "^7.2.1",
@@ -161,7 +152,6 @@
     "jest-pact": "^0.14.0",
     "lint-staged": "^17.6.0",
     "mockdate": "^3.0.5",
-    "newman": "^6.2.2",
     "nodemon": "^3.1.14",
     "npm-check-updates": "^23.1.0",
     "npm-package-arg": "^12.0.2",

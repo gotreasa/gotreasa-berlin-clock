@@ -304,9 +304,23 @@ jobs:
         if: github.actor != 'renovate[bot]'
         run: export CI=true && npm run test:api:provider
       - run: npm start &
-      - run: |
-          ./test/scripts/generate_postman.sh
-          npx newman run pact/postman/collections/postman_collection.json -r cli,json --env-var 'url=http://localhost:9080'
+      - name: Install Hurl
+        env:
+          HURL_VERSION: 8.0.1
+        run: |
+          base="https://github.com/Orange-OpenSource/hurl/releases/download/${HURL_VERSION}"
+          deb="hurl_${HURL_VERSION}_amd64.deb"
+          curl --fail --silent --show-error --location --remote-name "${base}/${deb}"
+          curl --fail --silent --show-error --location --remote-name "${base}/${deb}.sha256"
+          echo "$(cat "${deb}.sha256")  ${deb}" | sha256sum --check
+          sudo apt-get install --yes "./${deb}"
+      - name: Smoke test the running app with Hurl
+        run: |
+          for attempt in $(seq 30); do
+            curl --silent --fail http://localhost:9080/health > /dev/null && break
+            sleep 1
+          done
+          npm run test:smoke
 
   build_image:
     runs-on: ubuntu-latest
