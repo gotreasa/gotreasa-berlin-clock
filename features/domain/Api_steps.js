@@ -50,4 +50,8 @@ Then('the response is 200', () => {
   expect(response.status).toBe(200);
 });
 
+And('the health check is run', () => {
+  expect(child_process.exec).toHaveBeenCalledTimes(1);
+});
+
 Fusion('Api.feature');

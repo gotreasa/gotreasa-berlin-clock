@@ -6,6 +6,7 @@ Feature: API endpoints
 
     When the endpoint is called
     Then the response is 200
+    And the health check is run
 
   Scenario: Goss is missing for the API /health
     Given the API endpoint /health
@@ -13,6 +14,7 @@ Feature: API endpoints
 
     When the endpoint is called
     Then the response is 200
+    And the health check is run
 
   Scenario: Documentation endpoint
     Given the API endpoint /api-docs/

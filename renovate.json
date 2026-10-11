@@ -110,7 +110,7 @@
       "description": "Jest family majors move together.",
       "matchManagers": ["npm"],
       "matchUpdateTypes": ["major"],
-      "matchPackageNames": ["jest", "jest-*", "babel-jest", "@types/jest"],
+      "matchPackageNames": ["jest", "jest-*", "@types/jest"],
       "groupName": "jest majors"
     },
     {
