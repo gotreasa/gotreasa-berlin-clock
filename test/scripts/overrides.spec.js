@@ -1,4 +1,4 @@
-import { checkOverrides, problemsIn } from '../../scripts/overrides';
+import { checkOverrides, problemsIn } from '../../scripts/overrides.js';
 
 const lock = (packages) => ({ packages: { '': {}, ...packages } });
 

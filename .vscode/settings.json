@@ -3,5 +3,8 @@
     "activityBar.background": "#451561",
     "titleBar.activeBackground": "#611E87",
     "titleBar.activeForeground": "#FDFAFE"
+  },
+  "jest.nodeEnv": {
+    "NODE_OPTIONS": "--experimental-vm-modules"
   }
 }

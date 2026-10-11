@@ -1,5 +1,5 @@
-import { getSeconds } from '../../src/domain/Seconds';
-import { YELLOW_LIGHT, LIGHT_OFF } from '../../src/domain/constants';
+import { getSeconds } from '../../src/domain/Seconds.js';
+import { YELLOW_LIGHT, LIGHT_OFF } from '../../src/domain/constants.js';
 
 describe('Retrieving the seconds', () => {
   test('should return O when an even value', () => {

@@ -8,7 +8,7 @@ import {
 
 import request from 'supertest';
 
-import app from '../../src/api/app';
+import app from '../../src/api/app.js';
 
 const endpoint = '/api/v1/time';
 let time;

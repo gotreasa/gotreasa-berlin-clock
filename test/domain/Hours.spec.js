@@ -1,4 +1,4 @@
-import { getFirstRow, getSecondRow } from '../../src/domain/Hours';
+import { getFirstRow, getSecondRow } from '../../src/domain/Hours.js';
 
 describe('Retrieving the hours', () => {
   test.each`

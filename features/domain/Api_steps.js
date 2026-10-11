@@ -1,4 +1,4 @@
-import child_process from 'child_process';
+import { jest } from '@jest/globals';
 import {
   Given,
   When,
@@ -7,9 +7,16 @@ import {
   Fusion,
 } from '@g_package/jest-cucumber-fusion';
 import request from 'supertest';
-import app from '../../src/api/app';
 
-jest.mock('child_process');
+// In Jest's ES module mode a mock cannot be hoisted above the imports, so it is registered first
+// and the modules that use it are imported afterwards.
+jest.unstable_mockModule('child_process', () => {
+  const exec = jest.fn();
+
+  return { exec, default: { exec } };
+});
+const { default: child_process } = await import('child_process');
+const { default: app } = await import('../../src/api/app.js');
 
 let endpoint;
 let response;
@@ -41,6 +48,10 @@ When('the endpoint is called', async () => {
 
 Then('the response is 200', () => {
   expect(response.status).toBe(200);
+});
+
+And('the health check is run', () => {
+  expect(child_process.exec).toHaveBeenCalledTimes(1);
 });
 
 Fusion('Api.feature');
