@@ -52,6 +52,10 @@ Then('the response is 200', () => {
 
 And('the health check is run', () => {
   expect(child_process.exec).toHaveBeenCalledTimes(1);
+  expect(child_process.exec).toHaveBeenCalledWith(
+    expect.stringContaining('/goss/goss validate'),
+    expect.any(Function),
+  );
 });
 
 Fusion('Api.feature');
