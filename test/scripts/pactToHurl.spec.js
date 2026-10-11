@@ -1,4 +1,4 @@
-import { pactToHurl } from '../../scripts/pactToHurl';
+import { pactToHurl } from '../../scripts/pactToHurl.js';
 
 const pact = (...interactions) => ({ interactions });
 

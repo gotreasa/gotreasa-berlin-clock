@@ -29,14 +29,8 @@ export default {
   resetModules: true,
   testEnvironment: 'node',
   testMatch: [...defaults.testMatch, '**/*_steps.js', '**/*.spec.mjs'],
-  transform: {
-    '^.+\\.(js|jsx)$': 'babel-jest',
-  },
-  // Some transitive deps ship pure ESM (e.g. https-proxy-agent@9 + agent-base,
-  // pulled in by @pact-foundation/pact). Un-ignore them so babel-jest transpiles
-  // them to CommonJS; extend the alternation when new ESM-only deps appear.
-  transformIgnorePatterns: [
-    '/node_modules/(?!(?:.*/)?(https-proxy-agent|agent-base)/)',
-  ],
+  // Jest's ES module mode (node --experimental-vm-modules): the source runs as Node runs it in
+  // production, with no Babel transform.
+  transform: {},
   watchPathIgnorePatterns: ['pact/logs/*', 'pact/pacts/*', '.stryker-tmp/*'],
 };

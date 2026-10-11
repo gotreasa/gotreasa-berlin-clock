@@ -1,8 +1,11 @@
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { versionFromGitTag } from 'absolute-version';
 import { Verifier } from '@pact-foundation/pact';
 import { simpleGit } from 'simple-git';
-import server from '../../app';
+import server from '../../app.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 let baseUrl;
 if (process.env.SMOKE_TEST) {

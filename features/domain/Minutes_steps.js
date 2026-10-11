@@ -1,6 +1,6 @@
 import { Given, When, Then, Fusion } from '@g_package/jest-cucumber-fusion';
 import request from 'supertest';
-import app from '../../src/api/app';
+import app from '../../src/api/app.js';
 
 let endpoint;
 let response;
