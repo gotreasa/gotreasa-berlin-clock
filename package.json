@@ -75,9 +75,6 @@
     ]
   },
   "overrides": {
-    "concurrently": {
-      "shell-quote": "^1.12.0"
-    },
     "express": {
       "qs": "^6.16.0"
     },
@@ -148,7 +145,7 @@
     "mockdate": "^3.0.5",
     "nodemon": "^3.1.14",
     "npm-check-updates": "^23.1.0",
-    "npm-package-arg": "^12.0.2",
+    "npm-package-arg": "^14.0.0",
     "pmpact": "^0.5.0",
     "prettier": "^3.9.9",
     "prettier-plugin-gherkin": "^4.0.0",
