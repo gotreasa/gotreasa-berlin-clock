@@ -70,7 +70,7 @@ GEM
       tilt
     hashie (5.1.0)
       logger
-    inspec-core (7.2.1)
+    inspec-core (7.3.4)
       addressable (~> 2.9)
       chef-licensing (>= 1.2.0)
       chef-telemetry (~> 1.0, >= 1.0.8)
@@ -200,7 +200,8 @@ GEM
     temple (0.10.7)
     thor (1.4.0)
     tilt (2.9.0)
-    tomlrb (2.0.4)
+    tomlrb (2.0.5)
+      racc (~> 1.4)
     train-core (3.16.5)
       addressable (~> 2.5)
       ffi (>= 1.16.0, < 1.18)
