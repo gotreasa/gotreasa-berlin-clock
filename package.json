@@ -17,7 +17,7 @@
   "scripts": {
     "check:overrides": "node scripts/checkOverrides.js",
     "clean": "rimraf pact",
-    "detect-secrets": "cross-env-shell docker run --platform linux/amd64 --rm -v ${INIT_CWD}:/code icr.io/git-defenders/detect-secrets-hook:0.13.1.ibm.56.dss --baseline .secrets.baseline",
+    "detect-secrets": "cross-env-shell docker run --platform linux/amd64 --rm -v ${INIT_CWD}:/code -v $(git rev-parse --path-format=absolute --git-common-dir):$(git rev-parse --path-format=absolute --git-common-dir):ro icr.io/git-defenders/detect-secrets-hook:0.13.1.ibm.56.dss --baseline .secrets.baseline",
     "detect-secrets:audit": "cross-env-shell docker run -it --platform linux/amd64 --rm -v ${INIT_CWD}:/code icr.io/git-defenders/detect-secrets:0.13.1.ibm.56.dss audit --report --fail-on-unaudited --fail-on-live --fail-on-audited-real .secrets.baseline",
     "detect-secrets:exclude": "cross-env-shell docker run --platform linux/amd64 --rm -v ${INIT_CWD}:/code icr.io/git-defenders/detect-secrets:0.13.1.ibm.56.dss scan --update .secrets.baseline --exclude-files",
     "detect-secrets:update-baseline": "cross-env-shell docker run --platform linux/amd64 --rm -v ${INIT_CWD}:/code icr.io/git-defenders/detect-secrets:0.13.1.ibm.56.dss scan --update .secrets.baseline",
