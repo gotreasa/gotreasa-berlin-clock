@@ -11,8 +11,6 @@ env:
   CLAIR_DB: arminc/clair-db:latest
   CLAIR_SCAN: arminc/clair-local-scan
   CLAIR_VERSION: v12
-  CHEF_LICENSE_KEY: ${{ secrets.CHEF_LICENSE_KEY }}
-  CHEF_LICENSE: accept-no-persist
   DOCKER_USERNAME: gearoid9
 
 on:
@@ -80,37 +78,6 @@ jobs:
         with:
           sarif_file: eslint-results.sarif
           wait-for-processing: true
-
-  inspec:
-    if: github.actor != 'renovate[bot]'
-    name: Unit test docker image
-    needs: [hadolint]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@main
-
-      - name: 💿 Install Inspec
-        run: curl -fsSL "https://chefdownload-community.chef.io/install.sh?license_id=${CHEF_LICENSE_KEY}" | sudo -E bash -s -- -P inspec
-
-      - name: Run Inspec tests
-        run: inspec exec test --reporter junit:reports/inspec_junit.xml cli
-
-      - name: Test Report
-        uses: dorny/test-reporter@v3
-        if: always() # Forces this step to always run
-        with:
-          name: Inspec Tests # Name of the check run which will be created
-          path: reports/inspec_junit.xml # Path to test results
-          reporter: jest-junit # Format of test results
-
-      - name: Publish Test Report
-        if: always() # Forces this step to always run
-        uses: mikepenz/action-junit-report@v6
-        with:
-          report_paths: 'reports/inspec_junit.xml'
-          require_tests: true
-          check_name: Inspec Results
 
   prettier-verify:
     runs-on: ubuntu-latest
@@ -239,8 +206,6 @@ jobs:
       ]
 
     steps:
-      - name: 💿 Install Inspec
-        run: curl -fsSL "https://chefdownload-community.chef.io/install.sh?license_id=${CHEF_LICENSE_KEY}" | sudo -E bash -s -- -P inspec
       - name: 📂 Checkout the code
         uses: actions/checkout@main
       - uses: actions/setup-node@main
@@ -276,7 +241,11 @@ jobs:
           check_name: Jest Results
 
   pact_test:
-    runs-on: ubuntu-latest
+    # Pinned: ubuntu-latest is 26.04, which ships libxml2 as libxml2-16, and every Hurl 8 build
+    # (the .deb and the tarball) needs the old libxml2 (libxml2.so.2). As of 2026-11-03 there is no
+    # Hurl 8 build for 26.04: ppa:lepapareil/hurl carries only 7.1.0 for it. Move back to
+    # ubuntu-latest once one exists.
+    runs-on: ubuntu-24.04
     # needs:
     #   [eslint-verify, prettier-verify, test_swagger_editor_validator_remote]
 
@@ -321,6 +290,37 @@ jobs:
             sleep 1
           done
           npm run test:smoke
+
+  compose_test:
+    name: Test the compose stack
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📂 Checkout the code
+        uses: actions/checkout@main
+      - uses: actions/setup-node@main
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - run: npm ci
+      - run: touch .env
+      - name: 📝 Validate compose.yaml
+        run: docker compose config --quiet
+      - name: 🐳 Start the compose stack
+        # --wait returns once the app's goss healthcheck passes, which also proves the goss volume.
+        run: docker compose up --detach --build --wait
+      - name: Smoke test the compose stack with Hurl
+        # Hurl runs from its image, so this job is not tied to the runner's libxml2 (see pact_test).
+        env:
+          HURL_VERSION: 8.0.1
+        run: |
+          npm run test:api:consumer
+          node scripts/writeHurl.js pact/pacts/berlin_clock_client-berlin_clock_app.json pact/hurl/smoke.hurl
+          docker run --rm --network host --volume "${PWD}/pact/hurl:/hurl:ro" \
+            "ghcr.io/orange-opensource/hurl:${HURL_VERSION}" \
+            --test --variable url=http://localhost:9080 /hurl/smoke.hurl
+      - name: Stop the compose stack
+        if: always()
+        run: docker compose down --volumes
 
   build_image:
     runs-on: ubuntu-latest

@@ -38,11 +38,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "description": "Node major in the Dockerfile (node:24, node:24-alpine) and the InSpec Dockerfile control. node versioning cannot read -alpine tags, so these are read from Node's own releases instead of Docker Hub.",
-      "managerFilePatterns": [
-        "/(^|/)Dockerfile$/",
-        "/^test/controls/dockerfile\\.rb$/"
-      ],
+      "description": "Node major in the Dockerfile (node:24, node:24-alpine). node versioning cannot read -alpine tags, so these are read from Node's own releases instead of Docker Hub.",
+      "managerFilePatterns": ["/(^|/)Dockerfile$/"],
       "matchStrings": ["node:(?<currentValue>\\d+)(?:-alpine)?\\b"],
       "depNameTemplate": "node",
       "datasourceTemplate": "node-version",
@@ -150,13 +147,7 @@
       "automerge": true
     },
     {
-      "description": "faraday stays on 1.x: inspec ~> 7.0 requires faraday_middleware, which requires faraday ~> 1.0, so faraday 2 cannot resolve (PR #835). Revisit if InSpec drops faraday_middleware.",
-      "matchManagers": ["bundler"],
-      "matchPackageNames": ["faraday"],
-      "allowedVersions": "<2"
-    },
-    {
-      "description": "Bundler (InSpec test tooling) minor and patch together.",
+      "description": "Bundler (Ruby formatting and coverage tooling) minor and patch together.",
       "matchManagers": ["bundler"],
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "bundler",
@@ -187,7 +178,7 @@
       "enabled": false
     },
     {
-      "description": "Node: LTS releases only (node versioning treats a new major as stable once it reaches LTS). One PR moves .nvmrc, package.json engines, the Dockerfile, the structure test and the InSpec control together. CI reads .nvmrc via setup-node. Never auto-merged.",
+      "description": "Node: LTS releases only (node versioning treats a new major as stable once it reaches LTS). One PR moves .nvmrc, package.json engines, the Dockerfile and the structure test together. CI reads .nvmrc via setup-node. Never auto-merged.",
       "matchDepNames": ["node"],
       "versioning": "node",
       "groupName": "node",

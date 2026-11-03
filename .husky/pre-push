@@ -1,4 +1,13 @@
 #!/bin/bash
 
+# .env holds 1Password lookups ("$(op read op://...)"), which env-cmd cannot
+# run. Sourcing it here resolves them into the environment, and the env-cmd
+# calls use --no-override so those exported values win over the raw text.
+if [ -f .env ]; then
+  set -a
+  . ./.env
+  set +a
+fi
+
 npm run pre-push
-env-cmd npx --no-install @sonar/scan
+env-cmd --no-override npx --no-install @sonar/scan
