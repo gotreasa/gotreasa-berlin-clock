@@ -276,7 +276,11 @@ jobs:
           check_name: Jest Results
 
   pact_test:
-    runs-on: ubuntu-latest
+    # Pinned: ubuntu-latest is 26.04, which ships libxml2 as libxml2-16, and every Hurl 8 build
+    # (the .deb and the tarball) needs the old libxml2 (libxml2.so.2). As of 2026-11-03 there is no
+    # Hurl 8 build for 26.04: ppa:lepapareil/hurl carries only 7.1.0 for it. Move back to
+    # ubuntu-latest once one exists.
+    runs-on: ubuntu-24.04
     # needs:
     #   [eslint-verify, prettier-verify, test_swagger_editor_validator_remote]
 

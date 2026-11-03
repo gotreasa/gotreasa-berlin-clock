@@ -96,7 +96,8 @@ jobs:
           echo "🚀 Marked $(git rev-parse --short HEAD)-$(git branch --show-current)+$(git rev-parse --short HEAD) as deployed"
 
   smoke_test:
-    runs-on: ubuntu-latest
+    # Pinned to 24.04 for Hurl, as pact_test in pipeline.yml explains.
+    runs-on: ubuntu-24.04
     needs: [deploy_image]
     steps:
       - name: 📂 Checkout the code
