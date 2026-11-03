@@ -42,9 +42,9 @@ jobs:
           npm run test:api:provider
       - name: 🧾 Check if it can be deployed
         run: |
-          npx pact-broker can-i-deploy --pacticipant berlin_clock_app \
+          npx pact broker can-i-deploy --pacticipant berlin_clock_app \
             --version $(npx absolute-version --tagGlob '[0-9]*') \
-            --participant berlin_clock_client \
+            --pacticipant berlin_clock_client \
             --version $(git rev-parse --short HEAD)-$(git branch \
             --show-current)+$(git rev-parse --short HEAD) \
             --broker-base-url https://gotreasa.pactflow.io \
@@ -87,7 +87,7 @@ jobs:
       - name: Deploy the containers using Okteto
         run: |
           okteto pipeline deploy --wait
-          npx pact-broker record-deployment \
+          npx pact broker record-deployment \
           --broker-base-url https://gotreasa.pactflow.io \
           --broker-token $PACT_BROKER_TOKEN \
           --pacticipant berlin_clock_app \
