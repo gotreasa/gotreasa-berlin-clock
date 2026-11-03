@@ -8,11 +8,11 @@ import branchName from 'current-git-branch';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
 
-// The token is read by pact-broker from PACT_BROKER_TOKEN, so it never appears in the arguments.
-const pactBroker =
-  require.resolve('@pact-foundation/pact-cli/bin/pact-broker.js');
+// `pact broker` reads the token from PACT_BROKER_TOKEN, so it never appears in the arguments.
+const pact = require.resolve('@pact-foundation/pact-cli/bin/pact.js');
 const args = [
-  pactBroker,
+  pact,
+  'broker',
   'publish',
   resolve(__dirname, '../../pact/pacts'),
   '--broker-base-url',
