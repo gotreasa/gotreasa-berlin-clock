@@ -1,14 +1,16 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    haml (7.5.1)
+    haml (7.5.2)
       prism (>= 1.1.0)
       temple (>= 0.8.2)
       thor
       tilt
     logger (1.7.0)
     prettier_print (1.2.1)
-    prism (1.9.0)
+    prism (2.1.0-aarch64-linux-gnu)
+    prism (2.1.0-arm64-darwin)
+    prism (2.1.0-x86_64-linux-gnu)
     rbs (4.2.0)
       logger
       prism (>= 1.6.0)
@@ -25,7 +27,7 @@ GEM
       rbs
       syntax_tree (>= 2.0.1)
     temple (0.10.7)
-    thor (1.4.0)
+    thor (1.5.0)
     tilt (2.9.0)
     tsort (0.2.0)
 
