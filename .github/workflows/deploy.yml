@@ -97,7 +97,7 @@ jobs:
 
   smoke_test:
     # Pinned to 24.04 for Hurl, as pact_test in pipeline.yml explains.
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs: [deploy_image]
     steps:
       - name: 📂 Checkout the code

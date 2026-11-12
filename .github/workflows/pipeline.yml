@@ -245,7 +245,7 @@ jobs:
     # (the .deb and the tarball) needs the old libxml2 (libxml2.so.2). As of 2026-11-03 there is no
     # Hurl 8 build for 26.04: ppa:lepapareil/hurl carries only 7.1.0 for it. Move back to
     # ubuntu-latest once one exists.
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # needs:
     #   [eslint-verify, prettier-verify, test_swagger_editor_validator_remote]
 
