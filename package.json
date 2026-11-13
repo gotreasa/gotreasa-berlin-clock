@@ -73,9 +73,6 @@
     ]
   },
   "overrides": {
-    "release-it": {
-      "undici": "^7.30.0"
-    },
     "typed-rest-client": {
       "qs": "^6.16.0"
     }
