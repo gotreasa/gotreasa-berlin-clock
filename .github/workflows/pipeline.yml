@@ -548,6 +548,9 @@ jobs:
           image-ref: '${{ env.DOCKER_IMAGE_NAME }}@${{ needs.build_image.outputs.digest }}'
           format: 'sarif'
           output: 'trivy-results.sarif'
+          # The scanner itself. trivy-action v0.36.0 defaults to Trivy v0.70.0, older than the
+          # v0.76 that @master ran, so the version is set here. The gate below reuses this install.
+          version: 'v0.76.2'
 
       - name: ⏫ Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v4
