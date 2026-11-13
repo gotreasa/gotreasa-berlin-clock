@@ -8,9 +8,6 @@ env:
   APP_HOST: ${{ vars.APP_HOST }}
   DOCKER_IMAGE_NAME: gearoid9/gotreasa-berlin-clock
   DOCKER_IMAGE_TAG: gearoid9/gotreasa-berlin-clock:latest
-  CLAIR_DB: arminc/clair-db:latest
-  CLAIR_SCAN: arminc/clair-local-scan
-  CLAIR_VERSION: v12
   DOCKER_USERNAME: gearoid9
 
 on:
@@ -540,8 +537,10 @@ jobs:
       - name: ⏬ Pull the container image for testing
         run: docker pull '${{ env.DOCKER_IMAGE_NAME }}@${{ needs.build_image.outputs.digest }}'
 
+      # The full report, every severity, for the Security tab. It never fails the job: the
+      # gate below does that, after the upload, so findings are recorded even when it fails.
       - name: 🏃‍♂️ Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@v0.36.0
         env:
           TRIVY_DB_REPOSITORY: public.ecr.aws/aquasecurity/trivy-db
           TRIVY_JAVA_DB_REPOSITORY: public.ecr.aws/aquasecurity/trivy-java-db
@@ -549,6 +548,9 @@ jobs:
           image-ref: '${{ env.DOCKER_IMAGE_NAME }}@${{ needs.build_image.outputs.digest }}'
           format: 'sarif'
           output: 'trivy-results.sarif'
+          # The scanner itself. trivy-action v0.36.0 defaults to Trivy v0.70.0, older than the
+          # v0.76 that @master ran, so the version is set here. The gate below reuses this install.
+          version: 'v0.76.2'
 
       - name: ⏫ Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v4
@@ -556,44 +558,25 @@ jobs:
         with:
           sarif_file: 'trivy-results.sarif'
 
-  check_container_security_with_clair:
-    if: github.actor != 'renovate[bot]'
-    runs-on: ubuntu-latest
-    needs: [build_image]
-    steps:
-      - name: 🔐 Log in to Docker Hub
-        uses: docker/login-action@v4
+      # The gate: any HIGH or CRITICAL finding fails the job, fixed or not, matching Grype's
+      # severity-cutoff in check_container_software_list. To accept a risk, check out the
+      # repository in this job and pass an ignore file, with its reason, through `trivyignores`.
+      # This replaces Clair, whose scanner (clair-scanner v12, 2019) could no longer read the
+      # image and whose failures a `| tee` hid, so it never gave a verdict. It reuses the
+      # database the step above downloaded, so it neither updates it nor reinstalls Trivy.
+      - name: 🚦 Fail on HIGH or CRITICAL vulnerabilities
+        uses: aquasecurity/trivy-action@v0.36.0
+        env:
+          TRIVY_DB_REPOSITORY: public.ecr.aws/aquasecurity/trivy-db
+          TRIVY_JAVA_DB_REPOSITORY: public.ecr.aws/aquasecurity/trivy-java-db
+          TRIVY_SKIP_DB_UPDATE: true
+          TRIVY_SKIP_JAVA_DB_UPDATE: true
         with:
-          username: ${{ env.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: ⏬ Pull the container image for testing
-        run: docker pull '${{ env.DOCKER_IMAGE_NAME }}@${{ needs.build_image.outputs.digest }}'
-
-      - name: 🚓 Check - Image scan by Clair
-        run: |
-          mkdir ./report
-          echo "🔌 Download the latest clair-scanner version"
-          wget --no-verbose https://github.com/arminc/clair-scanner/releases/download/${{ env.CLAIR_VERSION }}/clair-scanner_linux_amd64
-          echo "📀 Install clair-scanner"
-          mv ./clair-scanner_linux_amd64 ./clair-scanner
-          chmod +x ./clair-scanner
-          echo "👉 Run ${{ env.CLAIR_DB }}"
-          docker run --rm -d --name clair-db ${{ env.CLAIR_DB }}
-          echo "👉 Run ${{ env.CLAIR_SCAN }}"
-          docker run --rm -p 6060:6060 --link clair-db:postgres -d --name clair ${{ env.CLAIR_SCAN }}
-          echo "ℹ️ getting MY_IP"
-          MY_IP=$(ifconfig eth0 | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
-          sleep 10
-          echo "ℹ️ getting CLAIR_IP"
-          CLAIR_IP=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' clair)
-          echo "👉 run clair-scanner on $MY_IP pointing http://$CLAIR_IP:6060"
-          ./clair-scanner --ip $MY_IP --clair http://$CLAIR_IP:6060 -t High --reportAll=false '${{ env.DOCKER_IMAGE_NAME }}@${{ needs.build_image.outputs.digest }}' | tee ./report/clair-image-scan-report.txt
-          echo "🧹 clean up"
-          docker stop clair
-          docker stop clair-db
-          sleep 5
-          docker image rm ${{ env.CLAIR_DB }}
+          image-ref: '${{ env.DOCKER_IMAGE_NAME }}@${{ needs.build_image.outputs.digest }}'
+          format: 'table'
+          severity: 'HIGH,CRITICAL'
+          exit-code: '1'
+          skip-setup-trivy: true
 
   # ============================================================
   # Dependency auto-merge is done by Renovate (renovate.json):
@@ -605,7 +588,6 @@ jobs:
   #     [
   #       check_container_efficiency,
   #       check_container_runs_correctly,
-  #       check_container_security_with_clair,
   #       check_container_security_with_snyk,
   #       check_container_security_with_trivy,
   #       check_container_software_list,
@@ -625,7 +607,6 @@ jobs:
       [
         check_container_efficiency,
         check_container_runs_correctly,
-        check_container_security_with_clair,
         check_container_security_with_snyk,
         check_container_security_with_trivy,
         check_container_software_list,
