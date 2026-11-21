@@ -172,6 +172,12 @@
       "automerge": true
     },
     {
+      "description": "Hold the pinned ubuntu runner labels (pact_test in pipeline.yml, smoke_test in deploy.yml) below 26.04. Those jobs install Hurl from its .deb, which depends on libxml2; Ubuntu 26.04 ships libxml2-16, so the install fails (#891). Hurl 8.1.0 still has this defect: https://github.com/Orange-OpenSource/hurl/issues/5426. Lift this rule on 2027-01-12 (two months after it was added): if #5426 is fixed by then, remove this rule and move those jobs back to ubuntu-latest, as the pact_test comment says; if not, look again. Note: github-runners uses docker versioning, so <26 falls back to npm semver, which cannot coerce a zero-padded label such as 24.04; in practice this rule holds every ubuntu runner label, which is harmless while 24.04 is the only pin.",
+      "matchDatasources": ["github-runners"],
+      "matchDepNames": ["ubuntu"],
+      "allowedVersions": "<26"
+    },
+    {
       "description": "The Docker Hub node images are handled by the node-version custom manager instead, so Node majors stay LTS-only and move with every other pin.",
       "matchDatasources": ["docker"],
       "matchPackageNames": ["node"],
