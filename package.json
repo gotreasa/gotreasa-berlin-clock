@@ -120,9 +120,9 @@
     "cross-env": "^10.1.0",
     "current-git-branch": "^2.0.2",
     "env-cmd": "^11.0.0",
-    "eslint": "^10.14.0",
+    "eslint": "^10.15.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-jest": "^29.17.0",
+    "eslint-plugin-jest": "^29.17.1",
     "eslint-plugin-jest-formatting": "^3.1.0",
     "eslint-plugin-prettier": "^5.5.7",
     "eslint-plugin-sonarjs": "^4.2.2",
@@ -132,7 +132,7 @@
     "jest-config": "^30.5.2",
     "jest-junit": "^17.0.0",
     "jest-pact": "^0.14.0",
-    "lint-staged": "^17.6.0",
+    "lint-staged": "^17.6.1",
     "mockdate": "^3.0.5",
     "nodemon": "^3.1.14",
     "npm-check-updates": "^23.1.1",
@@ -144,12 +144,12 @@
     "release-it": "^21.1.2",
     "rimraf": "^6.1.4",
     "semver": "^7.8.6",
-    "simple-git": "^4.0.2",
-    "snyk": "^1.1308.4",
+    "simple-git": "^4.1.0",
+    "snyk": "^1.1309.0",
     "sort-package-json": "^4.1.0",
     "supertest": "^7.3.2",
     "swagger-cli": "^4.0.4",
-    "typesync": "^0.14.3"
+    "typesync": "^0.15.0"
   },
   "engines": {
     "node": "24.22.2"
